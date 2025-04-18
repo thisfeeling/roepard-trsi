@@ -1,0 +1,30 @@
+/* Importa las variables definidas en variables.css */
+@import url('./variables.css');
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: var(--light-white);
+    color: var(--dark-black);
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    gap: 10px;
+}
+
+nav a {
+    text-decoration: none;
+    color: var(--forest-green);
+}
+
+footer {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.modal-dialog-scrollable .modal-body {
+    max-height: calc(100vh - 200px); /* Ajusta el valor según tu diseño */
+    overflow-y: auto;
+}
