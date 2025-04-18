@@ -1,58 +1,73 @@
-# Proyecto Synapse
 
-Este es un proyecto para gestionar usuarios, pedidos, notificaciones y productos. Utiliza PHP para el backend, SQL para la base de datos y HTML, CSS, JS y Bootstrap para el frontend.
+# 🚀 Proyecto TRSI
 
-## Funcionalidades
+Este es un proyecto para gestionar usuarios, tendencias y estadísticas.  
+Está construido con las siguientes tecnologías:
 
-- **Panel de registro y login de usuarios**
-- **Panel Gestion de usuarios**
-- **Panel de usuario**
+- 🐘 **PHP** para el backend  
+- 🛢️ **MySQL** para la base de datos  
+- 🎨 **HTML**, **CSS**, **JavaScript** y **Bootstrap** para el frontend  
+- 🔁 **Node-RED** para visualización e integración de datos
 
-/Proyecto-Synapse
+---
+
+## 🧩 Funcionalidades
+
+- 🔐 Panel de **login** de usuarios  
+- 👥 Panel de **gestión de usuarios**  
+- 👤 Panel de **usuario individual**
+
+---
+
+## 📁 Estructura del Proyecto
+
+```
+/Proyecto-TRSI
 │
-├── /backend                           # Lógica del servidor         
-│   ├── AuthController.php             # Controlador para consulta de inicio de sesion
-│   ├── CrUserController.php           # Controlador para crear usuarios
-│   ├── DBconfig.php                   # Configuracion de la base de datos
-│   ├── DelUserController.php          # Controlador para eliminar usuarios
-│   ├── DetUserController.php          # Controlador detalles de usuario
-│   ├── LiUserController.php           # Controlador para enlistar usuarios
-│   ├── LogoutController.php           # Controlador para cerrar la sesion
-│   ├── RegController.php              # Controlador para registrarse
-│   └── UpUserController.php           # Controlador para actualizar usuario
+├── /backend                       # Lógica del servidor
+│   ├── AuthController.php         # Inicio de sesión
+│   ├── CrUserController.php       # Crear usuarios
+│   ├── DBconfig.php               # Configuración de la base de datos
+│   ├── DelUserController.php      # Eliminar usuarios
+│   ├── DetUserController.php      # Detalles de usuario
+│   ├── LiUserController.php       # Listar usuarios
+│   ├── LogoutController.php       # Cerrar sesión
+│   ├── RegController.php          # Registro de usuarios
+│   └── UpUserController.php       # Actualizar usuarios
 │
-├── /css                               # Estilos CSS del proyecto y Boostrap CSS    
-│   ├── bootstrap.min.css              # Boostrap CSS
-│   ├── fonts.css                      # Definicion de fons
-│   ├── style.css                      # Definicion de estilos para vistas HTML
-│   └── variables.css                  # Variables Globales
+├── /css                           # Estilos del proyecto
+│   ├── bootstrap.min.css          # Estilos de Bootstrap
+│   ├── fonts.css                  # Definición de fuentes
+│   ├── style.css                  # Estilos generales
+│   └── variables.css              # Variables globales
 │
-├── /fonts                             # Fuentes personalizadas               
+├── /fonts                         # Fuentes personalizadas
 │
-├── /icons                             # Iconos del proyecto
+├── /icons                         # Iconos utilizados
 │
-├── /js                                # Logica del frontend en JavaScript y Boostrap JS
-│   ├── bootstrap.bundle.min.js        # Boostrap JS
-│   ├── jquery.js                      # jQuery
-│   ├── login.js                       # Logica de logeo
-│   ├── main.js                        # Logica de funciones principales
-│   ├── manage-users.js                # Logica para la manipulacion de usuarios mediante CRUD              
-│   ├── register.js                    # Logica de registro
-│   └── user-panel.js                  # Logica de panel de usuario    
+├── /js                            # Lógica del frontend
+│   ├── bootstrap.bundle.min.js    # Bootstrap JS
+│   ├── jquery.js                  # jQuery
+│   ├── login.js                   # Lógica del login
+│   ├── main.js                    # Funciones principales
+│   ├── manage-users.js            # CRUD de usuarios
+│   ├── register.js                # Registro de usuarios
+│   └── user-panel.js              # Panel de usuario
 │
-├── /uploads                           # Imagenes subidas por usuarios y imagen por defecto 
+├── /uploads                       # Imágenes subidas por los usuarios
 │
-├── /views                             # Vistas HTML
-│   ├── about.php                      # Pagina Sobre nosotros
-│   ├── company.php                    # Pagina central para el administrador
-│   ├── footer.php                     # Pie de pagina
-│   ├── home.php                       # Pagina principal
-│   ├── login.php                      # Pagina de inicio de sesión
-│   ├── manage-users.php               # Pagina para administracion de usuarios
-│   ├── navbar.php                     # Barra de navegación
-│   ├── register.php                   # Pagina de registro
-│   ├── reviews.php                    # Pagina de reseñas
-│   ├── terms.php                      # Pagina de terminos y condiciones
-│   └── user-panel.php                 # Panel de usuario
+├── /views                         # Vistas del proyecto
+│   ├── about.php                  # Sobre nosotros
+│   ├── company.php                # Panel del administrador
+│   ├── footer.php                 # Pie de página
+│   ├── home.php                   # Página principal
+│   ├── login.php                  # Página de inicio de sesión
+│   ├── manage-users.php           # Administración de usuarios
+│   ├── navbar.php                 # Barra de navegación
+│   ├── register.php               # Registro de usuario
+│   ├── reviews.php                # Reseñas
+│   ├── terms.php                  # Términos y condiciones
+│   └── user-panel.php             # Panel de usuario
 │
-└── index.php                          # Entrada principal del proyecto
+└── index.php                      # Punto de entrada principal
+```
