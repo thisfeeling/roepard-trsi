@@ -29,7 +29,7 @@
     <script src="../js/jquery.js"></script>
     <!-- Bootstrap Bundle with Popper -->
     <script src="../js/bootstrap.bundle.min.js"></script>
-    <!-- main JS -->
+    <!-- JS -->
     <script src="../js/main.js"></script>
     <script src="../js/chart.js"></script>
     <script src="../js/frame.js"></script>

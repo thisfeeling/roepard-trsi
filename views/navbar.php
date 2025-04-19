@@ -11,10 +11,10 @@ $first_name = $_SESSION['first_name'] ?? 'First name not available';
 $last_name = $_SESSION['last_name'] ?? 'Last name not available';
 $name = $loggedIn ? $first_name . ' ' . $last_name : "Symphony Synapse";
 
-// Definir los roles con valores numéricos, asumiendo que los valores de role_id son enteros
-$userIn = ($role_id === 1);        // Asumiendo que 1 es para usuario
-$adminIn = ($role_id === 2);       // Asumiendo que 2 es para admin
-$supervisorIn = ($role_id === 3);  // Asumiendo que 3 es para supervisor
+// Definir los roles con valores numericos, asumiendo que los valores de role_id son enteros
+$userIn = ($role_id === 1);        // 1 es para usuario
+$adminIn = ($role_id === 2);       // 2 es para admin
+$supervisorIn = ($role_id === 3);  // 3 es para supervisor
 ?>
 
 <!doctype html>
