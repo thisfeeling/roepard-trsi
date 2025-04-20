@@ -3,7 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <title>frame</title>
+    <!-- Bootstrap CSS -->
+    <link href="../dist/bootstrap/css/bootstrap.css" rel="stylesheet">
+    <!-- Styles -->
     <link rel="stylesheet" href="../css/style.css">
+    <!-- Icon of the page -->
+    <link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+    <link rel="manifest" href="../site.webmanifest">
 </head>
 <body>
 
@@ -27,8 +35,8 @@
 
     <!-- jQuery -->
     <script src="../js/jquery.js"></script>
-    <!-- Bootstrap Bundle with Popper -->
-    <script src="../js/bootstrap.bundle.min.js"></script>
+    <!-- Bootstrap JS -->
+    <script src="../dist/bootstrap/js/bootstrap.js"></script>
     <!-- JS -->
     <script src="../js/main.js"></script>
     <script src="../js/chart.js"></script>

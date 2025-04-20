@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>terms</title>
     <!-- Bootstrap CSS -->
-    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../dist/bootstrap/css/bootstrap.css" rel="stylesheet">
     <!-- Styles -->
     <link rel="stylesheet" href="../css/style.css">
     <!-- Icon of the page -->
@@ -76,8 +76,8 @@
 
     <!-- jQuery -->
     <script src="../js/jquery.js"></script>
-    <!-- Bootstrap Bundle with Popper -->
-    <script src="../js/bootstrap.bundle.min.js"></script>
+    <!-- Bootstrap JS -->
+    <script src="../dist/bootstrap/js/bootstrap.js"></script>
 </body>
 
 </html>
