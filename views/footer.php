@@ -72,8 +72,8 @@ $supervisorIn = ($role_id === 3);  // 3 es para supervisor
     </footer>
     <!-- jQuery -->
     <script src="../js/jquery.js"></script>
-    <!-- Bootstrap JS -->
-    <script src="../dist/bootstrap/js/bootstrap.js"></script>
+    <!-- Bootstrap JS With Popper-->
+    <script src="../dist/bootstrap/js/bootstrap.bundle.js"></script>
 </body>
 
 </html>

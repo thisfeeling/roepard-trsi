@@ -55,11 +55,6 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
     <link href="../dist/bootstrap/css/bootstrap.css" rel="stylesheet">
     <!-- Styles -->
     <link rel="stylesheet" href="../css/style.css">
-    <!-- Icon of the page -->
-    <link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
-    <link rel="manifest" href="../site.webmanifest">
 </head>
 
 <body style="background-color: var(--olive-green) !important; color: var(--soft-green);">
@@ -257,8 +252,8 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
 
     <!-- jQuery -->
     <script src="../js/jquery.js"></script>
-    <!-- Bootstrap JS -->
-    <script src="../dist/bootstrap/js/bootstrap.js"></script>
+    <!-- Bootstrap JS With Popper-->
+    <script src="../dist/bootstrap/js/bootstrap.bundle.js"></script>
     <!-- user-panel JS -->
     <script src="../js/user-panel.js"></script>
 </body>

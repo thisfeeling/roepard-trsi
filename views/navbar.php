@@ -27,6 +27,32 @@ $supervisorIn = ($role_id === 3);  // 3 es para supervisor
     <link href="../dist/bootstrap/css/bootstrap.css" rel="stylesheet">
     <!-- Styles -->
     <link rel="stylesheet" href="../css/style.css">
+    <!-- Icon of the page -->
+    <!-- Manifest -->
+    <link rel="manifest" href="/site.webmanifest">
+
+    <!-- Mobile & PWA support -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="application-name" content="trsi">
+    <meta name="apple-mobile-web-app-title" content="trsi">
+    <meta name="theme-color" content="#3393FF">
+    <meta name="msapplication-navbutton-color" content="#3393FF">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="msapplication-starturl" content="/index.php">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Íconos para PWA y dispositivos -->
+    <link rel="icon" type="image/png" sizes="96x96" href="../favicon-96x96.png">
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="57x57" href="../apple-touch-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="../apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="../apple-touch-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="../apple-touch-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="../apple-touch-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon-180x180.png">
 </head>
 <body>
     <header>
@@ -100,7 +126,7 @@ $supervisorIn = ($role_id === 3);  // 3 es para supervisor
 
     <!-- jQuery -->
     <script src="../js/jquery.js"></script>
-    <!-- Bootstrap JS -->
-    <script src="../dist/bootstrap/js/bootstrap.js"></script>
+    <!-- Bootstrap JS With Popper-->
+    <script src="../dist/bootstrap/js/bootstrap.bundle.js"></script>
 </body>
 </html>
