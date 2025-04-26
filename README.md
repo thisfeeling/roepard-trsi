@@ -7,7 +7,6 @@ Está construido con las siguientes tecnologías:
 - 🐘 **PHP** para el backend  
 - 🛢️ **MySQL** para la base de datos  
 - 🎨 **HTML**, **CSS**, **JavaScript** y **Bootstrap** para el frontend  
-- 🔁 **Node-RED** para visualización e integración de datos
 
 ---
 
