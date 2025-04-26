@@ -1,4 +1,4 @@
-fetch("https://roepard.ip-ddns.com/nodered/api/json")
+fetch("../backend/Frame.php")
     .then(response => response.json())
     .then(data => {
         const ctx = document.getElementById('usuariosChart').getContext('2d');
