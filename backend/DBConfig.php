@@ -3,7 +3,7 @@
 class DBConfig {
     private $host = "localhost"; // Host de la base de datos
     private $port = "3306"; // Puerto de la base de datos
-    private $username = "trsi_user";
+    private $username = "trsi_user"; 
     private $password = "xJgt1bm_m!j8Ys5r";
     private $db_name = "trsi"; // Nombre de la base de datos
 

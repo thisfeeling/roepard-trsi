@@ -9,7 +9,7 @@ $loggedIn = isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true;
 $role_id = $_SESSION['role_id'] ?? null;  // Obtener el role_id de la sesión
 $first_name = $_SESSION['first_name'] ?? 'First name not available';
 $last_name = $_SESSION['last_name'] ?? 'Last name not available';
-$name = $loggedIn ? $first_name . ' ' . $last_name : "Symphony Synapse";
+$name = $loggedIn ? $first_name . ' ' . $last_name : "Proyect TRSI";
 
 // Definir los roles con valores numericos, asumiendo que los valores de role_id son enteros
 $userIn = ($role_id === 1);        // 1 es para usuario
@@ -107,9 +107,6 @@ $supervisorIn = ($role_id === 3);  // 3 es para supervisor
                         <?php else: ?>
                             <li class="nav-item">
                                 <a class="nav-link" href="../views/login.php" tabindex="-1">Sign In</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="../views/register.php" tabindex="-1">Sign Up</a>
                             </li>
                         <?php endif; ?>
                     </ul>
