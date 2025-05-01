@@ -100,7 +100,7 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
 
         <!-- Modal de detalles de usuario -->
         <div class="modal fade" id="detalleUsuarioModal" tabindex="-1" aria-labelledby="detalleUsuarioLabel" aria-hidden="true" style="background-color: var(--soft-green); color: var(--dark-green);">
-            <div class="modal-dialog">
+            <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="detalleUsuarioLabel">Details</h5>
@@ -108,96 +108,86 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
                     </div>
                     <form id="formUsuario">
                         <div class="modal-body">
-                            <!-- Campo oculto que envía el valor -->
                             <input type="hidden" id="modalUserUser_id" name="user_id" />
-                            <!-- Fila 1 -->
+
+                            <!-- Fila 1: 3 columnas -->
                             <div class="row">
-                                <div class="col-md-6 mb-3">
+                                <div class="col-md-4 mb-3">
                                     <label for="modalUserProfilePicture" class="form-label">Profile Picture</label>
                                     <input type="text" class="form-control" id="modalUserProfilePicture" name="profile_picture" placeholder="Enter a profile picture" required autocomplete="off" />
                                 </div>
-                            </div>
-
-                            <!-- Fila 2 -->
-                            <div class="row">
-                                <div class="col-md-6 mb-3">
+                                <div class="col-md-4 mb-3">
                                     <label for="modalUserFirstName" class="form-label">First Name</label>
                                     <input type="text" class="form-control" id="modalUserFirstName" name="first_name" placeholder="Enter a first name" required autocomplete="off" />
                                 </div>
-                                <div class="col-md-6 mb-3">
+                                <div class="col-md-4 mb-3">
                                     <label for="modalUserLastName" class="form-label">Last Name</label>
                                     <input type="text" class="form-control" id="modalUserLastName" name="last_name" placeholder="Enter a last name" required autocomplete="off" />
                                 </div>
                             </div>
 
-                            <!-- Fila 3 -->
+                            <!-- Fila 2: 3 columnas -->
                             <div class="row">
-                                <div class="col-md-6 mb-3">
+                                <div class="col-md-4 mb-3">
                                     <label for="modalUserUsername" class="form-label">Username</label>
-                                    <input type="text" class="form-control" id="modalUserUsername" name="username" placeholder="Enter an username" required autocomplete="off" />
+                                    <input type="text" class="form-control" id="modalUserUsername" name="username" placeholder="Enter a username" required autocomplete="off" />
                                 </div>
-                                <div class="col-md-6 mb-3">
+                                <div class="col-md-4 mb-3">
                                     <label for="modalUserEmail" class="form-label">Email</label>
                                     <input type="email" class="form-control" id="modalUserEmail" name="email" placeholder="Enter an email" required autocomplete="off" />
                                 </div>
+                                <div class="col-md-4 mb-3">
+                                    <label for="modalUserPhone" class="form-label">Phone</label>
+                                    <input type="text" class="form-control" id="modalUserPhone" name="phone" placeholder="Enter a phone" required autocomplete="off" />
+                                </div>
                             </div>
 
-                            <!-- Fila 4 -->
+                            <!-- Fila 3: 2 columnas -->
                             <div class="row">
-                                <div class="col-md-6 mb-3">
-                                    <label for="modalUserPhone" class="form-label">Phone</label>
-                                    <input type="email" class="form-control" id="modalUserPhone" name="phone" placeholder="Enter a phone" required autocomplete="off" />
-                                </div>
                                 <div class="col-md-6 mb-3">
                                     <label for="modalUserPassword" class="form-label">Password</label>
                                     <input type="text" class="form-control" id="modalUserPassword" name="password" placeholder="Enter a password" required autocomplete="off" />
                                 </div>
-                            </div>
-
-                            <!-- Fila 5 -->
-                            <div class="row">
                                 <div class="col-md-6 mb-3">
                                     <label for="modalUserCountry" class="form-label">Country</label>
-                                    <input type="email" class="form-control" id="modalUserCountry" name="country" placeholder="Enter a country" required autocomplete="off" />
+                                    <input type="text" class="form-control" id="modalUserCountry" name="country" placeholder="Enter a country" required autocomplete="off" />
                                 </div>
+                            </div>
+
+                            <!-- Fila 4: 2 columnas -->
+                            <div class="row">
                                 <div class="col-md-6 mb-3">
                                     <label for="modalUserCity" class="form-label">City</label>
                                     <input type="text" class="form-control" id="modalUserCity" name="city" placeholder="Enter a city" required autocomplete="off" />
                                 </div>
-                            </div>
-
-                            <!-- Fila 6 -->
-                            <div class="row">
                                 <div class="col-md-6 mb-3">
                                     <label for="modalUserBirthdate" class="form-label">Birthdate</label>
                                     <input type="date" class="form-control" id="modalUserBirthdate" name="birthdate" required autocomplete="off" />
                                 </div>
                             </div>
 
-                            <!-- Fila 7 -->
+                            <!-- Fila 5: 2 columnas -->
                             <div class="row">
                                 <div class="col-md-6 mb-3">
                                     <label for="modalUserStatus" class="form-label">Status</label>
-                                    <!-- Select deshabilitado -->
-                                    <select class="form-select" id="modalUserStatus" name="status_id" disabled required autocomplete="off">
-                                        <option value="1" selected>Active</option>
+                                    <select class="form-select" id="modalUserStatus" name="status_id" disabled required>
+                                        <option value="1">Active</option>
                                         <option value="2">Inactive</option>
                                         <option value="3">Filed</option>
                                     </select>
-                                    <!-- Campo oculto que envía el valor -->
                                     <input type="hidden" id="status_id_hidden" name="status_id" value="<?php echo htmlspecialchars($status_id); ?>">
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <label for="modalUserRole" class="form-label">Role</label>
-                                    <select class="form-select" id="modalUserRole" name="role_id" disabled required autocomplete="off">
-                                        <option value="1" selected>User</option>
+                                    <select class="form-select" id="modalUserRole" name="role_id" disabled required>
+                                        <option value="1">User</option>
                                         <option value="2">Admin</option>
                                         <option value="3">Supervisor</option>
                                     </select>
-                                    <!-- Campo oculto que envía el valor -->
                                     <input type="hidden" id="role_id_hidden" name="role_id" value="<?php echo htmlspecialchars($role_id); ?>">
                                 </div>
                             </div>
+
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -207,6 +197,7 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
                 </div>
             </div>
         </div>
+
 
         <div class="row justify-content-center">
             <div class="col-md-8">

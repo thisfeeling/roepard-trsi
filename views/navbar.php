@@ -64,7 +64,7 @@ $supervisorIn = ($role_id === 3);  // 3 es para supervisor
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <a class="navbar-brand" href="../index.php">
-                            <img src="../uploads/TRSIV2.png" alt="" width="50" height="50">
+                            <img src="./files/UAM.png" alt="" width="100" height="50">
                         </a>
                         <li class="nav-item">
                             <a class="nav-link active" aria-current="page" href="../index.php">Proyect Trsi</a>
