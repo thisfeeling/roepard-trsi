@@ -65,12 +65,14 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
     <main class="container my-5">
 
         <!-- Modal alert -->
-        <div class="modal fade" id="manageUsersModal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true" data-bs-target="#detalleUsuarioModal" data-bs-theme="white" style="z-index: 1051 !important;">
+        <div class="modal fade" id="manageUsersModal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true"
+            data-bs-target="#detalleUsuarioModal" data-bs-theme="white" style="z-index: 1051 !important;">
             <div class="modal-dialog">
                 <div class="modal-content bg-white text-dark" style="background-color: var(--olive-green);">
                     <div class="modal-header">
                         <h5 class="modal-title" id="modalLabel">title</h5>
-                        <button type="button" class="btn-close btn-close-black" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <button type="button" class="btn-close btn-close-black" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         content
@@ -80,7 +82,8 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
         </div>
 
         <!-- Modal de confirmación para eliminar usuario -->
-        <div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
+        <div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-labelledby="confirmDeleteModalLabel"
+            aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header text-dark">
@@ -99,30 +102,33 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
         </div>
 
         <!-- Modal de detalles de usuario -->
-        <div class="modal fade" id="detalleUsuarioModal" tabindex="-1" aria-labelledby="detalleUsuarioLabel" aria-hidden="true" style="background-color: var(--soft-green); color: var(--dark-green);">
+        <div class="modal fade" id="detalleUsuarioModal" tabindex="-1" aria-labelledby="detalleUsuarioLabel"
+            aria-hidden="true" style="background-color: var(--soft-green); color: var(--dark-green);">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="detalleUsuarioLabel">Details</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <form id="formUsuario">
+                    <form id="formUsuario" enctype="multipart/form-data" method="post">
                         <div class="modal-body">
                             <input type="hidden" id="modalUserUser_id" name="user_id" />
 
                             <!-- Fila 1: 3 columnas -->
                             <div class="row">
                                 <div class="col-md-4 mb-3">
-                                    <label for="modalUserProfilePicture" class="form-label">Profile Picture</label>
-                                    <input type="text" class="form-control" id="modalUserProfilePicture" name="profile_picture" placeholder="Enter a profile picture" required autocomplete="off" />
+                                    <label for="modalUserExistingPicture" class="form-label">Profile Picture</label>
+                                    <input type="file" name="profile_picture" accept="image/png,image/jpeg,image/heic" class="form-control" id="modalUserExistingPicture">
                                 </div>
                                 <div class="col-md-4 mb-3">
                                     <label for="modalUserFirstName" class="form-label">First Name</label>
-                                    <input type="text" class="form-control" id="modalUserFirstName" name="first_name" placeholder="Enter a first name" required autocomplete="off" />
+                                    <input type="text" class="form-control" id="modalUserFirstName" name="first_name"
+                                        placeholder="Enter a first name" required autocomplete="off" />
                                 </div>
                                 <div class="col-md-4 mb-3">
                                     <label for="modalUserLastName" class="form-label">Last Name</label>
-                                    <input type="text" class="form-control" id="modalUserLastName" name="last_name" placeholder="Enter a last name" required autocomplete="off" />
+                                    <input type="text" class="form-control" id="modalUserLastName" name="last_name"
+                                        placeholder="Enter a last name" required autocomplete="off" />
                                 </div>
                             </div>
 
@@ -130,15 +136,18 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
                             <div class="row">
                                 <div class="col-md-4 mb-3">
                                     <label for="modalUserUsername" class="form-label">Username</label>
-                                    <input type="text" class="form-control" id="modalUserUsername" name="username" placeholder="Enter a username" required autocomplete="off" />
+                                    <input type="text" class="form-control" id="modalUserUsername" name="username"
+                                        placeholder="Enter an username" required autocomplete="off" />
                                 </div>
                                 <div class="col-md-4 mb-3">
                                     <label for="modalUserEmail" class="form-label">Email</label>
-                                    <input type="email" class="form-control" id="modalUserEmail" name="email" placeholder="Enter an email" required autocomplete="off" />
+                                    <input type="email" class="form-control" id="modalUserEmail" name="email"
+                                        placeholder="Enter an email" required autocomplete="off" />
                                 </div>
                                 <div class="col-md-4 mb-3">
                                     <label for="modalUserPhone" class="form-label">Phone</label>
-                                    <input type="text" class="form-control" id="modalUserPhone" name="phone" placeholder="Enter a phone" required autocomplete="off" />
+                                    <input type="text" class="form-control" id="modalUserPhone" name="phone"
+                                        placeholder="Enter a phone" required autocomplete="off" />
                                 </div>
                             </div>
 
@@ -146,11 +155,13 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
                             <div class="row">
                                 <div class="col-md-6 mb-3">
                                     <label for="modalUserPassword" class="form-label">Password</label>
-                                    <input type="text" class="form-control" id="modalUserPassword" name="password" placeholder="Enter a password" required autocomplete="off" />
+                                    <input type="text" class="form-control" id="modalUserPassword" name="password"
+                                        placeholder="Enter a password" required autocomplete="off" />
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <label for="modalUserCountry" class="form-label">Country</label>
-                                    <input type="text" class="form-control" id="modalUserCountry" name="country" placeholder="Enter a country" required autocomplete="off" />
+                                    <input type="text" class="form-control" id="modalUserCountry" name="country"
+                                        placeholder="Enter a country" required autocomplete="off" />
                                 </div>
                             </div>
 
@@ -158,11 +169,13 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
                             <div class="row">
                                 <div class="col-md-6 mb-3">
                                     <label for="modalUserCity" class="form-label">City</label>
-                                    <input type="text" class="form-control" id="modalUserCity" name="city" placeholder="Enter a city" required autocomplete="off" />
+                                    <input type="text" class="form-control" id="modalUserCity" name="city"
+                                        placeholder="Enter a city" required autocomplete="off" />
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <label for="modalUserBirthdate" class="form-label">Birthdate</label>
-                                    <input type="date" class="form-control" id="modalUserBirthdate" name="birthdate" required autocomplete="off" />
+                                    <input type="date" class="form-control" id="modalUserBirthdate" name="birthdate"
+                                        required autocomplete="off" />
                                 </div>
                             </div>
 
@@ -175,7 +188,8 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
                                         <option value="2">Inactive</option>
                                         <option value="3">Filed</option>
                                     </select>
-                                    <input type="hidden" id="status_id_hidden" name="status_id" value="<?php echo htmlspecialchars($status_id); ?>">
+                                    <input type="hidden" id="status_id_hidden" name="status_id"
+                                        value="<?php echo htmlspecialchars($status_id); ?>">
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <label for="modalUserRole" class="form-label">Role</label>
@@ -184,7 +198,8 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
                                         <option value="2">Admin</option>
                                         <option value="3">Supervisor</option>
                                     </select>
-                                    <input type="hidden" id="role_id_hidden" name="role_id" value="<?php echo htmlspecialchars($role_id); ?>">
+                                    <input type="hidden" id="role_id_hidden" name="role_id"
+                                        value="<?php echo htmlspecialchars($role_id); ?>">
                                 </div>
                             </div>
 
@@ -202,16 +217,20 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <!-- Card del usuario -->
-                <div class="card text-center shadow-lg" style="background-color: var(--soft-green) !important; color: var(--dark-green) !important;">
-                    <div class="card-header bg-white text-dark" style="background-color: var(--soft-green) !important; color: var(--dark-green) !important;">
+                <div class="card text-center shadow-lg"
+                    style="background-color: var(--soft-green) !important; color: var(--dark-green) !important;">
+                    <div class="card-header bg-white text-dark"
+                        style="background-color: var(--soft-green) !important; color: var(--dark-green) !important;">
                         <h5>User Management Panel</h5>
                     </div>
                     <div class="card-body">
                         <div class="row">
                             <!-- Imagen de perfil -->
-                            <div class="col-md-4">
-                                <img src="../uploads/<?php echo htmlspecialchars($profile_picture); ?>" alt="Profile picture" class="rounded-circle img-fluid mb-3" style="max-width: 150px;">
-                            </div>
+                            <img src="../uploads/<?php echo htmlspecialchars($profile_picture); ?>"
+     alt="Profile picture" class="rounded-circle img-fluid mb-3"
+     style="width: 250px; height: 250px; object-fit: cover;">
+
+                            
                             <!-- Información del usuario -->
                             <div class="col-md-8 text-start">
                                 <input type="hidden" id="UserUser_id" value="<?php echo htmlspecialchars($user_id); ?>">
@@ -228,7 +247,8 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
                             </div>
                         </div>
                     </div>
-                    <div class="card-footer bg-light" style="background-color: var(--soft-green) !important; color: var(--dark-green) !important;">
+                    <div class="card-footer bg-light"
+                        style="background-color: var(--soft-green) !important; color: var(--dark-green) !important;">
                         <button type="button" class="btn btn-primary me-2" id="btnDetailUser">Edit profile</button>
                         <button type="button" class="btn btn-danger me-2" id="btnDeleteUser">Delete account</button>
                         <a href="../backend/LogoutController.php" class="btn btn-danger">Logout</a>
@@ -238,13 +258,12 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
         </div>
     </main>
 
-    <!-- Incluir el footer -->
-    <?php include './footer.php'; ?>
-
     <!-- jQuery -->
-    <script src="../js/jquery.js"></script>
+    <script src="../dist/jquery/js/jquery.min.js"></script>
     <!-- Bootstrap JS With Popper-->
     <script src="../dist/bootstrap/js/bootstrap.bundle.js"></script>
+    <!-- ChartJS-->
+    <script src="../dist/chart/js/chart.umd.min.js"></script>
     <!-- user-panel JS -->
     <script src="../js/user-panel.js"></script>
 </body>

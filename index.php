@@ -9,7 +9,7 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 // Logica de redireccion basada en rol
-$redirect_url = './views/home.php'; // URL por defecto
+$redirect_url = './views/login.php'; // URL por defecto
 if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
     $user_id = $_SESSION['user_id'];
     $stmt = $db->prepare("SELECT first_name, last_name, email, role_id FROM users WHERE user_id = :user_id");
@@ -52,6 +52,7 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
     <!-- Íconos para PWA y dispositivos -->
     <link rel="icon" type="image/png" sizes="96x96" href="./favicon-96x96.png">
     <link rel="icon" type="image/svg+xml" href="./favicon.svg">
+    <link rel="shortcut icon" href="./favicon.ico">
     <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png">
     <link rel="apple-touch-icon" sizes="57x57" href="./apple-touch-icon-57x57.png">
     <link rel="apple-touch-icon" sizes="72x72" href="./apple-touch-icon-72x72.png">
@@ -59,7 +60,6 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
     <link rel="apple-touch-icon" sizes="120x120" href="./apple-touch-icon-120x120.png">
     <link rel="apple-touch-icon" sizes="152x152" href="./apple-touch-icon-152x152.png">
     <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon-180x180.png">
-
 </head>
 <body style="background-color: var(--olive-green) !important;">
     
@@ -82,5 +82,7 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
     <script src="./js/jquery.js"></script>
     <!-- Bootstrap JS With Popper-->
     <script src="./dist/bootstrap/js/bootstrap.bundle.js"></script>
+    <!-- ChartJS-->
+    <script src="./dist/chart/js/chart.umd.min.js"></script>
 </body>
 </html>

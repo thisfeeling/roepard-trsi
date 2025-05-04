@@ -127,15 +127,12 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
         </div>
     </main>
 
-    <!-- Incluir el footer -->
-    <?php
-    include './footer.php';
-    ?>
-
     <!-- jQuery -->
-    <script src="../js/jquery.js"></script>
+    <script src="../dist/jquery/js/jquery.min.js"></script>
     <!-- Bootstrap JS With Popper-->
     <script src="../dist/bootstrap/js/bootstrap.bundle.js"></script>
+    <!-- ChartJS-->
+    <script src="../dist/chart/js/chart.umd.min.js"></script>
     <!-- main JS -->
     <script src="../js/login.js"></script>
     <!-- <script src="https://kit.fontawesome.com/c5f09bfc31.js" crossorigin="anonymous"></script> -->

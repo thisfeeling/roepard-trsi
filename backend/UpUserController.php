@@ -1,12 +1,11 @@
 <?php
-// Incluir un archivo de conexion a la base de datos
 require_once '../backend/DBConfig.php';
-// Crear instancia de conexión a la base de datos
+
 $auth = new DBconfig();
 $db = $auth->getConnection();
-// Obtener datos del formulario
+
+// Obtener todos los datos del formulario excepto la imagen
 $user_id = $_POST['user_id'];
-$profile_picture = $_POST['profile_picture'];
 $first_name = $_POST['first_name'];
 $last_name = $_POST['last_name'];
 $username = $_POST['username'];
@@ -18,16 +17,56 @@ $city = $_POST['city'];
 $birthdate = $_POST['birthdate'];
 $status_id = $_POST['status_id'];
 $role_id = $_POST['role_id'];
-// Mostrar los datos recibidos para depuración
-// Permanece desactivado por que no permite la funcion del controlador
-/* echo json_encode(['debug' => $_POST]);
-exit; */
-// Validar que todos los datos requeridos estén presentes
-if (!$user_id|| !$profile_picture || !$first_name || !$last_name || !$username || !$email || !$phone || !$password || !$country || !$city || !$birthdate || !$status_id || !$role_id ) {
-    echo json_encode(['error' => 'All fields are required.']);
+
+// Directorio y tipos permitidos
+$upload_dir = '../uploads/';
+$allowed_types = ['image/jpeg', 'image/png', 'image/heic'];
+$profile_picture = 'default-profile.png';  // Imagen por defecto
+
+// Obtener la imagen actual del usuario
+$sql_current = "SELECT profile_picture FROM users WHERE user_id = :user_id";
+$stmt_current = $db->prepare($sql_current);
+$stmt_current->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+$stmt_current->execute();
+$current = $stmt_current->fetch(PDO::FETCH_ASSOC);
+if ($current && !empty($current['profile_picture'])) {
+    $profile_picture = $current['profile_picture'];  // Mantener la imagen actual si no se sube una nueva
+}
+
+// Si se envía una nueva imagen
+if (isset($_FILES['profile_picture']) && $_FILES['profile_picture']['error'] === 0) {
+    // Eliminar la imagen anterior si existe
+    if ($profile_picture !== 'default-profile.png' && file_exists($upload_dir . $profile_picture)) {
+        unlink($upload_dir . $profile_picture);  // Eliminar la imagen vieja
+    }
+
+    $file_tmp = $_FILES['profile_picture']['tmp_name'];
+    $file_type = mime_content_type($file_tmp);
+
+    if (in_array($file_type, $allowed_types)) {
+        $extension = pathinfo($_FILES['profile_picture']['name'], PATHINFO_EXTENSION);
+        $new_filename = "user_" . $user_id . '.' . $extension;  // Usar el ID del usuario
+        $destination = $upload_dir . $new_filename;
+
+        if (move_uploaded_file($file_tmp, $destination)) {
+            $profile_picture = $new_filename;  // Actualizar el nombre de la imagen en la base de datos
+        } else {
+            echo json_encode(['error' => 'Error al subir la imagen.']);
+            exit;
+        }
+    } else {
+        echo json_encode(['error' => 'Formato de imagen no permitido.']);
+        exit;
+    }
+}
+
+// Validación básica
+if (!$user_id || !$first_name || !$last_name || !$username || !$email || !$phone || !$password || !$country || !$city || !$birthdate || !$status_id || !$role_id) {
+    echo json_encode(['error' => 'Todos los campos son obligatorios.']);
     exit;
 }
-// Actualizar datos del usuario en la base de datos
+
+// Actualizar datos
 $sql = "UPDATE users SET 
             profile_picture = :profile_picture,
             first_name = :first_name, 
@@ -42,6 +81,7 @@ $sql = "UPDATE users SET
             status_id = :status_id, 
             role_id = :role_id
         WHERE user_id = :user_id";
+
 $query = $db->prepare($sql);
 $query->bindParam(':profile_picture', $profile_picture);
 $query->bindParam(':first_name', $first_name);
@@ -56,9 +96,10 @@ $query->bindParam(':birthdate', $birthdate);
 $query->bindParam(':status_id', $status_id);
 $query->bindParam(':role_id', $role_id);
 $query->bindParam(':user_id', $user_id);
+
 if ($query->execute()) {
-    echo json_encode(['success' => 'User updated successfully.']);
+    echo json_encode(['success' => 'Usuario actualizado correctamente.']);
 } else {
-    echo json_encode(['error' => 'Error updating user.']);
+    echo json_encode(['error' => 'Error al actualizar el usuario.']);
 }
 ?>

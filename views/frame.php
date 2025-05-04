@@ -23,18 +23,14 @@
         </div>
     </div>
 
-    <!-- Incluir el footer -->
-    <?php
-    include './footer.php';
-    ?>
-
     <!-- jQuery -->
-    <script src="../js/jquery.js"></script>
+    <script src="../dist/jquery/js/jquery.min.js"></script>
     <!-- Bootstrap JS With Popper-->
     <script src="../dist/bootstrap/js/bootstrap.bundle.js"></script>
+    <!-- ChartJS-->
+    <script src="../dist/chart/js/chart.umd.min.js"></script>
     <!-- JS -->
     <script src="../js/main.js"></script>
-    <script src="../js/chart.js"></script>
     <script src="../js/frame.js"></script>
 </body>
 </html>
