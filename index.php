@@ -72,11 +72,11 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
         </div>
     </main>
 
-    <!-- Script para redirigir despues de 2 segundos -->
+    <!-- Script para redirigir despues de 1 segundos -->
     <script>
         setTimeout(function () {
             window.location.href = "<?php echo htmlspecialchars($redirect_url); ?>";
-        }, 2000); // 2000 ms = 2 segundos
+        }, 1000); // 1000 ms = 1 segundos
     </script>
     <!-- jQuery -->
     <script src="./js/jquery.js"></script>

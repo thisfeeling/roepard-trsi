@@ -1,4 +1,5 @@
 <?php
+
 require_once '../backend/DBConfig.php';
 
 $auth = new DBconfig();

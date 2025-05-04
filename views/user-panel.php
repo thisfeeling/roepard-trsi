@@ -118,7 +118,8 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
                             <div class="row">
                                 <div class="col-md-4 mb-3">
                                     <label for="modalUserExistingPicture" class="form-label">Profile Picture</label>
-                                    <input type="file" name="profile_picture" accept="image/png,image/jpeg,image/heic" class="form-control" id="modalUserExistingPicture">
+                                    <input type="file" name="profile_picture" accept="image/png,image/jpeg,image/heic"
+                                        class="form-control" id="modalUserExistingPicture">
                                 </div>
                                 <div class="col-md-4 mb-3">
                                     <label for="modalUserFirstName" class="form-label">First Name</label>
@@ -226,11 +227,11 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
                     <div class="card-body">
                         <div class="row">
                             <!-- Imagen de perfil -->
-                            <img src="../uploads/<?php echo htmlspecialchars($profile_picture); ?>"
-     alt="Profile picture" class="rounded-circle img-fluid mb-3"
-     style="width: 250px; height: 250px; object-fit: cover;">
+                            <?php if (!empty($profile_picture)): ?>
+                            <img src="../uploads/<?php echo htmlspecialchars($profile_picture); ?>" alt="Profile"
+                                class="img-thumbnail mb-2" style="height: 200px; width: 200px;">
+                            <?php endif; ?>
 
-                            
                             <!-- Información del usuario -->
                             <div class="col-md-8 text-start">
                                 <input type="hidden" id="UserUser_id" value="<?php echo htmlspecialchars($user_id); ?>">

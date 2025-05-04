@@ -155,8 +155,8 @@ $(document).ready(function () {
         if (!file || !file.type.startsWith("image/")) return;
     
         // Ancho y largo
-        const maxWidth = 250;
-        const maxHeight = 250;
+        const maxWidth = 200;
+        const maxHeight = 200;
 
         const reader = new FileReader();
         reader.onload = function (e) {

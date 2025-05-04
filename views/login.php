@@ -84,7 +84,8 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
     <main style="background-color: var(--olive-green);">
         <div class="container d-flex justify-content-center align-items-center vh-100">
             <!-- Form Card -->
-            <div class="card shadow-lg p-4" style="max-width: 30rem; background-color: var(--soft-green); color: var(--dark-green);">
+            <div class="card shadow-lg p-4"
+                style="max-width: 30rem; background-color: var(--soft-green); color: var(--dark-green);">
                 <div class="card-header text-center border-0 pb-0" style="background-color: transparent;">
                     <h2 class="text-dark">Login Form</h2>
                 </div>
@@ -93,31 +94,34 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
                         <!-- Email -->
                         <div class="mb-4">
                             <label for="email" class="form-label">Email, Username or Phone</label>
-                            <input type="email" class="form-control custom-input" id="email" name="email" placeholder="Email/Username/Phone" required autocomplete="email">
+                            <input type="email" class="form-control custom-input" id="email" name="email"
+                                placeholder="Email/Username/Phone" required autocomplete="email">
                             <div class="invalid-feedback">Please enter a valid input.</div>
                         </div>
                         <!-- Password -->
                         <div class="mb-4">
                             <label for="password" class="form-label">Password</label>
-                            <input type="password" class="form-control custom-input" id="password" name="password" placeholder="Password" required autocomplete="current-password">
+                            <input type="password" class="form-control custom-input" id="password" name="password"
+                                placeholder="Password" required autocomplete="current-password">
                             <div class="invalid-feedback">Password is required.</div>
                         </div>
                         <!-- Submit -->
                         <div class="d-grid">
                             <button type="submit" class="btn btn-primary custom-button">Sign In</button>
-                            <small class="text-body-secondary my-2">By clicking Sign In, you agree to the terms of use.</small>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
         <!-- Modal de login -->
-        <div class="modal fade" id="LoginModal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true" data-bs-theme="white">
+        <div class="modal fade" id="LoginModal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true"
+            data-bs-theme="white">
             <div class="modal-dialog">
                 <div class="modal-content bg-white text-dark" style="background-color: var(--olive-green);">
                     <div class="modal-header">
                         <h5 class="modal-title" id="modalLabel">title</h5>
-                        <button type="button" class="btn-close btn-close-black" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <button type="button" class="btn-close btn-close-black" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         content

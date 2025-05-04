@@ -71,7 +71,8 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
             <h2 class="my-5">Servicios disponibles: </h2>
             <div class="d-flex align-items-center justify-content-between mb-3">
                 <strong>Gestión de Usuarios:</strong>
-                <button type="button" class="btn btn-success" id="btnGestionUsuarios" data-bs-toggle="modal" data-bs-target="#btnGestionUsuarios">
+                <button type="button" class="btn btn-success" id="btnGestionUsuarios" data-bs-toggle="modal"
+                    data-bs-target="#btnGestionUsuarios">
                     Ir
                 </button>
             </div>
@@ -90,7 +91,7 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
     <!-- ChartJS-->
     <script src="../dist/chart/js/chart.umd.min.js"></script>
     <!-- main JS -->
-    <script src="../js/main.js"></script>    
+    <script src="../js/main.js"></script>
 </body>
 
 </html>

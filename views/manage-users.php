@@ -78,18 +78,21 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
         </div>
 
         <div class="d-flex justify-content-center">
-            <button type="button" class="btn btn-success my-4" data-bs-toggle="modal" data-bs-target="#crearUsuarioModal">
+            <button type="button" class="btn btn-success my-4" data-bs-toggle="modal"
+                data-bs-target="#crearUsuarioModal">
                 Create New User
             </button>
         </div>
 
         <!-- Modal alert -->
-        <div class="modal fade" id="manageUsersModal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true" data-bs-target="#detalleUsuarioModal" data-bs-theme="white" style="z-index: 1051 !important;">
+        <div class="modal fade" id="manageUsersModal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true"
+            data-bs-target="#detalleUsuarioModal" data-bs-theme="white" style="z-index: 1051 !important;">
             <div class="modal-dialog">
                 <div class="modal-content bg-white text-dark" style="background-color: var(--olive-green);">
                     <div class="modal-header">
                         <h5 class="modal-title" id="modalLabel">title</h5>
-                        <button type="button" class="btn-close btn-close-black" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <button type="button" class="btn-close btn-close-black" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         content
@@ -99,7 +102,8 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
         </div>
 
         <!-- Modal de confirmación para eliminar usuario -->
-        <div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
+        <div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-labelledby="confirmDeleteModalLabel"
+            aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -118,7 +122,8 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
         </div>
 
         <!-- Modal de detalles de usuario -->
-        <div class="modal fade" id="detalleUsuarioModal" tabindex="-1" aria-labelledby="detalleUsuarioLabel" aria-hidden="true" style="background-color: var(--soft-green); color: var(--dark-green);">
+        <div class="modal fade" id="detalleUsuarioModal" tabindex="-1" aria-labelledby="detalleUsuarioLabel"
+            aria-hidden="true" style="background-color: var(--soft-green); color: var(--dark-green);">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -128,13 +133,15 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
                     <form id="formUsuario">
                         <div class="modal-body">
 
-                            <input type="hidden" id="modalUserUser_id" name="user_id"/>
+                            <input type="hidden" id="modalUserUser_id" name="user_id" />
 
                             <!-- Fila 1 -->
                             <div class="row">
                                 <div class="col-md-6 mb-3">
                                     <label for="modalUserProfilePicture" class="form-label">Profile Picture</label>
-                                    <input type="text" class="form-control" id="modalUserProfilePicture" name="profile_picture" placeholder="Enter a profile picture" required autocomplete="off" />
+                                    <input type="text" class="form-control" id="modalUserProfilePicture"
+                                        name="profile_picture" placeholder="Enter a profile picture" required
+                                        autocomplete="off" />
                                 </div>
                             </div>
 
@@ -142,11 +149,13 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
                             <div class="row">
                                 <div class="col-md-6 mb-3">
                                     <label for="modalUserFirstName" class="form-label">First Name</label>
-                                    <input type="text" class="form-control" id="modalUserFirstName" name="first_name" placeholder="Enter a first name" required autocomplete="off" />
+                                    <input type="text" class="form-control" id="modalUserFirstName" name="first_name"
+                                        placeholder="Enter a first name" required autocomplete="off" />
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <label for="modalUserLastName" class="form-label">Last Name</label>
-                                    <input type="text" class="form-control" id="modalUserLastName" name="last_name" placeholder="Enter a last name" required autocomplete="off" />
+                                    <input type="text" class="form-control" id="modalUserLastName" name="last_name"
+                                        placeholder="Enter a last name" required autocomplete="off" />
                                 </div>
                             </div>
 
@@ -154,11 +163,13 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
                             <div class="row">
                                 <div class="col-md-6 mb-3">
                                     <label for="modalUserUsername" class="form-label">Username</label>
-                                    <input type="text" class="form-control" id="modalUserUsername" name="username" placeholder="Enter an username" required autocomplete="off" />
+                                    <input type="text" class="form-control" id="modalUserUsername" name="username"
+                                        placeholder="Enter an username" required autocomplete="off" />
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <label for="modalUserEmail" class="form-label">Email</label>
-                                    <input type="email" class="form-control" id="modalUserEmail" name="email" placeholder="Enter an email" required autocomplete="off" />
+                                    <input type="email" class="form-control" id="modalUserEmail" name="email"
+                                        placeholder="Enter an email" required autocomplete="off" />
                                 </div>
                             </div>
 
@@ -166,11 +177,13 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
                             <div class="row">
                                 <div class="col-md-6 mb-3">
                                     <label for="modalUserPhone" class="form-label">Phone</label>
-                                    <input type="email" class="form-control" id="modalUserPhone" name="phone" placeholder="Enter a phone" required autocomplete="off" />
+                                    <input type="email" class="form-control" id="modalUserPhone" name="phone"
+                                        placeholder="Enter a phone" required autocomplete="off" />
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <label for="modalUserPassword" class="form-label">Password</label>
-                                    <input type="text" class="form-control" id="modalUserPassword" name="password" placeholder="Enter a password" required autocomplete="off" />
+                                    <input type="text" class="form-control" id="modalUserPassword" name="password"
+                                        placeholder="Enter a password" required autocomplete="off" />
                                 </div>
                             </div>
 
@@ -178,11 +191,13 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
                             <div class="row">
                                 <div class="col-md-6 mb-3">
                                     <label for="modalUserCountry" class="form-label">Country</label>
-                                    <input type="email" class="form-control" id="modalUserCountry" name="country" placeholder="Enter a country" required autocomplete="off" />
+                                    <input type="email" class="form-control" id="modalUserCountry" name="country"
+                                        placeholder="Enter a country" required autocomplete="off" />
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <label for="modalUserCity" class="form-label">City</label>
-                                    <input type="text" class="form-control" id="modalUserCity" name="city" placeholder="Enter a city" required autocomplete="off" />
+                                    <input type="text" class="form-control" id="modalUserCity" name="city"
+                                        placeholder="Enter a city" required autocomplete="off" />
                                 </div>
                             </div>
 
@@ -190,7 +205,8 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
                             <div class="row">
                                 <div class="col-md-6 mb-3">
                                     <label for="modalUserBirthdate" class="form-label">Birthdate</label>
-                                    <input type="date" class="form-control" id="modalUserBirthdate" name="birthdate" required autocomplete="off" />
+                                    <input type="date" class="form-control" id="modalUserBirthdate" name="birthdate"
+                                        required autocomplete="off" />
                                 </div>
                             </div>
 
@@ -198,7 +214,8 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
                             <div class="row">
                                 <div class="col-md-6 mb-3">
                                     <label for="modalUserStatus" class="form-label">Status</label>
-                                    <select class="form-select" id="modalUserStatus" name="status_id" required autocomplete="off">
+                                    <select class="form-select" id="modalUserStatus" name="status_id" required
+                                        autocomplete="off">
                                         <option value="1">Active</option>
                                         <option value="2">Inactive</option>
                                         <option value="3">Filed</option>
@@ -206,7 +223,8 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <label for="modalUserRole" class="form-label">Role</label>
-                                    <select class="form-select" id="modalUserRole" name="role_id" required autocomplete="off">
+                                    <select class="form-select" id="modalUserRole" name="role_id" required
+                                        autocomplete="off">
                                         <option value="1">User</option>
                                         <option value="2">Admin</option>
                                         <option value="3">Supervisor</option>
@@ -216,7 +234,8 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary" id="btnActualizarUsuario">Save Changes</button>
+                            <button type="button" class="btn btn-primary" id="btnActualizarUsuario">Save
+                                Changes</button>
                         </div>
                     </form>
                 </div>
@@ -224,7 +243,8 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
         </div>
 
         <!-- Modal para crear usuario  -->
-        <div class="modal fade" id="crearUsuarioModal" tabindex="-1" aria-labelledby="crearUsuarioLabel" aria-hidden="true" style="background-color: var(--soft-green); color: var(--dark-green);">
+        <div class="modal fade" id="crearUsuarioModal" tabindex="-1" aria-labelledby="crearUsuarioLabel"
+            aria-hidden="true" style="background-color: var(--soft-green); color: var(--dark-green);">
             <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -237,7 +257,9 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
                             <div class="row">
                                 <div class="col-md-6 mb-3">
                                     <label for="createUserProfilePicture" class="form-label">Profile Picture</label>
-                                    <input type="text" class="form-control" id="createUserProfilePicture" name="profile_picture" placeholder="Enter a profile picture" required autocomplete="off" />
+                                    <input type="text" class="form-control" id="createUserProfilePicture"
+                                        name="profile_picture" placeholder="Enter a profile picture" required
+                                        autocomplete="off" />
                                 </div>
                             </div>
 
@@ -245,11 +267,13 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
                             <div class="row">
                                 <div class="col-md-6 mb-3">
                                     <label for="createUserFirstName" class="form-label">First Name</label>
-                                    <input type="text" class="form-control" id="createUserFirstName" name="first_name" placeholder="Enter a first name" required autocomplete="off" />
+                                    <input type="text" class="form-control" id="createUserFirstName" name="first_name"
+                                        placeholder="Enter a first name" required autocomplete="off" />
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <label for="createUserLastName" class="form-label">Last Name</label>
-                                    <input type="text" class="form-control" id="createUserLastName" name="last_name" placeholder="Enter a last name" required autocomplete="off" />
+                                    <input type="text" class="form-control" id="createUserLastName" name="last_name"
+                                        placeholder="Enter a last name" required autocomplete="off" />
                                 </div>
                             </div>
 
@@ -257,11 +281,13 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
                             <div class="row">
                                 <div class="col-md-6 mb-3">
                                     <label for="createUserUsername" class="form-label">Username</label>
-                                    <input type="text" class="form-control" id="createUserUsername" name="username" placeholder="Enter an username" required autocomplete="off" />
+                                    <input type="text" class="form-control" id="createUserUsername" name="username"
+                                        placeholder="Enter an username" required autocomplete="off" />
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <label for="createUserEmail" class="form-label">Email</label>
-                                    <input type="email" class="form-control" id="createUserEmail" name="email" placeholder="Enter an email" required autocomplete="off" />
+                                    <input type="email" class="form-control" id="createUserEmail" name="email"
+                                        placeholder="Enter an email" required autocomplete="off" />
                                 </div>
                             </div>
 
@@ -269,11 +295,13 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
                             <div class="row">
                                 <div class="col-md-6 mb-3">
                                     <label for="createUserPhone" class="form-label">Phone</label>
-                                    <input type="email" class="form-control" id="createUserPhone" name="phone" placeholder="Enter a phone" required autocomplete="off" />
+                                    <input type="email" class="form-control" id="createUserPhone" name="phone"
+                                        placeholder="Enter a phone" required autocomplete="off" />
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <label for="createUserPassword" class="form-label">Password</label>
-                                    <input type="text" class="form-control" id="createUserPassword" name="password" placeholder="Enter a password" required autocomplete="off" />
+                                    <input type="text" class="form-control" id="createUserPassword" name="password"
+                                        placeholder="Enter a password" required autocomplete="off" />
                                 </div>
                             </div>
 
@@ -281,11 +309,13 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
                             <div class="row">
                                 <div class="col-md-6 mb-3">
                                     <label for="createUserCountry" class="form-label">Country</label>
-                                    <input type="email" class="form-control" id="createUserCountry" name="country" placeholder="Enter a country" required autocomplete="off" />
+                                    <input type="email" class="form-control" id="createUserCountry" name="country"
+                                        placeholder="Enter a country" required autocomplete="off" />
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <label for="createUserCity" class="form-label">City</label>
-                                    <input type="text" class="form-control" id="createUserCity" name="city" placeholder="Enter a city" required autocomplete="off" />
+                                    <input type="text" class="form-control" id="createUserCity" name="city"
+                                        placeholder="Enter a city" required autocomplete="off" />
                                 </div>
                             </div>
 
@@ -293,7 +323,8 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
                             <div class="row">
                                 <div class="col-md-6 mb-3">
                                     <label for="createUserBirthdate" class="form-label">Birthdate</label>
-                                    <input type="date" class="form-control" id="createUserBirthdate" name="birthdate" required autocomplete="off" />
+                                    <input type="date" class="form-control" id="createUserBirthdate" name="birthdate"
+                                        required autocomplete="off" />
                                 </div>
                             </div>
 
@@ -301,7 +332,8 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
                             <div class="row">
                                 <div class="col-md-6 mb-3">
                                     <label for="createUserStatus" class="form-label">Status</label>
-                                    <select class="form-select" id="createUserStatus" name="status_id" required autocomplete="off">
+                                    <select class="form-select" id="createUserStatus" name="status_id" required
+                                        autocomplete="off">
                                         <option value="1">Active</option>
                                         <option value="2">Inactive</option>
                                         <option value="3">Filed</option>
@@ -309,7 +341,8 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <label for="createUserRole" class="form-label">Role</label>
-                                    <select class="form-select" id="createUserRole" name="role_id" required autocomplete="off">
+                                    <select class="form-select" id="createUserRole" name="role_id" required
+                                        autocomplete="off">
                                         <option value="1">User</option>
                                         <option value="2">Admin</option>
                                         <option value="3">Supervisor</option>
@@ -325,17 +358,6 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
                 </div>
             </div>
         </div>
-
-        <!-- Casi final -->
-        <div class="container text-light">
-            <h2 class="my-5">Things to keep in mind: </h2>
-            <div class="d-flex align-items-center justify-content-between mb-3">
-                <ul class="list-unstyled">
-                    <li class="mb-3"><strong>-No se permite modificar la id de un usuario.</strong></li>
-                    <li class="mb-3"><strong>-Usuario eliminado deja de existir, pero su id no se reutiliza.</strong></li>
-                    
-                </ul>
-            </div>
     </main>
 
     <!-- jQuery -->
