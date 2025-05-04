@@ -19,7 +19,7 @@ $status_id = $_POST['status_id'];
 $role_id = $_POST['role_id'];
 
 // Directorio y tipos permitidos
-$upload_dir = '/../../trsi/uploads/';
+$upload_dir = __DIR__ . '/../../uploads/';
 $allowed_types = ['image/jpeg', 'image/png', 'image/heic'];
 $profile_picture = 'default-profile.png';  // Imagen por defecto
 

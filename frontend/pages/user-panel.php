@@ -34,12 +34,12 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
         // Si se encuentra autenticado , mantiene en la pagina
     } else {
         // Si no se encuentra el usuario en la base de datos
-        header("Location: ../index.php");
+        header("Location: /trsi/index.php");
         exit();
     }
 } else {
     // El usuario no está autenticado, redirige a la página de index.php
-    header("Location: ../index.php");
+    header("Location: /trsi/index.php");
     exit();
 }
 ?>
