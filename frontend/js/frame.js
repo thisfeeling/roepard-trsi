@@ -1,4 +1,4 @@
-fetch("../backend/Frame.php")
+fetch("/trsi/backend/controllers/FrameController.php")
     .then(response => response.json())
     .then(data => {
         const ctx = document.getElementById('usuariosChart').getContext('2d');

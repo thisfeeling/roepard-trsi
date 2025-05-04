@@ -1,5 +1,5 @@
 <?php
-require_once '../backend/DBConfig.php';
+require_once '../core/DBConfig.php';
 
 $auth = new DBconfig();
 $db = $auth->getConnection();

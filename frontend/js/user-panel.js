@@ -4,7 +4,7 @@ $(document).ready(function () {
         let formData = new FormData(form);
     
         $.ajax({
-            url: '../backend/UpUserController.php',
+            url: '/trsi/backend/controllers/UpUserController.php',
             method: 'POST',
             data: formData,
             processData: false,
@@ -37,7 +37,7 @@ $(document).ready(function () {
 
     $("#btnDetailUser").on("click", function () {
         $.ajax({
-            url: '../backend/DetUserController.php',
+            url: '/trsi/backend/controllers/DetUserController.php',
             method: 'POST',
             data: { user_id: user_id },
             success: function (response) {
@@ -130,7 +130,7 @@ $(document).ready(function () {
         // Asignar la acción de eliminar al botón de confirmación dentro del modal
         $('#confirmDeleteBtn').off('click').on('click', function () {
             $.ajax({
-                url: '../backend/DelUserController.php',
+                url: '/trsi/backend/controllers/DelUserController.php',
                 method: 'POST',
                 data: { user_id: user_id },
                 success: function (response) {
@@ -138,7 +138,7 @@ $(document).ready(function () {
                     let result = JSON.parse(response);
                     if (result.success) {
                         showModal(result.success);
-                        window.location.href = "../backend/LogoutController.php";  // Solo redirige si la eliminación fue exitosa
+                        window.location.href = "/trsi/backend/controllers/LogoutController.php";  // Solo redirige si la eliminación fue exitosa
                         $('#confirmDeleteModal').modal('hide'); // Cerrar el modal de confirmación
                     } else {
                         showModal(result.error || "Error desconocido al eliminar el usuario.");

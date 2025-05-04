@@ -4,7 +4,7 @@ $(document).ready(function () {
         let formData = $("#formUsuario").serialize();
         // Enviar los datos al servidor con AJAX
         $.ajax({
-            url: '../backend/UpUserController.php',
+            url: '/trsi/backend/controllers/UpUserController.php',
             method: 'POST',
             data: formData,
             success: function (response) {
@@ -50,7 +50,7 @@ $(document).ready(function () {
         }
         // Llamada AJAX para crear usuario
         $.ajax({
-            url: '../backend/CrUserController.php',
+            url: '/trsi/backend/controllers/CrUserController.php',
             method: 'POST',
             data: formData,
             success: function (response) {
@@ -76,7 +76,7 @@ $(document).ready(function () {
 
 function ListUsers() {
     $.ajax({
-        url: '../backend/LiUserController.php',
+        url: '/trsi/backend/controllers/LiUserController.php',
         method: 'POST',
         success: function (response) {
             // console.log("Respuesta ");
@@ -89,7 +89,7 @@ function ListUsers() {
 
 function mostrarDetallesUsuario(user_id) {
     $.ajax({
-        url: '../backend/DetUserController.php',
+        url: '/trsi/backend/controllers/DetUserController.php',
         method: 'POST',
         data: { user_id: user_id },
         success: function (response) {
@@ -131,7 +131,7 @@ function eliminarUsuario(user_id) {
     // Asignar la acción de eliminar al botón de confirmación dentro del modal
     $('#confirmDeleteBtn').off('click').on('click', function () {
         $.ajax({
-            url: '../backend/DelUserController.php',
+            url: '/trsi/backend/controllers/DelUserController.php',
             method: 'POST',
             data: { user_id: user_id },
             success: function (response) {

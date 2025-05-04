@@ -1,6 +1,6 @@
 <?php
 // Incluir un archivo de conexion a la base de datos
-require_once '../backend/DBConfig.php';
+require_once '../core/DBConfig.php';
 session_start();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {

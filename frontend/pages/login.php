@@ -1,6 +1,6 @@
 <?php
 // Incluir el archivo de conexión a la base de datos
-require_once '../backend/DBConfig.php';
+require_once __DIR__ . '/../../backend/core/DBConfig.php';
 // Crear una instancia de la clase de conexión
 $auth = new DBConfig();
 $db = $auth->getConnection();
@@ -27,32 +27,23 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
         $name = $first_name . ' ' . $last_name;
     } else {
         // Si no se encuentra el usuario en la base de datos
-        header("Location: ../index.php");
+        header("Location: /trsi/index.php");
         exit();
     }
     // Reridige si esta logeado al panel se usuario
     if (isset($_SESSION['role_id'])) {
         switch ($_SESSION['role_id']) {
             case '1':
-                header('Location: ./user-panel.php');
+                header('Location: /trsi/frontend/pages/user-panel.php');
                 exit();
             case '2':
-                header('Location: ./user-panel.php');
+                header('Location: /trsi/frontend/pages/user-panel.php');
                 exit();
             case '3':
-                header('Location: ./user-panel.php');
-                exit();
-            case '4':
-                header('Location: ./user-panel.php');
-                exit();
-            case '5':
-                header('Location: ./user-panel.php');
-                exit();
-            case '6':
-                header('Location: ./user-panel.php');
+                header('Location: /trsi/frontend/pages/user-panel.php');
                 exit();
             default:
-                header('Location: ../index.php'); // Redirige a index si el rol no coincide
+                header('Location: /trsi/index.php'); // Redirige a index si el rol no coincide
                 exit();
         }
     };
@@ -69,9 +60,9 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>login</title>
     <!-- Bootstrap CSS -->
-    <link href="../dist/bootstrap/css/bootstrap.css" rel="stylesheet">
+    <link href="/trsi/frontend/dist/bootstrap/css/bootstrap.css" rel="stylesheet">
     <!-- Styles -->
-    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="/trsi/frontend/css/style.css">
 </head>
 
 <body style="background-color: var(--olive-green);">
@@ -90,6 +81,7 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
                     <h2 class="text-dark">Login Form</h2>
                 </div>
                 <div class="card-body">
+
                     <form id="LoginForm" class="needs-validation" novalidate>
                         <!-- Email -->
                         <div class="mb-4">
@@ -108,8 +100,11 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
                         <!-- Submit -->
                         <div class="d-grid">
                             <button type="submit" class="btn btn-primary custom-button">Sign In</button>
+                            <small class="text-body-secondary my-2">By clicking Sign In, you agree to the terms of
+                                use.</small>
                         </div>
                     </form>
+
                 </div>
             </div>
         </div>
@@ -132,15 +127,13 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
     </main>
 
     <!-- jQuery -->
-    <script src="../dist/jquery/js/jquery.min.js"></script>
+    <script src="/trsi/frontend/dist/jquery/js/jquery.min.js"></script>
     <!-- Bootstrap JS With Popper-->
-    <script src="../dist/bootstrap/js/bootstrap.bundle.js"></script>
+    <script src="/trsi/frontend/dist/bootstrap/js/bootstrap.bundle.js"></script>
     <!-- ChartJS-->
-    <script src="../dist/chart/js/chart.umd.min.js"></script>
+    <script src="/trsi/frontend/dist/chart/js/chart.umd.min.js"></script>
     <!-- main JS -->
-    <script src="../js/login.js"></script>
-    <!-- <script src="https://kit.fontawesome.com/c5f09bfc31.js" crossorigin="anonymous"></script> -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <script src="/trsi/frontend/js/login.js"></script>
 </body>
 
 </html>

@@ -25,9 +25,9 @@ $supervisorIn = ($role_id === 3);  // 3 es para supervisor
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>navbar</title>
     <!-- Bootstrap CSS -->
-    <link href="../dist/bootstrap/css/bootstrap.css" rel="stylesheet">
+    <link href="/trsi/frontend/dist/bootstrap/css/bootstrap.css" rel="stylesheet">
     <!-- Styles -->
-    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="/trsi/frontend/css/style.css">
 </head>
 
 <body>
@@ -42,33 +42,33 @@ $supervisorIn = ($role_id === 3);  // 3 es para supervisor
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <a class="navbar-brand" href="../index.php">
-                            <img src="./files/UAM.png" alt="" width="100" height="50">
+                        <a class="navbar-brand" href="/trsi/index.php">
+                            <img src="/trsi/assets/logo.png" alt="" width="100" height="50">
                         </a>
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="../index.php">Trsi</a>
+                            <a class="nav-link active" aria-current="page" href="/trsi/index.php">Trsi</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="../views/frame.php">Frame</a>
+                            <a class="nav-link active" aria-current="page" href="/trsi/frontend/pages/frame.php">Frame</a>
                         </li>
                         <?php if ($adminIn): ?>
                         <li class="nav-item">
-                            <a class="nav-link active" href="../views/company.php">Company</a>
+                            <a class="nav-link active" href="/trsi/frontend/pages/company.php">Company</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active" href="../views/manage-users.php">Manage Users</a>
+                            <a class="nav-link active" href="/trsi/frontend/pages/manage-users.php">Manage Users</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="../views/user-panel.php">Admin
+                            <a class="nav-link active" aria-current="page" href="/trsi/frontend/pages/user-panel.php">Admin
                                 Panel</a>
                         </li>
                         <?php elseif ($userIn): ?>
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="../views/user-panel.php">User Panel</a>
+                            <a class="nav-link active" aria-current="page" href="/trsi/frontend/pages/user-panel.php">User Panel</a>
                         </li>
                         <?php elseif ($supervisorIn): ?>
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="../views/user-panel.php">Supervisor
+                            <a class="nav-link active" aria-current="page" href="/trsi/frontend/pages/user-panel.php">Supervisor
                                 Panel</a>
                         </li>
                         <?php endif; ?>
@@ -77,11 +77,12 @@ $supervisorIn = ($role_id === 3);  // 3 es para supervisor
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                         <?php if ($loggedIn): ?>
                         <li class="nav-item">
-                            <a class="nav-link" href="../backend/LogoutController.php" tabindex="-1">Logout</a>
+                        <a class="nav-link" href="/trsi/backend/controllers/LogoutController.php" tabindex="-1">Logout</a>
+
                         </li>
                         <?php else: ?>
                         <li class="nav-item">
-                            <a class="nav-link" href="../views/login.php" tabindex="-1">Sign In</a>
+                            <a class="nav-link" href="/trsi/frontend/pages/login.php" tabindex="-1">Sign In</a>
                         </li>
                         <?php endif; ?>
                     </ul>
@@ -97,11 +98,11 @@ $supervisorIn = ($role_id === 3);  // 3 es para supervisor
     </header>
 
     <!-- jQuery -->
-    <script src="../dist/jquery/js/jquery.min.js"></script>
+    <script src="/trsi/frontend/dist/jquery/js/jquery.min.js"></script>
     <!-- Bootstrap JS With Popper-->
-    <script src="../dist/bootstrap/js/bootstrap.bundle.js"></script>
+    <script src="/trsi/frontend/dist/bootstrap/js/bootstrap.bundle.js"></script>
     <!-- ChartJS-->
-    <script src="../dist/chart/js/chart.umd.min.js"></script>
+    <script src="/trsi/frontend/dist/chart/js/chart.umd.min.js"></script>
 </body>
 
 </html>

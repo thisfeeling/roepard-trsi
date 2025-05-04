@@ -1,6 +1,6 @@
 <?php
 // Incluir tu archivo de conexión
-require_once '../backend/DBConfig.php';
+require_once '../core/DBConfig.php';
 
 // Crear instancia y obtener conexión
 $auth = new DBConfig();

@@ -1,6 +1,6 @@
 <?php
 // Incluir el archivo de conexion a la base de datos
-require_once './backend/DBConfig.php';
+require_once './backend/core/DBConfig.php';
 // Crear una instancia de la clase de conexion
 $auth = new DBConfig();
 $db = $auth->getConnection();
@@ -9,7 +9,7 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 // Logica de redireccion basada en rol
-$redirect_url = './views/login.php'; // URL por defecto
+$redirect_url = './frontend/pages/login.php'; // URL por defecto
 if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
     $user_id = $_SESSION['user_id'];
     $stmt = $db->prepare("SELECT first_name, last_name, email, role_id FROM users WHERE user_id = :user_id");
@@ -18,8 +18,8 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
     if ($stmt->rowCount() > 0) {
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
         $role_id = $user['role_id'];
-        // Verifica si el usuario es administrador
-        $redirect_url = ($role_id === 2) ? './views/company.php' : './views/home.php';
+        // Verifica si el usuario es administrador o no
+        $redirect_url = ($role_id === 2) ? './frontend/pages/company.php' : './frontend/pages/user-panel.php';
     }
 }
 ?>
@@ -31,9 +31,9 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>index</title>
     <!-- Bootstrap CSS -->
-    <link href="./dist/bootstrap/css/bootstrap.css" rel="stylesheet">
+    <link href="./frontend/dist/bootstrap/css/bootstrap.css" rel="stylesheet">
     <!-- Styles -->
-    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./frontend/css/style.css">
     <!-- Icon of the page -->
     <!-- Manifest -->
     <link rel="manifest" href="./site.webmanifest">
@@ -79,10 +79,10 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
         }, 1000); // 1000 ms = 1 segundos
     </script>
     <!-- jQuery -->
-    <script src="./js/jquery.js"></script>
+    <script src="./frontend/js/jquery.js"></script>
     <!-- Bootstrap JS With Popper-->
-    <script src="./dist/bootstrap/js/bootstrap.bundle.js"></script>
+    <script src="./frontend/dist/bootstrap/js/bootstrap.bundle.js"></script>
     <!-- ChartJS-->
-    <script src="./dist/chart/js/chart.umd.min.js"></script>
+    <script src="./frontend/dist/chart/js/chart.umd.min.js"></script>
 </body>
 </html>

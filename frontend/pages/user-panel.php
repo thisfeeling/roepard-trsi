@@ -1,6 +1,6 @@
 <?php
 // Incluir el archivo de conexión a la base de datos
-require_once '../backend/DBConfig.php';
+require_once __DIR__ . '/../../backend/core/DBConfig.php';
 // Crear una instancia de la clase de conexión
 $auth = new DBConfig();
 $db = $auth->getConnection();
@@ -52,9 +52,9 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>user-panel</title>
     <!-- Bootstrap CSS -->
-    <link href="../dist/bootstrap/css/bootstrap.css" rel="stylesheet">
+    <link href="/trsi/frontend/dist/bootstrap/css/bootstrap.css" rel="stylesheet">
     <!-- Styles -->
-    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="/trsi/frontend/css/style.css">
 </head>
 
 <body style="background-color: var(--olive-green) !important; color: var(--soft-green);">
@@ -228,7 +228,7 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
                         <div class="row">
                             <!-- Imagen de perfil -->
                             <?php if (!empty($profile_picture)): ?>
-                            <img src="../uploads/<?php echo htmlspecialchars($profile_picture); ?>" alt="Profile"
+                            <img src="/trsi/uploads/<?php echo htmlspecialchars($profile_picture); ?>" alt="Profile"
                                 class="img-thumbnail mb-2" style="height: 200px; width: 200px;">
                             <?php endif; ?>
 
@@ -252,7 +252,7 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
                         style="background-color: var(--soft-green) !important; color: var(--dark-green) !important;">
                         <button type="button" class="btn btn-primary me-2" id="btnDetailUser">Edit profile</button>
                         <button type="button" class="btn btn-danger me-2" id="btnDeleteUser">Delete account</button>
-                        <a href="../backend/LogoutController.php" class="btn btn-danger">Logout</a>
+                        <a href="/trsi/backend/controllers/LogoutController.php" class="btn btn-danger">Logout</a>
                     </div>
                 </div>
             </div>
@@ -260,13 +260,13 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
     </main>
 
     <!-- jQuery -->
-    <script src="../dist/jquery/js/jquery.min.js"></script>
+    <script src="/trsi/frontend/dist/jquery/js/jquery.min.js"></script>
     <!-- Bootstrap JS With Popper-->
-    <script src="../dist/bootstrap/js/bootstrap.bundle.js"></script>
+    <script src="/trsi/frontend/dist/bootstrap/js/bootstrap.bundle.js"></script>
     <!-- ChartJS-->
-    <script src="../dist/chart/js/chart.umd.min.js"></script>
+    <script src="/trsi/frontend/dist/chart/js/chart.umd.min.js"></script>
     <!-- user-panel JS -->
-    <script src="../js/user-panel.js"></script>
+    <script src="/trsi/frontend/js/user-panel.js"></script>
 </body>
 
 </html>

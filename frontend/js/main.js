@@ -6,18 +6,10 @@ $(document).ready(function () {
         }
     });
 
-    // Manejar clics en botones
-    $("#masSobreNosotrosModal").on("click", function () {
-        $(".modal").modal("hide");
-        setTimeout(function () {
-            window.location.href = "../views/about.php";
-        }, 300);
-    });
-
     $("#btnGestionUsuarios").on("click", function () {
         $(".modal").modal("hide");
         setTimeout(function () {
-            window.location.href = "../views/manage-users.php";
+            window.location.href = "/trsi/frontend/pages/manage-users.php";
         }, 300);
     });
 });
