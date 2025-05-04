@@ -31,12 +31,14 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>index</title>
     <!-- Bootstrap CSS -->
-    <link href="./frontend/dist/bootstrap/css/bootstrap.css" rel="stylesheet">
+    <link rel="stylesheet" href="/trsi/frontend/dist/bootstrap/css/bootstrap.css">
+    <!-- FontAwesome CSS -->
+    <link rel="stylesheet" href="/trsi/frontend/dist/fontawesome/css/fontawesome.min.css">
     <!-- Styles -->
-    <link rel="stylesheet" href="./frontend/css/style.css">
+    <link rel="stylesheet" href="/trsi/frontend/css/style.css">
     <!-- Icon of the page -->
     <!-- Manifest -->
-    <link rel="manifest" href="./site.webmanifest">
+    <link rel="manifest" href="/trsi/site.webmanifest">
 
     <!-- Mobile & PWA support -->
     <meta name="mobile-web-app-capable" content="yes">
@@ -79,10 +81,12 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
         }, 1000); // 1000 ms = 1 segundos
     </script>
     <!-- jQuery -->
-    <script src="./frontend/js/jquery.js"></script>
+    <script src="/trsi/frontend/dist/jquery/js/jquery.min.js"></script>
     <!-- Bootstrap JS With Popper-->
-    <script src="./frontend/dist/bootstrap/js/bootstrap.bundle.js"></script>
-    <!-- ChartJS-->
-    <script src="./frontend/dist/chart/js/chart.umd.min.js"></script>
+    <script src="/trsi/frontend/dist/bootstrap/js/bootstrap.bundle.js"></script>
+    <!-- Chart JS -->
+    <script src="/trsi/frontend/dist/chart/js/chart.umd.min.js"></script>
+    <!-- FontAwesome JS -->
+    <script src="/trsi/frontend/dist/fontawesome/js/all.min.js"></script>
 </body>
 </html>

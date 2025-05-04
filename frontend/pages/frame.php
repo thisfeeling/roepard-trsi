@@ -6,6 +6,8 @@
     <title>frame</title>
     <!-- Bootstrap CSS -->
     <link href="/trsi/frontend/dist/bootstrap/css/bootstrap.css" rel="stylesheet">
+    <!-- FontAwesome CSS -->
+    <link rel="stylesheet" href="/trsi/frontend/dist/fontawesome/css/fontawesome.min.css">
     <!-- Styles -->
     <link rel="stylesheet" href="/trsi/frontend/css/style.css">
 </head>
@@ -33,8 +35,10 @@
     <script src="/trsi/frontend/dist/jquery/js/jquery.min.js"></script>
     <!-- Bootstrap JS With Popper-->
     <script src="/trsi/frontend/dist/bootstrap/js/bootstrap.bundle.js"></script>
-    <!-- ChartJS-->
+    <!-- Chart JS -->
     <script src="/trsi/frontend/dist/chart/js/chart.umd.min.js"></script>
+    <!-- FontAwesome JS -->
+    <script src="/trsi/frontend/dist/fontawesome/js/all.min.js"></script>
     <!-- MomentJS -->
     <script src="/trsi/frontend/dist/moment/js/moment.js"></script>
     <script src="/trsi/frontend/dist/moment/js/moment-timezone-with-data.js"></script>

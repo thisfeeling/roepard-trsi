@@ -26,6 +26,8 @@ $supervisorIn = ($role_id === 3);  // 3 es para supervisor
     <title>navbar</title>
     <!-- Bootstrap CSS -->
     <link href="/trsi/frontend/dist/bootstrap/css/bootstrap.css" rel="stylesheet">
+    <!-- FontAwesome CSS -->
+    <link rel="stylesheet" href="/trsi/frontend/dist/fontawesome/css/fontawesome.min.css">
     <!-- Styles -->
     <link rel="stylesheet" href="/trsi/frontend/css/style.css">
 </head>
@@ -45,9 +47,6 @@ $supervisorIn = ($role_id === 3);  // 3 es para supervisor
                         <a class="navbar-brand" href="/trsi/index.php">
                             <img src="/trsi/assets/logo.png" alt="" width="100" height="50">
                         </a>
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="/trsi/index.php">Trsi</a>
-                        </li>
                         <li class="nav-item">
                             <a class="nav-link active" aria-current="page" href="/trsi/frontend/pages/frame.php">Frame</a>
                         </li>
@@ -101,8 +100,10 @@ $supervisorIn = ($role_id === 3);  // 3 es para supervisor
     <script src="/trsi/frontend/dist/jquery/js/jquery.min.js"></script>
     <!-- Bootstrap JS With Popper-->
     <script src="/trsi/frontend/dist/bootstrap/js/bootstrap.bundle.js"></script>
-    <!-- ChartJS-->
+    <!-- Chart JS -->
     <script src="/trsi/frontend/dist/chart/js/chart.umd.min.js"></script>
+    <!-- FontAwesome JS -->
+    <script src="/trsi/frontend/dist/fontawesome/js/all.min.js"></script>
 </body>
 
 </html>

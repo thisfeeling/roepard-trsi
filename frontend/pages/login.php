@@ -61,6 +61,8 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
     <title>login</title>
     <!-- Bootstrap CSS -->
     <link href="/trsi/frontend/dist/bootstrap/css/bootstrap.css" rel="stylesheet">
+    <!-- FontAwesome CSS -->
+    <link rel="stylesheet" href="/trsi/frontend/dist/fontawesome/css/fontawesome.min.css">
     <!-- Styles -->
     <link rel="stylesheet" href="/trsi/frontend/css/style.css">
 </head>
@@ -130,8 +132,10 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
     <script src="/trsi/frontend/dist/jquery/js/jquery.min.js"></script>
     <!-- Bootstrap JS With Popper-->
     <script src="/trsi/frontend/dist/bootstrap/js/bootstrap.bundle.js"></script>
-    <!-- ChartJS-->
+    <!-- Chart JS -->
     <script src="/trsi/frontend/dist/chart/js/chart.umd.min.js"></script>
+    <!-- FontAwesome JS -->
+    <script src="/trsi/frontend/dist/fontawesome/js/all.min.js"></script>
     <!-- main JS -->
     <script src="/trsi/frontend/js/login.js"></script>
 </body>

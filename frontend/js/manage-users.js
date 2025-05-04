@@ -44,10 +44,13 @@ $(document).ready(function () {
             role_id: $('#createUserRole').val()
         };
         // Validación rápida de campos
-        if (Object.values(formData).some(field => field.trim() === "")) {
-            showModal("Please complete all fields.");
-            return;
+        for (const [key, value] of Object.entries(formData)) {
+            if ((value + "").trim() === "") {
+                showModal(`Please complete the field: ${key}`);
+                return;
+            }
         }
+        
         // Llamada AJAX para crear usuario
         $.ajax({
             url: '/trsi/backend/controllers/CrUserController.php',
@@ -124,7 +127,7 @@ function mostrarDetallesUsuario(user_id) {
     });
 };
 
-function eliminarUsuario(user_id) {
+function eliminarUsuario(user_id, username) {
     // Mostrar el modal de confirmación
     $('#confirmDeleteModal').modal('show');
 
@@ -139,9 +142,8 @@ function eliminarUsuario(user_id) {
                 let result = JSON.parse(response);
                 if (result.success) {
                     showModal(result.success);
-                    // Recargar la lista de usuarios
-                    ListUsers();
-                    $('#confirmDeleteModal').modal('hide'); // Cerrar el modal de confirmación
+                    ListUsers(); // Recargar lista
+                    $('#confirmDeleteModal').modal('hide'); // Cerrar modal
                 } else {
                     showModal(result.error);
                 }

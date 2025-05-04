@@ -31,7 +31,7 @@ $query->execute();
 // Tabla de usuarios
 if ($query->rowCount() > 0) {
 	$output = "";
-	$output .= "<table class='table align-items-center mb-0  table-hover table-sm'>
+	$output .= "<table class='table align-items-center mb-0 table-hover table-sm'>
 		<thead class='table-dark'>
 		<tr class='text-center '>
 		  <th class='text-uppercase text-secondary text-xxs font-weight-bolder opacity-7'>Status/ID</th>
@@ -91,6 +91,7 @@ if ($query->rowCount() > 0) {
 					<button type='button' class='btn btn-danger btn-sm my-2' onclick='eliminarUsuario({$row['user_id']})'>
 						Delete
 					</button>
+					
 				    </td>
 				  </tr>
 			</tbody>";
