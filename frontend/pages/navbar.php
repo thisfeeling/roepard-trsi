@@ -50,6 +50,9 @@ $supervisorIn = ($role_id === 3);  // 3 es para supervisor
                         <li class="nav-item">
                             <a class="nav-link active" aria-current="page" href="/trsi/frontend/pages/frame.php">Frame</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="/trsi/frontend/pages/commits.php">Commits</a>
+                        </li>
                         <?php if ($adminIn): ?>
                         <li class="nav-item">
                             <a class="nav-link active" href="/trsi/frontend/pages/company.php">Company</a>
