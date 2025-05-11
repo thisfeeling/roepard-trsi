@@ -24,8 +24,7 @@ $(document).ready(function () {
       });
     });
   }
-
-  // Llenar campos del modal de usuario con datos
+  
   // Llenar campos del modal de usuario con datos
   function rellenarCamposUsuario(user) {
     const campos = {
@@ -36,7 +35,6 @@ $(document).ready(function () {
       modalUserUsername: user.username,
       modalUserEmail: user.email,
       modalUserPhone: user.phone,
-      modalUserCurrentPassword: user.password,
       modalUserCountry: user.country,
       modalUserCity: user.city,
       modalUserBirthdate: user.birthdate,
@@ -116,6 +114,8 @@ $(document).ready(function () {
       const fullNumber = normalizedPrefix + number;
       // console.log("Número completo:", fullNumber);
     });
+
+    $("#modalUserCurrentPassword").val(""); // Siempre vacío para el admin
   }
 
 

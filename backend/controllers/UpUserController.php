@@ -81,7 +81,6 @@ $campos_obligatorios = [
     'phone' => $phone,
     'phone_prefix' => $phone_prefix,
     'password' => $password,
-    'current_password' => $current_password,
     'country' => $country,
     'city' => $city,
     'birthdate' => $birthdate,
@@ -89,6 +88,15 @@ $campos_obligatorios = [
     'role_id' => $role_id
 ];
 
+// Solo validar current_password si NO es admin
+if (!$is_admin) {
+    if (empty($current_password)) {
+        echo json_encode(['error' => "El campo 'current_password' es obligatorio."]);
+        exit;
+    }
+}
+
+// Validar los demás campos
 foreach ($campos_obligatorios as $campo => $valor) {
     if (!$valor) {
         echo json_encode(['error' => "El campo '$campo' es obligatorio."]);

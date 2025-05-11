@@ -118,6 +118,6 @@ if (isset($_SESSION['user_id'])) {
     <!-- Sweetalert2 JS -->
     <script src="/trsi/frontend/dist/sweetalert2/js/sweetalert2.all.min.js"></script>
     <!-- JS personalizado -->
-    <script src="/trsi/frontend/js/verify.js"></script>
+    <script src="/trsi/frontend/js/diagnostic.js"></script>
 </body>
 </html>

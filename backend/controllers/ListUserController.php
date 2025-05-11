@@ -15,7 +15,6 @@ $sql = "SELECT
     users.role_id, 
     users.username,
     users.phone,
-    users.password,
     users.country,
     users.city,
     users.status_id,

@@ -34,6 +34,9 @@ if (isset($_POST['user_id'])) {
     if ($query->rowCount() > 0) {
         $user = $query->fetch(PDO::FETCH_ASSOC);
         
+        // Eliminar el campo password antes de enviar la respuesta por seguridad
+        unset($user['password']);
+
         // Verifica si la imagen de perfil es válida, si no, asigna la imagen por defecto
         if (empty($user['profile_picture'])) {
             $user['profile_picture'] = 'default-profile.png';

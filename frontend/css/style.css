@@ -55,3 +55,79 @@ footer {
   background-color: transparent !important;
   backdrop-filter: none !important;
 }
+
+/* Navbar */
+
+.navbar-uam {
+  background-color: var(--uam-blue) !important;
+  color: var(--uam-yellow) !important;
+  padding: 0;
+  height: 100px;
+}
+.uam-title {
+  font-size: 2.0rem;
+  font-weight: bold;
+  color: var(--uam-yellow);
+  margin-left: 20px;
+}
+.uam-bar {
+  background-color: var(--uam-blue);
+  color: var(--uam-yellow);
+  font-size: 2rem;
+  font-weight: bold;
+  border-radius: 15px;
+  margin: 30px 0 30px 0;
+  padding: 10px 30px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+.uam-bar .uam-login {
+  color: var(--uam-yellow);
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+.uam-bar .uam-date {
+  color: var(--uam-white);
+  font-size: 1.5rem;
+  font-weight: normal;
+}
+.uam-logo {
+  background-color:var(--uam-white);
+  height: 80px;
+  width: 200px;
+  border-radius: 15px;
+  padding: 10px;
+  object-fit: contain;
+}
+
+@media (max-width: 768px) {
+  .uam-bar { font-size: 1.2rem; flex-direction: column; gap: 10px; }
+  .uam-date { font-size: 1rem; }
+}
+
+.uam-bar > .flex-fill {
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+.btn-uam {
+    background: var(--uam-yellow);
+    color: var(--uam-blue);
+    font-weight: bold;
+    font-size: 1.3rem;
+    border-radius: 15px;
+    padding: 12px 0;
+    margin-bottom: 10px;
+    transition: background 0.2s, color 0.2s;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+.btn-uam:hover, .btn-uam:focus {
+    background: #ffe066;
+    color: var(--uam-blue);
+    text-decoration: none;
+}
+.panel-usuario {
+    box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+}

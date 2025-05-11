@@ -471,8 +471,6 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
                     <div class="card-footer bg-light"
                         style="background-color: var(--soft-green) !important; color: var(--dark-green) !important;">
                         <button type="button" class="btn btn-primary me-2" id="btnDetailUser">Edit profile</button>
-                        <button type="button" class="btn btn-danger me-2" id="btnDeleteUser">Delete account</button>
-                        <a href="/trsi/backend/controllers/LogoutController.php" class="btn btn-danger">Logout</a>
                     </div>
                 </div>
             </div>

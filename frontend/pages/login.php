@@ -65,46 +65,49 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
     <link rel="stylesheet" href="/trsi/frontend/dist/fontawesome/css/fontawesome.min.css">
     <!-- Styles -->
     <link rel="stylesheet" href="/trsi/frontend/css/style.css">
+    <link rel="stylesheet" href="/trsi/frontend/css/variables.css">
 </head>
 
-<body style="background-color: var(--olive-green);">
+<body style="background-color: var(--uam-white);">
 
     <!-- Navbar -->
     <?php include __DIR__ . '/../../frontend/components/navbar.php'; ?>
 
 
-    <main style="background-color: var(--olive-green);">
-        <div class="container d-flex justify-content-center align-items-center vh-100">
+    <main style="background-color: var(--uam-white);">
+        <div class="d-flex justify-content-center align-items-center" style="min-height: 0vh;">
             <!-- Form Card -->
             <div class="card shadow-lg p-4"
-                style="max-width: 30rem; background-color: var(--soft-green); color: var(--dark-green);">
+                style="max-width: 30rem; background-color: var(--uam-blue); color: var(--uam-white);">
                 <div class="card-header text-center border-0 pb-0" style="background-color: transparent;">
-                    <h2 class="text-dark">Login Form</h2>
+                    <h2 style="color: var(--uam-yellow)">Login Form</h2>
                 </div>
                 <div class="card-body">
 
-                    <form id="LoginForm" class="needs-validation" novalidate>
-                        <!-- Email -->
-                        <div class="mb-4">
-                            <label for="email" class="form-label">Email, Username or Phone</label>
-                            <input type="email" class="form-control custom-input" id="email" name="email"
-                                placeholder="Email/Username/Phone" required autocomplete="email">
-                            <div class="invalid-feedback">Please enter a valid input.</div>
-                        </div>
-                        <!-- Password -->
-                        <div class="mb-4">
-                            <label for="password" class="form-label">Password</label>
-                            <input type="password" class="form-control custom-input" id="password" name="password"
-                                placeholder="Password" required autocomplete="current-password">
-                            <div class="invalid-feedback">Password is required.</div>
-                        </div>
-                        <!-- Submit -->
-                        <div class="d-grid">
-                            <button type="submit" class="btn btn-primary custom-button">Sign In</button>
-                            <small class="text-body-secondary my-2">By clicking Sign In, you agree to the terms of
-                                use.</small>
-                        </div>
-                    </form>
+                    <div class="login-form-container mx-auto" style="font-weight: bold; background-color: var(--uam-blue); color: var(--uam-white); max-width: 300px; max-height: 250px;">
+                        <form id="LoginForm" class="needs-validation" style="background-color: var(--uam-blue); color: var(--uam-white);" novalidate>
+                            <!-- Email -->
+                            <div class="mb-4">
+                                <label  for="email" class="form-label">Email, Username or Phone</label>
+                                <input style="color: var(--uam-black);" type="email" class="form-control custom-input" id="email" name="email"
+                                    placeholder="Email/Username/Phone" required autocomplete="email">
+                                <div class="invalid-feedback">Please enter a valid input.</div>
+                            </div>
+                            <!-- Password -->
+                            <div class="mb-4">
+                                <label for="password" class="form-label">Password</label>
+                                <input style="color: var(--uam-black);" type="password" class="form-control custom-input" id="password" name="password"
+                                    placeholder="Password" required autocomplete="current-password">
+                                <div class="invalid-feedback">Password is required.</div>
+                            </div>
+                            <!-- Submit -->
+                            <div class="d-grid" >
+                                <button style="background-color: var(--uam-yellow); color: var(--uam-blue);" type="submit" class="btn btn-primary custom-button">Sign In</button>
+                                <small style="color: var(--uam-black);" class="text-body-secondary my-2">By clicking Sign In, you agree to the terms of
+                                    use.</small>
+                            </div>
+                        </form>
+                    </div>
 
                 </div>
             </div>

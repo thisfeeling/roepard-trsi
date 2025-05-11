@@ -4,17 +4,52 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 };
 
+// Detectar si estamos en login.php
+$currentFile = basename($_SERVER['PHP_SELF']);
+$isLogin = ($currentFile === 'login.php');
+$isServices = ($currentFile === 'services.php');
+$isGraphs = ($currentFile === 'graphs.php');
+$isCommits = ($currentFile === 'commits.php');
+$isUsers = ($currentFile === 'users.php');
+$isUserpanel = ($currentFile === 'user-panel.php');
+$isVerify = ($currentFile === 'diagnostic.php');
+
 // Variables globales
 $loggedIn = isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true;
-$role_id = $_SESSION['role_id'] ?? null;  // Obtener el role_id de la sesión
+$role_id = $_SESSION['role_id'] ?? 'Role not available';  // Obtener el role_id de la sesión
 $first_name = $_SESSION['first_name'] ?? 'First name not available';
 $last_name = $_SESSION['last_name'] ?? 'Last name not available';
-$name = $loggedIn ? $first_name . ' ' . $last_name : "TRSI";
 
-// Definir los roles con valores numericos, asumiendo que los valores de role_id son enteros
-$userIn = ($role_id === 1);        // 1 es para usuario
-$adminIn = ($role_id === 2);       // 2 es para admin
-$supervisorIn = ($role_id === 3);  // 3 es para supervisor
+// Asignar nombre de rol
+$roles = [
+    1 => 'user',
+    2 => 'admin',
+    3 => 'supervisor',
+];
+$rol_text = $roles[$role_id] ?? '';
+
+// Si está logeado y no está en services.php, redirigir
+if ($loggedIn && $currentFile === 'login.php') {
+    header('Location: /trsi/frontend/pages/services.php');
+    exit();
+}
+
+$pageName = '';
+if ($isServices) {
+    $pageName = 'Home';
+} elseif ($isGraphs) {
+    $pageName = 'Gráficas';
+} elseif ($isCommits) {
+    $pageName = 'Commits';
+} elseif ($isUsers) {
+    $pageName = 'Administrar Usuarios';
+} elseif ($isUserpanel) {
+    $pageName = 'Panel de Usuario';
+} elseif ($isVerify) {
+    $pageName = 'Diagnóstico';
+} else {
+    $pageName = '';
+}
 ?>
 
 <!doctype html>
@@ -34,69 +69,49 @@ $supervisorIn = ($role_id === 3);  // 3 es para supervisor
 
 <body>
     <header>
-        <nav class="navbar navbar-expand-lg bg-body-tertiary border-body" data-bs-theme="dark"
-            style="background-color: var(--olive-green) !important;">
-            <div class="container-fluid">
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <a class="navbar-brand" href="/trsi/index.php">
-                            <img src="/trsi/frontend/site/assets/logo.png" alt="" width="100" height="50">
-                        </a>
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="/trsi/frontend/pages/frame.php">Frame</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="/trsi/frontend/pages/commits.php">Commits</a>
-                        </li>
-                        <?php if ($adminIn): ?>
-                        <li class="nav-item">
-                            <a class="nav-link active" href="/trsi/frontend/pages/company.php">Company</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link active" href="/trsi/frontend/pages/users.php">Manage Users</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="/trsi/frontend/pages/user-panel.php">Admin
-                                Panel</a>
-                        </li>
-                        <?php elseif ($userIn): ?>
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="/trsi/frontend/pages/user-panel.php">User Panel</a>
-                        </li>
-                        <?php elseif ($supervisorIn): ?>
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="/trsi/frontend/pages/user-panel.php">Supervisor
-                                Panel</a>
-                        </li>
-                        <?php endif; ?>
-                    </ul>
-
-                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                        <?php if ($loggedIn): ?>
-                        <li class="nav-item">
-                        <a class="nav-link" href="/trsi/backend/controllers/LogoutController.php" tabindex="-1">Logout</a>
-
-                        </li>
-                        <?php else: ?>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/trsi/frontend/pages/login.php" tabindex="-1">Sign In</a>
-                        </li>
-                        <?php endif; ?>
-                    </ul>
-
-                    <?php if ($loggedIn): ?>
-                    <li class="nav-item ms-auto text-light">
-                        <?php echo $name; ?>
-                    </li>
-                    <?php endif; ?>
-                </div>
+        <div class="navbar-uam d-flex align-items-center px-3 py-1">
+            <div class="uam-logo">
+                <img src="/trsi/frontend/site/assets/logo.png" alt="Logo UAM" style="height:80px;">
             </div>
-        </nav>
+            <span class="uam-title">Monitoring Station</span>
+        </div>
+
+        <div class="container-fluid">
+            <div class="uam-bar d-flex align-items-center justify-content-between" style="gap:0;">
+                <?php if ($isLogin): ?>
+                    <div class="flex-fill text-start d-flex align-items-center justify-content-center">
+                        <span class="uam-login" style="font-weight:bold; color:var(--uam-yellow);">Login</span>
+                    </div>
+                    <div class="flex-fill text-center d-flex align-items-center justify-content-center">
+                        <span style="font-weight:bold; color:var(--uam-white);" class="uam-date" id="uam-date"></span>
+                    </div>
+                    <div class="flex-fill"></div>
+                <?php elseif ($loggedIn): ?>
+                    <div class="flex-fill text-start d-flex align-items-center justify-content-center">
+                        <?php if ($pageName): ?>
+                            <span class="uam-login" style="font-weight:bold; color:var(--uam-yellow);">
+                                <?php echo $pageName; ?>
+                            </span>
+                        <?php endif; ?>
+                    </div>
+                    <div class="flex-fill text-center d-flex align-items-center justify-content-center">
+                        <span style="font-weight:bold; color:var(--uam-white);" class="uam-date" id="uam-date"></span>
+                    </div>
+                    <div class="flex-fill text-end d-flex align-items-center justify-content-center gap-3">
+                        <span class="uam-rol" style="color:var(--uam-yellow); font-weight:bold; font-size:1.3rem;">
+                            <?php echo ucfirst($rol_text) . ' ' . htmlspecialchars($first_name); ?>
+                        </span>
+                        <a href="/trsi/backend/controllers/LogoutController.php" class="btn" style="background:var(--uam-yellow); color:var(--uam-blue); font-weight:bold; border-radius:15px;">Cerrar sesión</a>
+                    </div>
+                <?php else: ?>
+                    <div class="flex-fill"></div>
+                    <div class="flex-fill text-center d-flex align-items-center justify-content-center">
+                        <span class="uam-login">Bienvenido</span>
+                    </div>
+                    <div class="flex-fill"></div>
+                <?php endif; ?>
+            </div>
+        </div>
     </header>
 
     <!-- jQuery -->
@@ -107,6 +122,12 @@ $supervisorIn = ($role_id === 3);  // 3 es para supervisor
     <script src="/trsi/frontend/dist/chart/js/chart.umd.min.js"></script>
     <!-- FontAwesome JS -->
     <script src="/trsi/frontend/dist/fontawesome/js/all.min.js"></script>
+    <!-- MomentJS -->
+    <script src="/trsi/frontend/dist/moment/js/moment.js"></script>
+    <script src="/trsi/frontend/dist/moment/js/moment-timezone-with-data.js"></script>
+    <!-- JS -->
+    <script src="/trsi/frontend/js/main.js"></script>
+    <script src="/trsi/frontend/js/navbar.js"></script>
 </body>
 
 </html>

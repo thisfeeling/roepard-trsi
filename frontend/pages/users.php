@@ -66,7 +66,7 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
     <link rel="stylesheet" href="/trsi/frontend/css/style.css" />
 </head>
 
-<body class="p-4" class="bg-dark text-light">
+<body class="bg-dark text-light">
 
     <!-- Navbar -->
     <?php include __DIR__ . '/../../frontend/components/navbar.php'; ?>
@@ -74,7 +74,9 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
     <main>
         <div class="d-flex justify-content-center text-light">
             <!-- Contenido de la página -->
-            <h2 class="mb-4">Gestor de Usuarios</h2>
+            <div class="d-flex justify-content-center text-light" style="margin-top: 15px; margin-bottom: -15px;">
+                <h2 class="mb-4">Gestor de Usuarios</h2>
+            </div>
         </div>
 
         <div class="container-fluid my-4">

@@ -4,19 +4,9 @@
 /* Global colors */
 :root {
     /* Colores verdes */
-    --light-white: #F0F0F0;    /* Blanco claro */
-    --soft-green: #E7F0DC;    /* Verde suave */
-    --forest-green: #729762;  /* Verde bosque */
-    --olive-green: #658147;   /* Verde oliva */
-    --dark-green: #597445;    /* Verde oscuro */
-    /* Colores tierra */
-    --sand-brown: #A79277;    /* Marrón arena */
-    --beige-tan: #D1BB9E;     /* Beige tostado */
-    --ivory-cream: #EAD8C0;   /* Crema marfil */
-    --pale-peach: #FFF2E1;    /* Melocotón pálido */
-    --dark-black: #000000;    /* Negro oscuro */
-
-    --light-white: #f8f9fa;
-    --dark-black: #121212;
-    --forest-green: #28a745;
+    --uam-blue: #0069a3;
+    --uam-yellow: #f4d73b;
+    --uam-white: #ffffff;
+    --uam-black: #1a1a1a;
+    --uam-gray: #808080;
 }

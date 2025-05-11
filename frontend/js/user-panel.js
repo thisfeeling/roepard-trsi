@@ -195,32 +195,6 @@ $(document).ready(function () {
         });
     });
 
-    $("#btnDeleteUser").on("click", function () {
-        // Mostrar el modal de confirmación
-        $('#confirmDeleteModal').modal('show');
-        // Asignar la acción de eliminar al botón de confirmación dentro del modal
-        $('#confirmDeleteBtn').off('click').on('click', function () {
-            $.ajax({
-                url: '/trsi/backend/controllers/DelUserController.php',
-                method: 'POST',
-                data: { user_id: user_id },
-                success: function (response) {
-                    // console.log("Respuesta del servidor:", response);
-                    let result = JSON.parse(response);
-                    if (result.success) {
-                        showModal(result.success);
-                        window.location.href = "/trsi/backend/controllers/LogoutController.php";  // Solo redirige si la eliminación fue exitosa
-                        $('#confirmDeleteModal').modal('hide'); // Cerrar el modal de confirmación
-                    } else {
-                        showModal(result.error || "Error desconocido al eliminar el usuario.");
-                    }
-                },
-                error: function () {
-                    showModal("Error conectando con el servidor.");
-                }
-            });
-        });
-    });
     $("#modalUserExistingPicture").on("change", function (event) {
         const file = event.target.files[0];
         if (!file || !file.type.startsWith("image/")) return;
