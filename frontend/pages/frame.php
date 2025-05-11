@@ -14,10 +14,8 @@
 
 <body>
 
-    <!-- Incluir el navbar -->
-    <?php
-    include './navbar.php';
-    ?>
+    <!-- Navbar -->
+    <?php include __DIR__ . '/../../frontend/components/navbar.php'; ?>
 
     <p id="horaColombia"></p>
 

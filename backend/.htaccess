@@ -1,0 +1,3 @@
+
+# Desactiva el listado de directorios
+Options -Indexes

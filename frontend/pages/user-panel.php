@@ -60,8 +60,8 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
 </head>
 
 <body style="background-color: var(--olive-green) !important; color: var(--soft-green);">
-    <!-- Incluir el navbar -->
-    <?php include './navbar.php'; ?>
+    <!-- Navbar -->
+    <?php include __DIR__ . '/../../frontend/components/navbar.php'; ?>
 
     <!-- Contenido principal -->
     <main class="container my-5">
@@ -358,7 +358,7 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
                                 <div class="col-md-4 mb-3">
                                     <label for="modalUserCurrentPassword" class="form-label">Contraseña actual</label>
                                     <input type="password" class="form-control" id="modalUserCurrentPassword" name="current_password"
-                                        placeholder="Introduce tu contraseña actual" required autocomplete="on" />
+                                        placeholder="Introduce tu contraseña actual" required autocomplete="on " />
                                 </div>
                                 <div class="col-md-4 mb-3">
                                     <label for="modalUserPassword" class="form-label">Nueva contraseña</label>

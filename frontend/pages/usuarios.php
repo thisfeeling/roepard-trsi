@@ -68,7 +68,7 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
 <body class="p-4" class="bg-dark text-light">
 
     <!-- Navbar -->
-    <?php include './navbar.php'; ?>
+    <?php include __DIR__ . '/../../frontend/components/navbar.php'; ?>
 
     <main>
         <div class="d-flex justify-content-center text-light">

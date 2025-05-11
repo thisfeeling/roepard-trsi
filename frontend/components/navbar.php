@@ -58,7 +58,7 @@ $supervisorIn = ($role_id === 3);  // 3 es para supervisor
                             <a class="nav-link active" href="/trsi/frontend/pages/company.php">Company</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active" href="/trsi/frontend/pages/manage-users.php">Manage Users</a>
+                            <a class="nav-link active" href="/trsi/frontend/pages/usuarios.php">Manage Users</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link active" aria-current="page" href="/trsi/frontend/pages/user-panel.php">Admin

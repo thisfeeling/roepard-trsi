@@ -1,18 +1,29 @@
 <?php
-// Creación de una clase para conectar a la base de datos
+// Clase para conectar a la base de datos MySQL usando PDO
 class DBConfig {
-    private $host = "localhost"; // Host de la base de datos
-    private $port = "3306"; // Puerto de la base de datos
-    private $username = "trsi_user"; 
+    private $host = "localhost";
+    private $port = "3306";
+    private $username = "trsi_user";
     private $password = "xJgt1bm_m!j8Ys5r";
-    private $db_name = "trsi"; // Nombre de la base de datos
+    private $db_name = "trsi";
+    private static $instance = null;
 
-    // Método que retorna la conexión
+    /**
+     * Retorna una instancia PDO para la conexión a la base de datos.
+     * Usa singleton para evitar múltiples conexiones.
+     */
     public function getConnection() {
-        $dsn = "mysql:host={$this->host};port={$this->port};dbname={$this->db_name}";
-        $conn = new PDO($dsn, $this->username, $this->password);
-        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        return $conn;
+        if (self::$instance === null) {
+            try {
+                $dsn = "mysql:host={$this->host};port={$this->port};dbname={$this->db_name};charset=utf8mb4";
+                self::$instance = new PDO($dsn, $this->username, $this->password);
+                self::$instance->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            } catch (PDOException $e) {
+                error_log("Error de conexión a la base de datos: " . $e->getMessage());
+                die("No se pudo conectar a la base de datos.");
+            }
+        }
+        return self::$instance;
     }
 }
 ?>

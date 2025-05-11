@@ -62,10 +62,8 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
 
 <body style="background-color: var(--olive-green) !important;">
 
-    <!-- Incluir el navbar -->
-    <?php
-    include './navbar.php';
-    ?>
+    <!-- Navbar -->
+    <?php include __DIR__ . '/../../frontend/components/navbar.php'; ?>
 
     <!-- Contenido principal de la página -->
     <main class="container text-light">

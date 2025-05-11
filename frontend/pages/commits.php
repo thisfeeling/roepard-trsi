@@ -23,7 +23,7 @@
 <body class="bg-dark text-light">
 
     <!-- Navbar -->
-    <?php include './navbar.php'; ?>
+    <?php include __DIR__ . '/../../frontend/components/navbar.php'; ?>
 
     <div class="container my-5">
         <h2 class="text-center text-white mb-4">Commits recientes</h2>
