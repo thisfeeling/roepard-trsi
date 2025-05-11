@@ -1,2 +1,6 @@
-# Desactiva el listado de directorios
 Options -Indexes
+ErrorDocument 404 /trsi/404.php
+
+RewriteEngine On
+RewriteCond %{REQUEST_URI} ^/trsi/backend/?$
+RewriteRule ^.*$ /trsi/404.php [L]

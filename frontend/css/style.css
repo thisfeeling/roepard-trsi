@@ -50,3 +50,8 @@ footer {
   width: 400px !important;
   height: 300px !important;
 }
+
+.modal-backdrop {
+  background-color: transparent !important;
+  backdrop-filter: none !important;
+}

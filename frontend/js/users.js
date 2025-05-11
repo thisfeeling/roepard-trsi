@@ -1,5 +1,4 @@
 $(document).ready(function () {
-
   // Mostrar mensaje en modal
   function showModal(message) {
     $('#modalMessageContent').text(message);
@@ -37,11 +36,12 @@ $(document).ready(function () {
       modalUserUsername: user.username,
       modalUserEmail: user.email,
       modalUserPhone: user.phone,
+      modalUserCurrentPassword: user.password,
       modalUserCountry: user.country,
       modalUserCity: user.city,
       modalUserBirthdate: user.birthdate,
       modalUserStatus: user.status_id,
-      modalUserRole: user.role_id
+      modalUserRole: user.role_id,
     };
 
     for (const id in campos) {
@@ -114,7 +114,7 @@ $(document).ready(function () {
       }
 
       const fullNumber = normalizedPrefix + number;
-      console.log("Número completo:", fullNumber);
+      // console.log("Número completo:", fullNumber);
     });
   }
 
@@ -228,7 +228,7 @@ $(document).ready(function () {
     let form = $('#formUpdateUsuario')[0];
     let formData = new FormData(form);
     let user_id = $("#modalUserUser_id").val();
-
+    let current_password = $("#modalUserCurrentPassword").val();
     if (!user_id) {
       showModal("ID de usuario no válido.");
       return;
@@ -296,6 +296,40 @@ $(document).ready(function () {
       img.src = e.target.result;
     };
     reader.readAsDataURL(file);
+  });
+
+  $("#modalUserCountry").on("change", function() {
+    if ($(this).val() === "Colombia") {
+        $("#ciudadColombiaDiv").show();
+        $("#ciudadOtroDiv").hide();
+        $("#modalUserCityOtro").val('');
+    } else if ($(this).val() !== "") {
+        $("#ciudadColombiaDiv").hide();
+        $("#ciudadOtroDiv").show();
+        $("#modalUserCity").val('');
+    } else {
+        $("#ciudadColombiaDiv").hide();
+        $("#ciudadOtroDiv").hide();
+        $("#modalUserCity").val('');
+        $("#modalUserCityOtro").val('');
+    }
+  });
+  
+  $("#createUserCountry").on("change", function() {
+    if ($(this).val() === "Colombia") {
+        $("#CreateciudadColombiaDiv").show();
+        $("#CreateciudadOtroDiv").hide();
+        $("#CreateUserCityOtro").val('');
+    } else if ($(this).val() !== "") {
+        $("#CreateciudadColombiaDiv").hide();
+        $("#CreateciudadOtroDiv").show();
+        $("#createUserCity").val('');
+    } else {
+        $("#CreateciudadColombiaDiv").hide();
+        $("#CreateciudadOtroDiv").hide();
+        $("#createUserCity").val('');
+        $("#CreateUserCityOtro").val('');
+    }
   });
 
   // Inicializar

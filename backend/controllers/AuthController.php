@@ -13,25 +13,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Verificar si es un email
         if (filter_var($input, FILTER_VALIDATE_EMAIL)) {
             // Es un email
-            $sql = "SELECT * FROM users WHERE email = :input AND password = :password";
+            $sql = "SELECT * FROM users WHERE email = :input";
         } 
         // Verificar si es un telefono
         elseif (is_numeric($input)) {
             // Es un numero de telefono
-            $sql = "SELECT * FROM users WHERE phone = :input AND password = :password";
+            $sql = "SELECT * FROM users WHERE phone = :input";
         } 
         else {
             // Es un username
-            $sql = "SELECT * FROM users WHERE username = :input AND password = :password";
+            $sql = "SELECT * FROM users WHERE username = :input";
         }
         // Preparar y ejecutar la consulta
         $stmt = $db->prepare($sql);
         $stmt->bindParam(':input', $input, PDO::PARAM_STR);
-        $stmt->bindParam(':password', $password, PDO::PARAM_STR);
         $stmt->execute();
         // Obtener los datos
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
-        if ($row) {
+        if ($row && password_verify($password, $row['password'])) {
             // Usuario encontrado, iniciar sesion
             $_SESSION['logged_in'] = true;
             $_SESSION['user_id'] = $row['user_id'];

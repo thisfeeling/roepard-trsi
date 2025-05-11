@@ -13,8 +13,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             exit;
         }
     }
-    // Concatenar el prefijo al número de teléfono
-    $full_phone = $phone_prefix . $phone; 
+
+    // ¡AQUÍ! Asigna las variables antes de usarlas
+    $phone_prefix = $_POST['phone_prefix'];
+    $phone = $_POST['phone'];
+    $full_phone = $phone_prefix . $phone;
 
     // Directorio y tipos permitidos
     $upload_dir = __DIR__ . '/../../uploads/';
@@ -44,6 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     // Insertar datos del usuario
+    $hashed_password = password_hash($_POST['password'], PASSWORD_DEFAULT);
     $sql = "INSERT INTO users (profile_picture, first_name, last_name, username, email, phone, password, country, city, birthdate, status_id, role_id)
             VALUES (:profile_picture, :first_name, :last_name, :username, :email, :phone, :password, :country, :city, :birthdate, :status_id, :role_id)";
     
@@ -57,7 +61,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             ':username' => $_POST['username'],
             ':email' => $_POST['email'],
             ':phone' => $full_phone,
-            ':password' => $_POST['password'],
+            ':password' => $hashed_password,
             ':country' => $_POST['country'],
             ':city' => $_POST['city'],
             ':birthdate' => $_POST['birthdate'],

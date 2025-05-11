@@ -45,7 +45,7 @@ $supervisorIn = ($role_id === 3);  // 3 es para supervisor
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <a class="navbar-brand" href="/trsi/index.php">
-                            <img src="/trsi/assets/logo.png" alt="" width="100" height="50">
+                            <img src="/trsi/frontend/site/assets/logo.png" alt="" width="100" height="50">
                         </a>
                         <li class="nav-item">
                             <a class="nav-link active" aria-current="page" href="/trsi/frontend/pages/frame.php">Frame</a>
@@ -58,7 +58,7 @@ $supervisorIn = ($role_id === 3);  // 3 es para supervisor
                             <a class="nav-link active" href="/trsi/frontend/pages/company.php">Company</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active" href="/trsi/frontend/pages/usuarios.php">Manage Users</a>
+                            <a class="nav-link active" href="/trsi/frontend/pages/users.php">Manage Users</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link active" aria-current="page" href="/trsi/frontend/pages/user-panel.php">Admin

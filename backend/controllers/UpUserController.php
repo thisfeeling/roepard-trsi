@@ -12,13 +12,14 @@ $username = $_POST['username'];
 $email = $_POST['email'];
 $phone_prefix = $_POST['phone_prefix'];
 $phone = $_POST['phone'];
-$password = $_POST['password'];
+$password = $_POST['password'] ?? '';
 $current_password = $_POST['current_password'] ?? '';
 $country = $_POST['country'];
 $city = $_POST['city'];
 $birthdate = $_POST['birthdate'];
 $status_id = $_POST['status_id'];
 $role_id = $_POST['role_id'];
+$is_admin = isset($_POST['admin_edit']) && $_POST['admin_edit'] == '1';
 
 // Concatenar el prefijo al número de teléfono
 // Evitar duplicación del prefijo
@@ -95,16 +96,31 @@ foreach ($campos_obligatorios as $campo => $valor) {
     }
 }
 
-// Validar que la contraseña actual sea correcta
-$sql_check = "SELECT password FROM users WHERE user_id = :user_id";
-$stmt_check = $db->prepare($sql_check);
-$stmt_check->bindParam(':user_id', $user_id, PDO::PARAM_INT);
-$stmt_check->execute();
-$user = $stmt_check->fetch(PDO::FETCH_ASSOC);
+// Validar contraseña actual solo si NO es admin
+if (!$is_admin) {
+    $sql_check = "SELECT password FROM users WHERE user_id = :user_id";
+    $stmt_check = $db->prepare($sql_check);
+    $stmt_check->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+    $stmt_check->execute();
+    $user = $stmt_check->fetch(PDO::FETCH_ASSOC);
 
-if (!$user || $user['password'] !== $current_password) {
-    echo json_encode(['error' => 'La contraseña actual es incorrecta.']);
-    exit;
+    if (!$user || !password_verify($current_password, $user['password'])) {
+        echo json_encode(['error' => 'La contraseña actual es incorrecta.']);
+        exit;
+    }
+}
+
+// Si se va a cambiar la contraseña (campo no vacío)
+if (!empty($password)) {
+    $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+} else {
+    // Si no se cambia, usa la actual de la base de datos
+    $sql_get = "SELECT password FROM users WHERE user_id = :user_id";
+    $stmt_get = $db->prepare($sql_get);
+    $stmt_get->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+    $stmt_get->execute();
+    $row = $stmt_get->fetch(PDO::FETCH_ASSOC);
+    $hashed_password = $row['password'];
 }
 
 // Actualizar datos
@@ -130,7 +146,7 @@ $query->bindParam(':last_name', $last_name);
 $query->bindParam(':username', $username);
 $query->bindParam(':email', $email);
 $query->bindParam(':phone', $full_phone);
-$query->bindParam(':password', $password);
+$query->bindParam(':password', $hashed_password);
 $query->bindParam(':country', $country);
 $query->bindParam(':city', $city);
 $query->bindParam(':birthdate', $birthdate);

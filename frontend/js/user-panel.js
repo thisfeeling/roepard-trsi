@@ -16,7 +16,7 @@ $(document).ready(function () {
             processData: false,
             contentType: false,
             success: function (response) {
-                console.log("Respuesta del servidor:", response);
+                // console.log("Respuesta del servidor:", response);
                 let result = JSON.parse(response);
                 if (result.success) {
                     showModal(result.success);
@@ -56,7 +56,7 @@ $(document).ready(function () {
     });
 
     let user_id = $("#UserUser_id").val();
-    console.log("User ID:", user_id); // Verifica que el valor es correcto
+    // console.log("User ID:", user_id); // Verifica que el valor es correcto
     if (!user_id) {
         showModal("ID de usuario no válido.");
         return; // Evita que el código continúe si no se tiene un `user_id`
@@ -68,12 +68,12 @@ $(document).ready(function () {
             method: 'POST',
             data: { user_id: user_id },
             success: function (response) {
-                console.log(response); // Verifica la respuesta completa
+                // console.log(response); // Verifica la respuesta completa
                 let user = JSON.parse(response);
                 if (user.error) {
                     showModal(user.error);
                 } else {
-                    console.log("User Info:", user); // Verifica los datos del usuario
+                    //console.log("User Info:", user); // Verifica los datos del usuario
 
                     // Verifica la existencia de los elementos antes de manipularlos
                     if ($("#modalUserUser_id").length) {
@@ -82,10 +82,6 @@ $(document).ready(function () {
 
                     if ($("#modalUserProfilePicture").length) {
                         $("#modalUserProfilePicture").val(user.profile_picture);  // Asegúrate de que este campo sea un <input>, si es una imagen usa attr
-                    }
-
-                    if ($("#modalUserWebsite").length) {
-                        $("#modalUserWebsite").val(user.website);
                     }
 
                     if ($("#modalUserFirstName").length) {
@@ -161,12 +157,8 @@ $(document).ready(function () {
                         }
 
                         const fullNumber = normalizedPrefix + number;
-                        console.log("Número completo:", fullNumber);
+                        //console.log("Número completo:", fullNumber);
                     });
-
-                    if ($("#modalUserPassword").length) {
-                        $("#modalUserPassword").val(user.password);
-                    }
 
                     if ($("#modalUserCountry").length) {
                         $("#modalUserCountry").val(user.country);
@@ -178,10 +170,6 @@ $(document).ready(function () {
 
                     if ($("#modalUserBirthdate").length) {
                         $("#modalUserBirthdate").val(user.birthdate);
-                    }
-
-                    if ($("#modalUserBio").length) {
-                        $("#modalUserBio").val(user.bio);
                     }
 
                     if ($("#modalUserStatus").length) {
@@ -217,7 +205,7 @@ $(document).ready(function () {
                 method: 'POST',
                 data: { user_id: user_id },
                 success: function (response) {
-                    console.log("Respuesta del servidor:", response);
+                    // console.log("Respuesta del servidor:", response);
                     let result = JSON.parse(response);
                     if (result.success) {
                         showModal(result.success);
@@ -271,13 +259,29 @@ $(document).ready(function () {
                     dataTransfer.items.add(resizedFile);
                     event.target.files = dataTransfer.files;
     
-                    console.log("Imagen redimensionada");
+                    // console.log("Imagen redimensionada");
                 }, file.type, 0.9);
             };
             img.src = e.target.result;
         };
         reader.readAsDataURL(file);
     });
+    $("#modalUserCountry").on("change", function() {
+        if ($(this).val() === "Colombia") {
+            $("#ciudadColombiaDiv").show();
+            $("#ciudadOtroDiv").hide();
+            $("#modalUserCityOtro").val('');
+        } else if ($(this).val() !== "") {
+            $("#ciudadColombiaDiv").hide();
+            $("#ciudadOtroDiv").show();
+            $("#modalUserCity").val('');
+        } else {
+            $("#ciudadColombiaDiv").hide();
+            $("#ciudadOtroDiv").hide();
+            $("#modalUserCity").val('');
+            $("#modalUserCityOtro").val('');
+        }
+      });
 });
 
 // Función para mostrar el modal de mensajes

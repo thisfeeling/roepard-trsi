@@ -9,7 +9,7 @@ $(document).ready(function () {
     $("#btnGestionUsuarios").on("click", function () {
         $(".modal").modal("hide");
         setTimeout(function () {
-            window.location.href = "/trsi/frontend/pages/manage-users.php";
+            window.location.href = "/trsi/frontend/pages/users.php";
         }, 300);
     });
 });

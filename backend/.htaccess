@@ -1,3 +1,8 @@
-
-# Desactiva el listado de directorios
 Options -Indexes
+ErrorDocument 404 /trsi/404.php
+
+RewriteEngine On
+# Si la petición es a /trsi/backend o cualquier subcarpeta sin archivo, muestra 404
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteCond %{REQUEST_URI} ^/trsi/backend
+RewriteRule ^.*$ /trsi/404.php [L]

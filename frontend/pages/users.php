@@ -13,7 +13,7 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
     // Recupera el ID del usuario desde la sesión
     $user_id = $_SESSION['user_id']; // Asumiendo que 'user_id' está guardado en la sesión
     // Consulta para obtener los datos del usuario
-    $stmt = $db->prepare("SELECT first_name, last_name, email, role_id, status_id FROM users WHERE user_id = :user_id");
+    $stmt = $db->prepare("SELECT first_name, last_name, email, password, role_id, status_id FROM users WHERE user_id = :user_id");
     $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
     $stmt->execute();
     // Si el usuario existe, obtenemos sus datos
@@ -22,6 +22,7 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
         $first_name = $user['first_name'];
         $last_name = $user['last_name'];
         $email = $user['email'];
+        $password = $user['password'];
         $role_id = $user['role_id'];
         $status_id = $user['status_id'];
         $name = $first_name . ' ' . $last_name;
@@ -152,6 +153,8 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
                     <form id="formUpdateUsuario" enctype="multipart/form-data">
                         <div class="modal-body">
                             <input type="hidden" id="modalUserUser_id" name="user_id" />
+                            <input type="hidden" name="admin_edit" value="1">
+                            <input type="hidden" id="modalUserCurrentPassword" name="current_password"/>
                             <!-- Fila 1: 3 columnas -->
                             <div class="row">
                                 <div class="col-md-4 mb-3">
@@ -183,6 +186,7 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
                                     <input type="email" class="form-control" id="modalUserEmail" name="email"
                                         placeholder="Enter an email" required autocomplete="off" />
                                 </div>
+                                
                                 <div class="col-md-4 mb-3">
                                     <label for="modalUserPhone" class="form-label">Phone</label>
                                     <!-- Phone number with country code -->
@@ -390,37 +394,71 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
                                 </div>
                             </div>
 
-                            <!-- Fila 3: 2 columnas -->
+                            <!-- Fila 3: 3 columnas -->
                             <div class="row">
-                                <div class="col-md-6 mb-3">
+                                <div class="col-md-4 mb-3">
                                     <label for="modalUserPassword" class="form-label">Password</label>
                                     <input type="text" class="form-control" id="modalUserPassword" name="password"
                                         placeholder="Enter a password" required autocomplete="off" />
                                 </div>
-                                <div class="col-md-6 mb-3">
-                                    <label for="modalUserCountry" class="form-label">Country</label>
-                                    <input type="text" class="form-control" id="modalUserCountry" name="country"
-                                        placeholder="Enter a country" required autocomplete="off" />
+                                <div class="col-md-4 mb-3">
+                                    <label for="modalUserCountry" class="form-label">País</label>
+                                    <select class="form-select" id="modalUserCountry" name="country" required>
+                                        <option value="">Seleccione un país</option>
+                                        <option value="Colombia">Colombia</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-4 mb-3" id="ciudadColombiaDiv" style="display:none;">
+                                    <label for="modalUserCity" class="form-label">Ciudad</label>
+                                    <select class="form-select" id="modalUserCity" name="city">
+                                        <option value="">Seleccione una ciudad</option>
+                                        <option value="Arauca">Arauca</option>
+                                        <option value="Armenia">Armenia</option>
+                                        <option value="Barranquilla">Barranquilla</option>
+                                        <option value="Bogotá">Bogotá</option>
+                                        <option value="Bucaramanga">Bucaramanga</option>
+                                        <option value="Cali">Cali</option>
+                                        <option value="Cartagena">Cartagena</option>
+                                        <option value="Cúcuta">Cúcuta</option>
+                                        <option value="Florencia">Florencia</option>
+                                        <option value="Ibagué">Ibagué</option>
+                                        <option value="Leticia">Leticia</option>
+                                        <option value="Manizales">Manizales</option>
+                                        <option value="Medellín">Medellín</option>
+                                        <option value="Mitú">Mitú</option>
+                                        <option value="Mocoa">Mocoa</option>
+                                        <option value="Montería">Montería</option>
+                                        <option value="Neiva">Neiva</option>
+                                        <option value="Pasto">Pasto</option>
+                                        <option value="Pereira">Pereira</option>
+                                        <option value="Popayán">Popayán</option>
+                                        <option value="Puerto Carreño">Puerto Carreño</option>
+                                        <option value="Quibdó">Quibdó</option>
+                                        <option value="Riohacha">Riohacha</option>
+                                        <option value="San Andrés">San Andrés</option>
+                                        <option value="San José del Guaviare">San José del Guaviare</option>
+                                        <option value="Santa Marta">Santa Marta</option>
+                                        <option value="Sincelejo">Sincelejo</option>
+                                        <option value="Tunja">Tunja</option>
+                                        <option value="Valledupar">Valledupar</option>
+                                        <option value="Villavicencio">Villavicencio</option>
+                                        <option value="Yopal">Yopal</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-4 mb-3" id="ciudadOtroDiv" style="display:none;">
+                                    <label for="modalUserCityOtro" class="form-label">Ciudad</label>
+                                    <input type="text" class="form-control" id="modalUserCityOtro" name="city_otro" placeholder="Ingrese su ciudad" />
                                 </div>
                             </div>
 
-                            <!-- Fila 4: 2 columnas -->
+                            <!-- Fila 4: 3 columnas -->
                             <div class="row">
-                                <div class="col-md-6 mb-3">
-                                    <label for="modalUserCity" class="form-label">City</label>
-                                    <input type="text" class="form-control" id="modalUserCity" name="city"
-                                        placeholder="Enter a city" required autocomplete="off" />
-                                </div>
-                                <div class="col-md-6 mb-3">
+                                <div class="col-md-4 mb-3">
                                     <label for="modalUserBirthdate" class="form-label">Birthdate</label>
                                     <input type="date" class="form-control" id="modalUserBirthdate" name="birthdate"
                                         required autocomplete="off" />
                                 </div>
-                            </div>
-
-                            <!-- Fila 5: 2 columnas -->
-                            <div class="row">
-                                <div class="col-md-6 mb-3">
+                                <div class="col-md-4 mb-3">
                                     <label for="modalUserStatus" class="form-label">Status</label>
                                     <select class="form-select" id="modalUserStatus" name="status_id" required>
                                         <option value="1">Active</option>
@@ -428,7 +466,7 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
                                         <option value="3">Filed</option>
                                     </select>
                                 </div>
-                                <div class="col-md-6 mb-3">
+                                <div class="col-md-4 mb-3">
                                     <label for="modalUserRole" class="form-label">Role</label>
                                     <select class="form-select" id="modalUserRole" name="role_id" required>
                                         <option value="1">User</option>
@@ -437,7 +475,6 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
                                     </select>
                                 </div>
                             </div>
-
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -460,6 +497,7 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
                     <form id="formCrearUsuario" enctype="multipart/form-data" method="post">
                         <div class="modal-body">
                             <input type="hidden" id="modalUserUser_id" name="user_id" />
+                            <input type="hidden" name="admin_edit" value="1">
                             <!-- Fila 1: 3 columnas -->
                             <div class="row">
                                 <div class="col-md-4 mb-3">
@@ -698,37 +736,72 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
                                 </div>
                             </div>
 
-                            <!-- Fila 3: 2 columnas -->
+                            <!-- Fila 3: 3 columnas -->
                             <div class="row">
-                                <div class="col-md-6 mb-3">
+                                <div class="col-md-4 mb-3">
                                     <label for="createUserPassword" class="form-label">Password</label>
                                     <input type="text" class="form-control" id="createUserPassword" name="password"
                                         placeholder="Enter a password" required autocomplete="on" />
                                 </div>
-                                <div class="col-md-6 mb-3">
-                                    <label for="createUserCountry" class="form-label">Country</label>
-                                    <input type="email" class="form-control" id="createUserCountry" name="country"
-                                        placeholder="Enter a country" required autocomplete="on" />
+                                <div class="col-md-4 mb-3">
+                                    <label for="createUserCountry" class="form-label">País</label>
+                                    <select class="form-select" id="createUserCountry" name="country" required>
+                                        <option value="">Seleccione un país</option>
+                                        <option value="Colombia">Colombia</option>                                   
+                                    </select>
+                                </div>
+                                <div class="col-md-4 mb-3" id="CreateciudadColombiaDiv" style="display:none;">
+                                    <label for="createUserCity" class="form-label">Ciudad</label>
+                                    <select class="form-select" id="createUserCity" name="city">
+                                        <option value="">Seleccione una ciudad</option>
+                                        <option value="Arauca">Arauca</option>
+                                        <option value="Armenia">Armenia</option>
+                                        <option value="Barranquilla">Barranquilla</option>
+                                        <option value="Bogotá">Bogotá</option>
+                                        <option value="Bucaramanga">Bucaramanga</option>
+                                        <option value="Cali">Cali</option>
+                                        <option value="Cartagena">Cartagena</option>
+                                        <option value="Cúcuta">Cúcuta</option>
+                                        <option value="Florencia">Florencia</option>
+                                        <option value="Ibagué">Ibagué</option>
+                                        <option value="Leticia">Leticia</option>
+                                        <option value="Manizales">Manizales</option>
+                                        <option value="Medellín">Medellín</option>
+                                        <option value="Mitú">Mitú</option>
+                                        <option value="Mocoa">Mocoa</option>
+                                        <option value="Montería">Montería</option>
+                                        <option value="Neiva">Neiva</option>
+                                        <option value="Pasto">Pasto</option>
+                                        <option value="Pereira">Pereira</option>
+                                        <option value="Popayán">Popayán</option>
+                                        <option value="Puerto Carreño">Puerto Carreño</option>
+                                        <option value="Quibdó">Quibdó</option>
+                                        <option value="Riohacha">Riohacha</option>
+                                        <option value="San Andrés">San Andrés</option>
+                                        <option value="San José del Guaviare">San José del Guaviare</option>
+                                        <option value="Santa Marta">Santa Marta</option>
+                                        <option value="Sincelejo">Sincelejo</option>
+                                        <option value="Tunja">Tunja</option>
+                                        <option value="Valledupar">Valledupar</option>
+                                        <option value="Villavicencio">Villavicencio</option>
+                                        <option value="Yopal">Yopal</option>
+                                        <!-- Puedes agregar más ciudades si lo deseas -->
+                                    </select>
+                                </div>
+                                <div class="col-md-4 mb-3" id="CreateciudadOtroDiv" style="display:none;">
+                                    <label for="CreateUserCityOtro" class="form-label">Ciudad</label>
+                                    <input type="text" class="form-control" id="CreateUserCityOtro" name="city_otro" placeholder="Ingrese su ciudad" />
                                 </div>
                             </div>
-
-                            <!-- Fila 4: 2 columnas -->
+                            
+                            <!-- Fila 4: 3 columnas -->
                             <div class="row">
-                                <div class="col-md-6 mb-3">
-                                    <label for="createUserCity" class="form-label">City</label>
-                                    <input type="text" class="form-control" id="createUserCity" name="city"
-                                        placeholder="Enter a city" required autocomplete="on" />
-                                </div>
-                                <div class="col-md-6 mb-3">
+                                <div class="col-md-4 mb-3">
                                     <label for="createUserBirthdate" class="form-label">Birthdate</label>
                                     <input type="date" class="form-control" id="createUserBirthdate" name="birthdate"
                                         required autocomplete="on" />
                                 </div>
-                            </div>
-
-                            <!-- Fila 5: 2 columnas -->
-                            <div class="row">
-                                <div class="col-md-6 mb-3">
+                                <div class="col-md-4 mb-3">
                                     <label for="createUserStatus" class="form-label">Status</label>
                                     <select class="form-select" id="createUserStatus" name="status_id" required
                                         autocomplete="off">
@@ -737,7 +810,7 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
                                         <option value="3">Filed</option>
                                     </select>
                                 </div>
-                                <div class="col-md-6 mb-3">
+                                <div class="col-md-4 mb-3">
                                     <label for="createUserRole" class="form-label">Role</label>
                                     <select class="form-select" id="createUserRole" name="role_id" required
                                         autocomplete="off">
@@ -770,7 +843,7 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
     <script src="/trsi/frontend/dist/datatables/js/jquery.dataTables.min.js"></script>
     <script src="/trsi/frontend/dist/datatables/js/dataTables.bootstrap5.min.js"></script>
     <!-- JS personalizado -->
-    <script src="/trsi/frontend/js/usuarios.js"></script>
+    <script src="/trsi/frontend/js/users.js"></script>
 </body>
 
 </html>
