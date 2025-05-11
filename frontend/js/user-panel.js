@@ -1,7 +1,13 @@
 $(document).ready(function () {
     $("#btnUpdateUser").on("click", function () {
-        let form = $('#formUsuario')[0];
+        let form = $('#formUpdateUsuario')[0];
         let formData = new FormData(form);
+    
+        // Validación extra en el frontend (opcional)
+        if (!formData.get('current_password')) {
+            showModal("Debes ingresar tu contraseña actual para actualizar los datos.");
+            return;
+        }
     
         $.ajax({
             url: '/trsi/backend/controllers/UpUserController.php',
@@ -18,6 +24,27 @@ $(document).ready(function () {
                     $('.modal-backdrop').remove();
                     document.body.classList.remove('modal-open');
                     document.body.style.removeProperty('padding-right');
+                    // Limpiar campos de contraseña
+                    $('#modalUserCurrentPassword').val('');
+                    $('#modalUserPassword').val('');
+                    // Actualizar datos en la tarjeta principal
+                    $("#userFirstNameCard").text($("#modalUserFirstName").val());
+                    $("#userLastNameCard").text($("#modalUserLastName").val());
+                    $("#userUsernameCard").text($("#modalUserUsername").val());
+                    $("#userEmailCard").text($("#modalUserEmail").val());
+                    $("#userPhoneCard").text($("#modalUserPhone").val());
+                    $("#userCityCard").text($("#modalUserCity").val());
+                    $("#userCountryCard").text($("#modalUserCountry").val());
+                    $("#userBirthdateCard").text($("#modalUserBirthdate").val());
+                    $("#userStatusCard").text($("#modalUserStatus").val());
+                    $("#userRoleCard").text($("#modalUserRole").val());
+                    // Si quieres actualizar la imagen de perfil:
+                    let newProfilePicture = $("#modalUserExistingPicture").val();
+                    if (newProfilePicture) {
+                        // Si el usuario subió una nueva imagen, puedes forzar la recarga de la imagen
+                        // (esto solo funciona si el input es tipo file y el backend devuelve el nombre del archivo)
+                        $("#userProfilePictureCard").attr("src", "/trsi/uploads/" + newProfilePicture + "?" + new Date().getTime());
+                    }
                 } else {
                     showModal(result.error || "Error desconocido");
                 }
@@ -77,9 +104,65 @@ $(document).ready(function () {
                         $("#modalUserEmail").val(user.email);
                     }
 
-                    if ($("#modalUserPhone").length) {
-                        $("#modalUserPhone").val(user.phone);
+                    let phone = user.phone;
+                    if (phone.startsWith("+00")) {
+                        phone = phone.slice(3); // Eliminar el prefijo redundante "+00"
+                    } else if (phone.startsWith("+000")) {
+                        phone = phone.slice(4); // Eliminar el prefijo redundante "+000"
                     }
+                    $("#modalUserPhone").val(phone);
+
+                    document.getElementById("modalUserPhone").addEventListener("input", function () {
+                        const prefix = document.getElementById("modalUserPhonePrefix").value;
+                        let number = this.value;
+
+                        // Normalizar prefijos como +1-268, +1-876, etc.
+                        const normalizedPrefix = prefix.replace(/[^+\d]/g, "");
+
+                        switch (normalizedPrefix) {
+                            case "+34": // España
+                                if (number.startsWith("0")) {
+                                    number = number.slice(1);
+                                }
+                                break;
+                            case "+52": // México
+                                if (number.startsWith("044") || number.startsWith("045")) {
+                                    number = number.slice(3);
+                                } else if (number.startsWith("1") && number.length === 11) {
+                                    number = number.slice(1);
+                                }
+                                break;
+                            case "+1": // Estados Unidos y Canadá (incluye +1-xxx)
+                            case "+1242": case "+1268": case "+1345": case "+1441":
+                            case "+1473": case "+1649": case "+1664": case "+1670":
+                            case "+1671": case "+1684": case "+1758": case "+1767":
+                            case "+1784": case "+1787": case "+1809": case "+1868":
+                            case "+1876": // Países con código +1
+                                if (number.startsWith("1") && number.length === 11) {
+                                    number = number.slice(1);
+                                }
+                                break;
+                            case "+91": // India
+                                if (number.startsWith("0")) {
+                                    number = number.slice(1);
+                                }
+                                break;
+                            case "+57": // Colombia
+                                if (number.startsWith("03")) {
+                                    number = number.slice(1); // Quitar un 0 si lo tiene
+                                }
+                                break;
+                            default:
+                                // Para la mayoría de países, si el número empieza con 0, quitarlo
+                                if (number.startsWith("0")) {
+                                    number = number.slice(1);
+                                }
+                                break;
+                        }
+
+                        const fullNumber = normalizedPrefix + number;
+                        console.log("Número completo:", fullNumber);
+                    });
 
                     if ($("#modalUserPassword").length) {
                         $("#modalUserPassword").val(user.password);
@@ -117,7 +200,7 @@ $(document).ready(function () {
                     // Abre el modal
                     $("#detalleUsuarioModal").modal('show');
                 }
-            },            
+            },
             error: function () {
                 showModal("Error obteniendo detalles del usuario.");
             }
@@ -199,7 +282,6 @@ $(document).ready(function () {
 
 // Función para mostrar el modal de mensajes
 function showModal(message) {
-    // Asegúrate de que el modal esté disponible antes de intentar ocultarlo
     if ($('#crearUsuarioModal').length) {
         $('#crearUsuarioModal').modal('hide');
     }
@@ -208,21 +290,11 @@ function showModal(message) {
     }
     
     var $modal = $('#manageUsersModal');
-    
-    // Verificar que el modal esté disponible antes de cambiar su contenido
     if ($modal.length) {
         $modal.find('.modal-title').text("Respuesta de Gestión de Usuario: ");
         $modal.find('.modal-body').text(message);
         $modal.modal('show');
-        
-        // Manejo del evento cuando el modal se cierra
-        $modal.on('hidden.bs.modal', function () {
-            // Recargar la página solo si es necesario
-            window.location.reload();
-        });
     } else {
         console.error("El modal no está disponible.");
     }
-    
-    
-};
+}

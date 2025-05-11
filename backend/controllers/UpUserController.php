@@ -10,13 +10,23 @@ $first_name = $_POST['first_name'];
 $last_name = $_POST['last_name'];
 $username = $_POST['username'];
 $email = $_POST['email'];
+$phone_prefix = $_POST['phone_prefix'];
 $phone = $_POST['phone'];
 $password = $_POST['password'];
+$current_password = $_POST['current_password'] ?? '';
 $country = $_POST['country'];
 $city = $_POST['city'];
 $birthdate = $_POST['birthdate'];
 $status_id = $_POST['status_id'];
 $role_id = $_POST['role_id'];
+
+// Concatenar el prefijo al número de teléfono
+// Evitar duplicación del prefijo
+if (str_starts_with($phone, $phone_prefix)) {
+    $phone = substr($phone, strlen($phone_prefix));
+}
+$full_phone = $phone_prefix . $phone;
+
 
 // Directorio y tipos permitidos
 $upload_dir = __DIR__ . '/../../uploads/';
@@ -60,9 +70,40 @@ if (isset($_FILES['profile_picture']) && $_FILES['profile_picture']['error'] ===
     }
 }
 
-// Validación básica
-if (!$user_id || !$first_name || !$last_name || !$username || !$email || !$phone || !$password || !$country || !$city || !$birthdate || !$status_id || !$role_id) {
-    echo json_encode(['error' => 'Todos los campos son obligatorios.']);
+// Validación mejorada
+$campos_obligatorios = [
+    'user_id' => $user_id,
+    'first_name' => $first_name,
+    'last_name' => $last_name,
+    'username' => $username,
+    'email' => $email,
+    'phone' => $phone,
+    'phone_prefix' => $phone_prefix,
+    'password' => $password,
+    'current_password' => $current_password,
+    'country' => $country,
+    'city' => $city,
+    'birthdate' => $birthdate,
+    'status_id' => $status_id,
+    'role_id' => $role_id
+];
+
+foreach ($campos_obligatorios as $campo => $valor) {
+    if (!$valor) {
+        echo json_encode(['error' => "El campo '$campo' es obligatorio."]);
+        exit;
+    }
+}
+
+// Validar que la contraseña actual sea correcta
+$sql_check = "SELECT password FROM users WHERE user_id = :user_id";
+$stmt_check = $db->prepare($sql_check);
+$stmt_check->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+$stmt_check->execute();
+$user = $stmt_check->fetch(PDO::FETCH_ASSOC);
+
+if (!$user || $user['password'] !== $current_password) {
+    echo json_encode(['error' => 'La contraseña actual es incorrecta.']);
     exit;
 }
 
@@ -88,7 +129,7 @@ $query->bindParam(':first_name', $first_name);
 $query->bindParam(':last_name', $last_name);
 $query->bindParam(':username', $username);
 $query->bindParam(':email', $email);
-$query->bindParam(':phone', $phone);
+$query->bindParam(':phone', $full_phone);
 $query->bindParam(':password', $password);
 $query->bindParam(':country', $country);
 $query->bindParam(':city', $city);

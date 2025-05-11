@@ -11,14 +11,14 @@ $(document).ready(function () {
                 console.log(response);
                 let result = JSON.parse(response);
                 if (result.success) {
-                    showModal(result.success);
+                    showModal(result.message);
                     ListUsers();
                     $('#detalleUsuarioModal').modal('hide'); // Cerrar modal
                     $('.modal-backdrop').remove(); // Eliminar fondo residual
                     document.body.classList.remove('modal-open'); // Remover clase residual
                     document.body.style.removeProperty('padding-right'); // Eliminar padding añadido por Bootstrap 
                 } else {
-                    showModal(result.error);
+                    showModal(result.message);
                 }
             },
             error: function () {
@@ -59,14 +59,14 @@ $(document).ready(function () {
             success: function (response) {
                 const res = JSON.parse(response);
                 if (res.success) {
-                    showModal("User created successfully.");
+                    showModal(res.message, true);
                     // Recargar la lista de usuarios
                     ListUsers();
                     // Cierra el modal
                     $('#crearUsuarioModal').modal('hide');
                     $('.modal-backdrop').remove(); // Eliminar el fondo
                 } else {
-                    showModal("Error creating user: " + res.message);
+                    showModal(res.message, false);
                 }
             },
             error: function () {
@@ -104,7 +104,6 @@ function mostrarDetallesUsuario(user_id) {
                 // Llena los campos del formulario con los datos del usuario
                 $("#modalUserUser_id").val(user_id);
                 $("#modalUserProfilePicture").val(user.profile_picture);
-                $("#modalUserWebsite").val(user.website);
                 $("#modalUserFirstName").val(user.first_name);
                 $("#modalUserLastName").val(user.last_name);
                 $("#modalUserUsername").val(user.username);
@@ -114,7 +113,6 @@ function mostrarDetallesUsuario(user_id) {
                 $("#modalUserCountry").val(user.country);
                 $("#modalUserCity").val(user.city);
                 $("#modalUserBirthdate").val(user.birthdate);
-                $("#modalUserBio").val(user.bio);
                 $("#modalUserStatus").val(user.status_id);
                 $("#modalUserRole").val(user.role_id);
                 // Abre el modal
@@ -141,11 +139,11 @@ function eliminarUsuario(user_id, username) {
                 console.log("Respuesta del servidor:", response);
                 let result = JSON.parse(response);
                 if (result.success) {
-                    showModal(result.success);
+                    showModal(result.message);
                     ListUsers(); // Recargar lista
                     $('#confirmDeleteModal').modal('hide'); // Cerrar modal
                 } else {
-                    showModal(result.error);
+                    showModal(result.message);
                 }
             },
             error: function () {
@@ -156,7 +154,7 @@ function eliminarUsuario(user_id, username) {
 };
 
 // Función para mostrar el modal de mensajes
-function showModal(message) {
+function showModal(message,success = true) {
     $('#crearUsuarioModal').modal('hide');
     $("#detalleUsuarioModal").modal('hide');
     var $modal = $('#manageUsersModal');
@@ -167,4 +165,10 @@ function showModal(message) {
         // El modal primario no permite controlar la pagina por eso esta linea 
         window.location.reload();
     });
+    if (result.success) {
+        showModal(result.message, true);
+    } else {
+        showModal(result.message, false);
+    }
+
 };

@@ -1,4 +1,5 @@
 $(document).ready(function () {
+  // Repositorio
   const owner = "thisfeeling";
   const repo = "roepard-trsi";
   const apiUrl = `https://api.github.com/repos/${owner}/${repo}/commits`;
@@ -17,7 +18,7 @@ $(document).ready(function () {
         { title: "Mensaje" },
         { title: "Autor" },
         { title: "Fecha" },
-        { title: "Ver" }
+        { title: "Acción" }
       ],
       columnDefs: [{ className: 'dt-center', targets: '_all' }],
       // Idioma

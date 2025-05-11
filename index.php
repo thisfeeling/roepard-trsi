@@ -1,26 +1,48 @@
 <?php
-// Incluir el archivo de conexion a la base de datos
+// Incluir el archivo de conexión a la base de datos
 require_once './backend/core/DBConfig.php';
-// Crear una instancia de la clase de conexion
+// Crear una instancia de la clase de conexión
 $auth = new DBConfig();
 $db = $auth->getConnection();
-// Verifica si la sesion esta iniciada
+// Verifica si la sesión está iniciada
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
-// Logica de redireccion basada en rol
-$redirect_url = './frontend/pages/login.php'; // URL por defecto
+// Verifica si el usuario está autenticado
 if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
-    $user_id = $_SESSION['user_id'];
-    $stmt = $db->prepare("SELECT first_name, last_name, email, role_id FROM users WHERE user_id = :user_id");
+    // Recupera el ID del usuario desde la sesión
+    $user_id = $_SESSION['user_id']; // Asumiendo que 'user_id' está guardado en la sesión
+    // Consulta para obtener los datos del usuario
+    $stmt = $db->prepare("SELECT first_name, last_name, email, role_id, status_id FROM users WHERE user_id = :user_id");
     $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
     $stmt->execute();
+    // Si el usuario existe, obtenemos sus datos
     if ($stmt->rowCount() > 0) {
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
+        $first_name = $user['first_name'];
+        $last_name = $user['last_name'];
+        $email = $user['email'];
         $role_id = $user['role_id'];
-        // Verifica si el usuario es administrador o no
-        $redirect_url = ($role_id === 2) ? './frontend/pages/company.php' : './frontend/pages/user-panel.php';
+        $status_id = $user['status_id'];
+        $name = $first_name . ' ' . $last_name;
+        // Verifica el rol del usuario
+        if ($role_id === 2) { // Verifica si el usuario es admin (role_id = 2)
+            header('Location: /trsi/frontend/pages/company.php');
+            exit();
+        } else {
+            // Redirige a index.php si no es admin
+            header('Location: /trsi/frontend/pages/user-panel.php');
+            exit();
+        }
+    } else {
+        // Si no se encuentra el usuario en la base de datos
+        header("Location: /trsi/index.php");
+        exit();
     }
+} else {
+    // El usuario no está autenticado, redirige a la página de inicio de sesión
+    header("Location: /trsi/frontend/pages/login.php");
+    exit();
 }
 ?>
 
