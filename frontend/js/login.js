@@ -1,7 +1,7 @@
 $(document).ready(function() {
     $('#LoginForm').submit(function (event) {
         event.preventDefault();
-        console.log("Login process started");
+        // console.log("Login process started");
 
         // Obtener los valores de los campos de entrada
         var username = $.trim($('input[name="email"]').val()); // 'email' es el campo combinado para email, username o phone

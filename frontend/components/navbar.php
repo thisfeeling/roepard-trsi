@@ -103,7 +103,7 @@ if ($isServices) {
                         <span class="uam-rol" style="color:var(--uam-yellow); font-weight:bold; font-size:1.3rem;">
                             <?php echo ucfirst($rol_text) . ' ' . htmlspecialchars($first_name); ?>
                         </span>
-                        <a href="/trsi/backend/controllers/LogoutController.php" class="btn" style="background:var(--uam-yellow); color:var(--uam-blue); font-weight:bold; border-radius:15px;">Cerrar sesión</a>
+                        <a href="#" class="btn" style="background:var(--uam-yellow); color:var(--uam-blue); font-weight:bold; border-radius:15px;" id="logout-button">Cerrar sesión</a>
                     </div>
                 <?php else: ?>
                     <div class="flex-fill"></div>
