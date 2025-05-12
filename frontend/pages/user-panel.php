@@ -62,7 +62,7 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
     </script>
 </head>
 
-<body style="background-color: var(--olive-green) !important; color: var(--soft-green);">
+<body style="background-color: var(--uam-white); color: var(--uam-black);">
     <!-- Navbar -->
     <?php include __DIR__ . '/../../frontend/components/navbar.php'; ?>
 
@@ -136,7 +136,7 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
 
     <!-- Modal de detalles de usuario -->
     <div class="modal fade" id="detalleUsuarioModal" tabindex="-1" aria-labelledby="detalleUsuarioLabel"
-        aria-hidden="true" style="background-color: var(--soft-green); color: var(--dark-green);">
+        aria-hidden="true" style="color: var(--uam-black);">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">

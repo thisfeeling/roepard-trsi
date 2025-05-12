@@ -5,7 +5,7 @@ $(document).ready(function() {
             method: 'POST',
             data: { action: 'db' },
             success: function(response) {
-                console.log('Respuesta del servidor:', response); // Para debug
+                // console.log('Respuesta del servidor:', response); // Para debug
                 
                 let html = response.db_status ? 
                     '<span style="color: #28a745;">✅ Conectada</span>' : 

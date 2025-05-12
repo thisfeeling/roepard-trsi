@@ -151,7 +151,7 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
 
     <!-- Modal de detalles de usuario -->
     <div class="modal fade" id="detalleUsuarioModal" tabindex="-1" aria-labelledby="detalleUsuarioLabel"
-        aria-hidden="true" style="background-color: var(--soft-green); color: var(--dark-green);">
+        aria-hidden="true" style="color: var(--uam-black);">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
@@ -495,7 +495,7 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
 
     <!-- Modal para crear usuario  -->
     <div class="modal fade" id="crearUsuarioModal" tabindex="-1" aria-labelledby="crearUsuarioLabel"
-        aria-hidden="true" style="background-color: var(--soft-green); color: var(--dark-green);">
+        aria-hidden="true" style="color: var(--uam-black);">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
