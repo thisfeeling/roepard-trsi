@@ -17,42 +17,42 @@ $(document).ready(function() {
 
 // Función para loguear al usuario
 function LoginUser(username, password) {
+    // Verificar si los campos están vacíos
+    if (!username || !password) {
+        var $modal = $('#LoginModal');
+        $modal.find('.modal-title').text("Error");
+        $modal.find('.modal-body').text("Por favor, completa todos los campos.");
+        $modal.modal('show');
+        return; // Salir de la función si hay campos vacíos
+    }
+
     $.ajax({
-        url: '/trsi/backend/controllers/AuthController.php',
+        url: '/trsi/backend/api/auth.php',
         method: 'POST',
         data: { username: username, password: password },
         dataType: 'json',
-        success: function (response) {
-            // console.log("Response: ", response);
-
-            // Verificación de acceso y manejo del modal
+        success: function (message) {
             var $modal = $('#LoginModal');
-            if (response.status == "success") {
-                // console.log("Successful login.");
-                // console.log("Redirecting to home...");
-
-                // Configurar el contenido del modal
+            if (message.status === "success") {
                 $modal.find('.modal-title').text("Login response: ");
                 $modal.find('.modal-body').text("Login successful.");
-
-                // Mostrar el modal
                 $modal.modal('show');
 
-                // Redirigir después de cerrar el modal
                 $modal.on('hidden.bs.modal', function () {
-                    window.location.href = "/trsi/index.php"; // Redirige a la página principal
+                    window.location.href = "/trsi/index.php";
                 });
             } else {
-                // console.log("Error: " + response.message);
-
-                // Mostrar un modal para el error
+                // Asegúrate de que el mensaje de error se maneje correctamente
                 $modal.find('.modal-title').text("Login response: ");
-                $modal.find('.modal-body').text("Incorrect Credentials.");
+                $modal.find('.modal-body').text(message.message || "Error desconocido.");
                 $modal.modal('show');
             }
         },
         error: function(xhr, status, error) {
-            // console.log("AJAX Error: " + error);
+            var $modal = $('#LoginModal');
+            $modal.find('.modal-title').text("Error");
+            $modal.find('.modal-body').text("Ocurrió un error en la conexión. Inténtalo de nuevo.");
+            $modal.modal('show');
         }
     });
-};
+}

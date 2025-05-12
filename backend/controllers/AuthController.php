@@ -1,64 +1,42 @@
 <?php
-// Incluir un archivo de conexion a la base de datos
-require_once __DIR__ . '/../../backend/core/DBConfig.php';
-session_start();
+require_once __DIR__ . '/../services/AuthService.php';
+require_once __DIR__ . '/../models/UserAuth.php';
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $input = $_POST['username']; // El valor puede ser email, username o phone
-    $password = $_POST['password'];
-    // Crear instancia de conexión
-    $auth = new DBconfig();
-    $db = $auth->getConnection();
-    try {
-        // Verificar si es un email
-        if (filter_var($input, FILTER_VALIDATE_EMAIL)) {
-            // Es un email
-            $sql = "SELECT * FROM users WHERE email = :input";
-        } 
-        // Verificar si es un telefono
-        elseif (is_numeric($input)) {
-            // Es un numero de telefono
-            $sql = "SELECT * FROM users WHERE phone = :input";
-        } 
-        else {
-            // Es un username
-            $sql = "SELECT * FROM users WHERE username = :input";
-        }
-        // Preparar y ejecutar la consulta
-        $stmt = $db->prepare($sql);
-        $stmt->bindParam(':input', $input, PDO::PARAM_STR);
-        $stmt->execute();
-        // Obtener los datos
-        $row = $stmt->fetch(PDO::FETCH_ASSOC);
-        if ($row && password_verify($password, $row['password'])) {
-            // Usuario encontrado, iniciar sesion
-            $_SESSION['logged_in'] = true;
-            $_SESSION['user_id'] = $row['user_id'];
-            $_SESSION['role_id'] = $row['role_id'];
-            $_SESSION['first_name'] = $row['first_name'];
-            $_SESSION['last_name'] = $row['last_name'];
-            $_SESSION['email'] = $row['email'];
-            $_SESSION['phone'] = $row['phone'];
-            $_SESSION['birthdate'] = $row['birthdate'];
-            $_SESSION['profile_picture'] = $row['profile_picture'];
-            $response = array(
-                'status' => 'success',
-                'message' => 'Login successful',
-                'user_data' => $row
-            );
-        } else {
-            // Usuario no encontrado o contraseña incorrecta
-            $response = array(
-                'status' => 'error',
-                'message' => 'Incorrect Credentials.'
-            );
-        }
-    } catch (PDOException $e) {
-        $response = array('status' => 'error', 'message' => $e->getMessage());
+class AuthController {
+    private $authService;
+    private $userModel;
+
+    public function __construct() {
+        $this->authService = new AuthService();
+        $this->userModel = new User();
     }
 
-    // Devolver la respuesta en formato JSON
-    header('Content-Type: application/json');
-    echo json_encode($response);
+    public function login() {
+        if ($_SERVER["REQUEST_METHOD"] != "POST") {
+            $this->sendResponse(['status' => 'error', 'message' => 'Método no permitido'], 405);
+            return;
+        }
+
+        $input = $_POST['username'] ?? '';
+        $password = $_POST['password'] ?? '';
+
+        if (empty($input) || empty($password)) {
+            $this->sendResponse(['status' => 'error', 'message' => 'Credenciales incompletas'], 400);
+            return;
+        }
+
+        try {
+            $result = $this->authService->authenticate($input, $password);
+            $this->sendResponse($result);
+        } catch (Exception $e) {
+            $this->sendResponse(['status' => 'error', 'message' => $e->getMessage()], 500);
+        }
+    }
+
+    private function sendResponse($data, $statusCode = 200) {
+        http_response_code($statusCode);
+        header('Content-Type: application/json');
+        echo json_encode($data);
+    }
 }
 ?>

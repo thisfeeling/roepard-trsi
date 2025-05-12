@@ -1,5 +1,14 @@
+var iti;
 $(document).ready(function () {
-    $("#btnUpdateUser").on("click", function () {
+    var input = document.querySelector("#modalUserPhone");
+    iti = window.intlTelInput(input, {
+        initialCountry: "auto",
+        nationalMode: false, // Siempre incluye el prefijo
+        utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/18.1.1/js/utils.js"
+    });
+
+    $("#btnUpdateUser").on("click", function (e) {
+        e.preventDefault();
         let form = $('#formUpdateUsuario')[0];
         let formData = new FormData(form);
     
@@ -9,17 +18,20 @@ $(document).ready(function () {
             return;
         }
     
+        // Usa el valor internacional del plugin
+        let fullPhone = iti.getNumber();
+        formData.set('phone', fullPhone);
+    
         $.ajax({
-            url: '/trsi/backend/controllers/UpUserController.php',
+            url: '/trsi/backend/api/up_user.php',
             method: 'POST',
             data: formData,
             processData: false,
             contentType: false,
+            dataType: 'json',
             success: function (response) {
-                // console.log("Respuesta del servidor:", response);
-                let result = JSON.parse(response);
-                if (result.success) {
-                    showModal(result.success);
+                if (response.status === "success") {
+                    showModal(response.message);
                     $('#detalleUsuarioModal').modal('hide');
                     $('.modal-backdrop').remove();
                     document.body.classList.remove('modal-open');
@@ -46,11 +58,26 @@ $(document).ready(function () {
                         $("#userProfilePictureCard").attr("src", "/trsi/uploads/" + newProfilePicture + "?" + new Date().getTime());
                     }
                 } else {
-                    showModal(result.error || "Error desconocido");
+                    showModal(response.message || "Error desconocido");
                 }
             },
-            error: function () {
-                showModal("Error conectando con el servidor.");
+            error: function (xhr, status, error) {
+                let msg = "Error conectando con el servidor: " + error;
+                // Intenta extraer el mensaje del backend si existe
+                if (xhr.responseJSON && xhr.responseJSON.message) {
+                    msg = xhr.responseJSON.message;
+                } else if (xhr.responseText) {
+                    try {
+                        let json = JSON.parse(xhr.responseText);
+                        if (json.message) msg = json.message;
+                    } catch (e) {
+                        // Si no es JSON, muestra el texto plano (puede ser un error de PHP)
+                        if (xhr.responseText.trim() !== "") {
+                            msg = xhr.responseText;
+                        }
+                    }
+                }
+                showModal(msg);
             }
         });
     });
@@ -63,17 +90,13 @@ $(document).ready(function () {
             return;
         }
         $.ajax({
-            url: '/trsi/backend/controllers/DetUserController.php',
+            url: '/trsi/backend/api/det_user.php',
             method: 'POST',
             data: { user_id: user_id },
+            dataType: 'json',
             success: function (response) {
-                // console.log(response); // Verifica la respuesta completa
-                let user = JSON.parse(response);
-                if (user.error) {
-                    showModal(user.error);
-                } else {
-                    //console.log("User Info:", user); // Verifica los datos del usuario
-
+                if (response.status === "success") {
+                    let user = response.data;
                     // Verifica la existencia de los elementos antes de manipularlos
                     if ($("#modalUserUser_id").length) {
                         $("#modalUserUser_id").val(user_id);
@@ -99,13 +122,18 @@ $(document).ready(function () {
                         $("#modalUserEmail").val(user.email);
                     }
 
-                    let phone = user.phone;
-                    if (phone.startsWith("+00")) {
-                        phone = phone.slice(3); // Eliminar el prefijo redundante "+00"
-                    } else if (phone.startsWith("+000")) {
-                        phone = phone.slice(4); // Eliminar el prefijo redundante "+000"
+                    let phone = user.phone || "";
+                    let prefix = "";
+                    let number = phone;
+
+                    let match = phone.match(/^(\+\d{1,4})/);
+                    if (match) {
+                        prefix = match[1];
+                        number = phone.slice(prefix.length);
                     }
-                    $("#modalUserPhone").val(phone);
+
+                    $("#modalUserPhonePrefix").val(prefix);
+                    $("#modalUserPhone").val(number);
 
                     document.getElementById("modalUserPhone").addEventListener("input", function () {
                         const prefix = document.getElementById("modalUserPhonePrefix").value;
@@ -186,6 +214,10 @@ $(document).ready(function () {
 
                     // Abre el modal
                     $("#detalleUsuarioModal").modal('show');
+
+                    iti.setNumber(user.phone);
+                } else {
+                    showModal(response.message || "Error al obtener los detalles del usuario.");
                 }
             },
             error: function () {

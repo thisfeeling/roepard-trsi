@@ -1,6 +1,6 @@
 <?php
 // Incluye el servicio que contiene la lógica de negocio para usuarios
-require_once __DIR__ . '/../services/UserService.php';
+require_once __DIR__ . '/../services/UserDeleteService.php';
 
 class DelUserController {
     private $userService;

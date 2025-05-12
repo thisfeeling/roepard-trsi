@@ -12,14 +12,9 @@ if (!isset($_SESSION['user_id'])) {
     echo json_encode(['error' => 'No autorizado']);
     exit;
 }
-// Incluye el controlador encargado de la lógica para eliminar usuarios
-require_once __DIR__ . '/../controllers/DelUserController.php';
 
-// Crea una instancia del controlador
-$controller = new DelUserController();
+require_once __DIR__ . '/../controllers/ListUserController.php';
 
-// Llama al método que maneja la petición HTTP (POST) y responde en JSON
+$controller = new ListUserController();
 $controller->handleRequest();
-
-// Nota: No pongas nada después de esto para evitar romper el formato JSON
 ?>

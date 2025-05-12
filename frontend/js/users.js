@@ -1,3 +1,6 @@
+var IS_ADMIN = true; // o false, según corresponda
+var itiDetalle, itiCrear;
+
 $(document).ready(function () {
   // Mostrar mensaje en modal
   function showModal(message) {
@@ -52,16 +55,19 @@ $(document).ready(function () {
       $("#modalUserExistingPicture").attr("src", user.profile_picture);
     }
 
-    // Eliminar prefijos duplicados en el teléfono
-    let phone = user.phone;
-    if (phone.startsWith("+00")) {
-      phone = phone.slice(3); // Eliminar el prefijo redundante "+00"
-    } else if (phone.startsWith("+000")) {
-      phone = phone.slice(4); // Eliminar el prefijo redundante "+000"
+    // Eliminar prefijos duplicados y separar prefijo y número
+    let phone = user.phone || "";
+    let prefix = "";
+    let number = phone;
+    let match = phone.match(/^(\+\d{1,4})/);
+    if (match) {
+        prefix = match[1];
+        number = phone.slice(prefix.length);
     }
 
-    // Asignar el número limpio al input del teléfono
-    $("#modalUserPhone").val(phone);
+    // Asignar a los inputs correspondientes
+    $("#modalUserPhonePrefix").val(prefix);
+    $("#modalUserPhone").val(number);
 
     document.getElementById("modalUserPhone").addEventListener("input", function () {
       const prefix = document.getElementById("modalUserPhonePrefix").value;
@@ -115,17 +121,29 @@ $(document).ready(function () {
       // console.log("Número completo:", fullNumber);
     });
 
-    $("#modalUserCurrentPassword").val(""); // Siempre vacío para el admin
+    if (IS_ADMIN) {
+        $("#currentPasswordGroup").hide();
+        $("#modalUserCurrentPassword").prop('required', false);
+    } else {
+        $("#currentPasswordGroup").show();
+        $("#modalUserCurrentPassword").prop('required', true);
+    }
+    $("#modalUserCurrentPassword").val('');
+
+    if (itiDetalle) {
+        itiDetalle.setNumber(user.phone || "");
+    }
   }
 
 
   // Listar usuarios en DataTable
   async function ListUsers() {
     try {
-      const response = await fetch('/trsi/backend/controllers/ListUserController.php', {
-        method: 'POST'
+      const response = await fetch('/trsi/backend/api/list_users.php', {
+        method: 'GET'
       });
       const json = await response.json();
+      // console.log(json);
       $('#tablaUsuarios').DataTable({
         destroy: true,
         data: json.data,
@@ -138,8 +156,8 @@ $(document).ready(function () {
           { data: 'phone', title: 'Phone' },
           { data: 'country', title: 'Country' },
           { data: 'city', title: 'City' },
-          { data: 'status_name', title: 'Status' },
-          { data: 'role_name', title: 'Role' },
+          { data: 'status_id', title: 'Status' },
+          { data: 'role_id', title: 'Role' },
           {
             data: null,
             title: 'Actions',
@@ -155,20 +173,28 @@ $(document).ready(function () {
       console.error(err);
       showModal('Error al obtener los usuarios: ' + err.message);
     }
+
   }
 
   // Ver detalles del usuario
   window.verDetallesUsuario = function (user_id) {
-    $.post('/trsi/backend/controllers/DetUserController.php', { user_id }, function (response) {
-      let user = JSON.parse(response);
-      if (user.error) {
-        showModal(user.error);
-      } else {
-        rellenarCamposUsuario(user);
-        $('#detalleUsuarioModal').modal('show');
-      }
-    }).fail(function () {
-      showModal("Error al obtener los detalles del usuario.");
+    $.ajax({
+        url: '/trsi/backend/api/det_user.php',
+        method: 'POST',
+        data: { user_id: user_id },
+        dataType: 'json',
+        success: function (response) {
+            if (response.status === "success") {
+                rellenarCamposUsuario(response.data);
+                $('#detalleUsuarioModal').modal('show');
+            } else {
+                showModal(response.message || "Error al obtener los detalles del usuario");
+            }
+        },
+        error: function (xhr, status, error) {
+            console.error('Error:', xhr.responseText);
+            showModal("Error al obtener los detalles del usuario: " + error);
+        }
     });
   };
 
@@ -177,11 +203,12 @@ $(document).ready(function () {
     $('#confirmDeleteModal').modal('show');
     $('#confirmDeleteBtn').off('click').on('click', function () {
       $.ajax({
-        url: '/trsi/backend/api/del_user.php',
+        url: '/trsi/backend/api/delete_user.php',
         method: 'POST',
         data: { user_id: user_id },
+        dataType: 'json',
         success: function(response) {
-          if (response.success) {
+          if (response.status === "success") {
             showModal(response.message);
             $('#confirmDeleteModal').modal('hide');
             ListUsers();
@@ -198,69 +225,101 @@ $(document).ready(function () {
 
   // Crear usuario
   $("#btnCrearUsuario").on("click", function () {
-    const form = $('#formCrearUsuario')[0]; // Asegúrate de que el formulario tenga este ID
+    const form = $('#formCrearUsuario')[0];
     const formData = new FormData(form);
+    
+    // Validación de campos
     for (const [key, value] of Object.entries(formData)) {
-      if ((value + "").trim() === "") {
-        showModal(`Complete el campo: ${key}`);
-        return;
-      }
+        if ((value + "").trim() === "") {
+            showModal(`Complete el campo: ${key}`);
+            return;
+        }
+    }
+
+    // Usa el valor internacional del plugin
+    if (itiCrear) {
+        let fullPhone = itiCrear.getNumber();
+        formData.set('phone', fullPhone);
     }
 
     $.ajax({
-      url: '/trsi/backend/controllers/CrUserController.php',
-      method: 'POST',
-      data: formData,
-      processData: false,
-      contentType: false,
-      success: function (response) {
-        let result = JSON.parse(response);
-        showModal(result.message || "Usuario creado.");
-        if (result.success) {
-          $('#crearUsuarioModal').modal('hide');
-          ListUsers();
+        url: '/trsi/backend/api/cr_user.php', // Cambiado a la ruta correcta
+        method: 'POST',
+        data: formData,
+        processData: false,
+        contentType: false,
+        dataType: 'json',
+        success: function (response) {
+            if (response.status === "success") {
+                showModal(response.message);
+                $('#crearUsuarioModal').modal('hide');
+                ListUsers();
+            } else {
+                showModal(response.message || "Error al crear el usuario");
+            }
+        },
+        error: function (xhr, status, error) {
+            console.error('Error:', xhr.responseText); // Para debug
+            showModal("Error conectando con el servidor: " + error);
         }
-      },
-      error: function () {
-        showModal("Error conectando con el servidor.");
-      }
     });
-
   });
 
   // Actualizar usuario
   $("#btnUpdateUser").on("click", function () {
     let form = $('#formUpdateUsuario')[0];
     let formData = new FormData(form);
-    let user_id = $("#modalUserUser_id").val();
-    let current_password = $("#modalUserCurrentPassword").val();
-    if (!user_id) {
-      showModal("ID de usuario no válido.");
-      return;
+
+    // Añade el campo is_admin
+    formData.append('is_admin', IS_ADMIN ? '1' : '0');
+
+    // Solo valida la contraseña actual si NO es admin
+    if (!IS_ADMIN && !formData.get('current_password')) {
+        showModal("Debes ingresar tu contraseña actual para actualizar los datos.");
+        return;
+    }
+
+    // Usa el valor internacional del plugin
+    if (itiDetalle) {
+        let fullPhone = itiDetalle.getNumber();
+        formData.set('phone', fullPhone);
     }
 
     $.ajax({
-      url: '/trsi/backend/controllers/UpUserController.php',
-      method: 'POST',
-      data: formData,
-      processData: false,
-      contentType: false,
-      success: function (response) {
-        let result = JSON.parse(response);
-        if (result.success) {
-          showModal(result.success);
-          ListUsers();
-          $('#detalleUsuarioModal').modal('hide');
-          $('.modal-backdrop').remove();
-          document.body.classList.remove('modal-open');
-          document.body.style.removeProperty('padding-right');
-        } else {
-          showModal(result.error || "Error desconocido");
+        url: '/trsi/backend/api/up_user.php',
+        method: 'POST',
+        data: formData,
+        processData: false,
+        contentType: false,
+        dataType: 'json',
+        success: function (response) {
+            if (response.status === "success") {
+                showModal(response.message);
+                ListUsers();
+                $('#detalleUsuarioModal').modal('hide');
+                $('.modal-backdrop').remove();
+                document.body.classList.remove('modal-open');
+                document.body.style.removeProperty('padding-right');
+            } else {
+                showModal(response.message || "Error desconocido");
+            }
+        },
+        error: function (xhr, status, error) {
+            let msg = "Error conectando con el servidor: " + error;
+            if (xhr.responseJSON && xhr.responseJSON.message) {
+                msg = xhr.responseJSON.message;
+            } else if (xhr.responseText) {
+                try {
+                    let json = JSON.parse(xhr.responseText);
+                    if (json.message) msg = json.message;
+                } catch (e) {
+                    if (xhr.responseText.trim() !== "") {
+                        msg = xhr.responseText;
+                    }
+                }
+            }
+            showModal(msg);
         }
-      },
-      error: function () {
-        showModal("Error conectando con el servidor.");
-      }
     });
   });
 
@@ -336,6 +395,26 @@ $(document).ready(function () {
         $("#CreateUserCityOtro").val('');
     }
   });
+
+  // Para el modal de detalles
+  var inputDetalle = document.querySelector("#modalUserPhone");
+  if (inputDetalle) {
+    itiDetalle = window.intlTelInput(inputDetalle, {
+      initialCountry: "auto",
+      nationalMode: false,
+      utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/18.1.1/js/utils.js"
+    });
+  }
+
+  // Para el modal de crear usuario
+  var inputCrear = document.querySelector("#createUserPhone");
+  if (inputCrear) {
+    itiCrear = window.intlTelInput(inputCrear, {
+      initialCountry: "auto",
+      nationalMode: false,
+      utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/18.1.1/js/utils.js"
+    });
+  }
 
   // Inicializar
   ListUsers();
