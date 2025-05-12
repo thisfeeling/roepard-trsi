@@ -77,10 +77,19 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
                 <!-- Columna de servicios -->
                 <div class="col-md-6 d-flex flex-column align-items-center">
                     <h4 class="mb-3" style="color: #fff; font-weight: bold;">Services Options</h4>
-                    <a href="/trsi/frontend/pages/users.php" class="btn btn-uam mb-3 w-100">Adminstrador de Usuarios</a>
-                    <a href="/trsi/frontend/pages/user-panel.php" class="btn btn-uam mb-3 w-100">Panel de usuario</a>
-                    <a href="/trsi/frontend/pages/diagnostic.php" class="btn btn-uam mb-3 w-100">Verificar Conexiones</a>
-                    <a href="/trsi/frontend/pages/commits.php" class="btn btn-uam mb-3 w-100">Registro de Cambios</a>
+                    <?php if ($role_id == 2): // Admin ?>
+                        <a href="/trsi/frontend/pages/users.php" class="btn btn-uam mb-3 w-100">Adminstrador de Usuarios</a>
+                        <a href="/trsi/frontend/pages/user-panel.php" class="btn btn-uam mb-3 w-100">Panel de usuario</a>
+                        <a href="/trsi/frontend/pages/diagnostic.php" class="btn btn-uam mb-3 w-100">Verificar Conexiones</a>
+                        <a href="/trsi/frontend/pages/commits.php" class="btn btn-uam mb-3 w-100">Registro de Cambios</a>
+                    <?php elseif ($role_id == 3): // Supervisor ?>
+                        <a href="/trsi/frontend/pages/user-panel.php" class="btn btn-uam mb-3 w-100">Panel de usuario</a>
+                        <a href="/trsi/frontend/pages/diagnostic.php" class="btn btn-uam mb-3 w-100">Verificar Conexiones</a>
+                        <a href="/trsi/frontend/pages/commits.php" class="btn btn-uam mb-3 w-100">Registro de Cambios</a>
+                    <?php else: // Usuario ?>
+                        <a href="/trsi/frontend/pages/user-panel.php" class="btn btn-uam mb-3 w-100">Panel de usuario</a>
+                        <a href="/trsi/frontend/pages/commits.php" class="btn btn-uam mb-3 w-100">Registro de Cambios</a>
+                    <?php endif; ?>
                 </div>
             </div>
             <span id="github-version" class="position-absolute" style="bottom: 20px; right: 30px; color: var(--uam-yellow); font-weight: bold;">

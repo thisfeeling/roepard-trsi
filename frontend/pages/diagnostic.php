@@ -52,7 +52,7 @@ if (isset($_SESSION['user_id'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>verify</title>
-    <link rel="website icon" type="png" href="/trsi/assets/logo.png">
+    <link rel="website icon" type="png" href="/trsi/frontend/site/assets/logo.png">
     <!-- Bootstrap 5 CSS -->
     <link href="/trsi/frontend/dist/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
     <!-- Sweetalert2 CSS -->
@@ -65,59 +65,38 @@ if (isset($_SESSION['user_id'])) {
     <link rel="stylesheet" href="/trsi/frontend/css/variables.css" />
     <link rel="stylesheet" href="/trsi/frontend/css/style.css" />
 </head>
-<body>
+<body class="bg-white text-light">
     <!-- Navbar -->
     <?php include __DIR__ . '/../../frontend/components/navbar.php'; ?>
 
-    <h2>Estado del Sistema TRSI</h2>
-
-    <div class="card">
-        <p>🗄️ Base de Datos: 
-            <span class="status <?= $db_status ? 'online' : 'offline' ?>">
-                <?= $db_status ? 'Conectada' : 'Desconectada' ?>
-            </span>
-        </p>
+    <div class="container d-flex flex-column align-items-center justify-content-center" style="min-height: 90vh;">
+        <div class="uam-bar-commits w-100" style="max-width: 700px;">
+            <h2 class="text-center" style="color: var(--uam-yellow); font-weight: bold;">Verificar Conexiones</h2>
+            
+            <div class="d-flex flex-column align-items-center gap-3 mt-4">
+                <button id="btn-db" class="btn btn-uam w-100" style="max-width: 350px;">Verificar Base de datos</button>
+                <div id="db-result" class="mt-2 mb-3" style="font-size: 1.3rem; font-weight: bold;"></div>
+                
+                <button id="btn-jetson" class="btn btn-uam w-100" style="max-width: 350px;">Verificar Dispositivo</button>
+                <div id="jetson-result" class="mt-2 mb-3" style="font-size: 1.3rem; font-weight: bold;"></div>
+            </div>
+            
+            <div class="mt-4">
+                <a href="/trsi/frontend/pages/services.php" class="btn btn-uam" style="font-size: 1.2rem; border-radius: 15px; width: 150px;">Regresar</a>
+            </div>
+        </div>
     </div>
 
-    <div class="card">
-        <p>🤖 Jetson Nano (<?= $jetson_ip ?>): 
-            <span class="status <?= $jetson_status ? 'online' : 'offline' ?>">
-                <?= $jetson_status ? 'Disponible' : 'Sin respuesta' ?>
-            </span>
-        </p>
-    </div>
-
-    <div class="card">
-        <p>👤 Usuario actual: 
-            <span class="status">
-                <?php
-                if ($user_status && isset($user['username'])) {
-                    echo htmlspecialchars($user['username']) . " (" . htmlspecialchars($role) . ")";
-                } else {
-                    echo 'No autenticado';
-                }
-                ?>
-            </span>
-        </p>
-    </div>
-
-    <!-- jQuery -->
+    <!-- Scripts igual que antes -->
     <script src="/trsi/frontend/dist/jquery/js/jquery.min.js"></script>
-    <!-- Bootstrap JS Bundle -->
     <script src="/trsi/frontend/dist/bootstrap/js/bootstrap.bundle.js"></script>
-    <!-- Chart.js -->
     <script src="/trsi/frontend/dist/chart/js/chart.umd.min.js"></script>
-    <!-- FontAwesome -->
     <script src="/trsi/frontend/dist/fontawesome/js/all.min.js"></script>
-    <!-- DataTables JS -->
     <script src="/trsi/frontend/dist/datatables/js/jquery.dataTables.min.js"></script>
     <script src="/trsi/frontend/dist/datatables/js/dataTables.bootstrap5.min.js"></script>
-    <!-- Momento JS -->
     <script src="/trsi/frontend/dist/moment/js/moment.js"></script>
     <script src="/trsi/frontend/dist/moment/js/moment-timezone-with-data.js"></script>
-    <!-- Sweetalert2 JS -->
     <script src="/trsi/frontend/dist/sweetalert2/js/sweetalert2.all.min.js"></script>
-    <!-- JS personalizado -->
     <script src="/trsi/frontend/js/diagnostic.js"></script>
 </body>
 </html>

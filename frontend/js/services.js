@@ -1,8 +1,7 @@
-
 async function mostrarVersionGitHub() {
     const tagUrl = "https://api.github.com/repos/thisfeeling/roepard-trsi/tags";
     const commitUrl = "https://api.github.com/repos/thisfeeling/roepard-trsi/commits/main";
-    let version = "Rev-";
+    let version = "";
     try {
         // Primero intenta obtener el último tag
         const tagResp = await fetch(tagUrl);
@@ -20,4 +19,5 @@ async function mostrarVersionGitHub() {
     }
     document.getElementById("github-version").textContent = version;
 }
+
 mostrarVersionGitHub();

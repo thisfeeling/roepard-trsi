@@ -20,17 +20,18 @@
     <link rel="stylesheet" href="/trsi/frontend/css/style.css" />
 </head>
 
-<body class="bg-dark text-light">
+<body class="bg-white text-light">
 
     <!-- Navbar -->
     <?php include __DIR__ . '/../../frontend/components/navbar.php'; ?>
 
-    <div class="container my-5">
-        <h2 class="text-center text-white mb-4">Commits recientes</h2>
+    <div class="uam-bar-commits my-5 mx-auto p-4">
+        <h2 class="text-center mb-4" style="font-size: 2rem; font-weight: bold; color: var(--uam-yellow);">Registros de cambios</h2>
         <div class="table-responsive">
             <table id="tablaCommits" class="table table-striped table-bordered table-hover text-white">
                 <thead>
                     <tr>
+                        <th>ID</th>
                         <th>Mensaje</th>
                         <th>Autor</th>
                         <th>Fecha</th>
@@ -39,6 +40,14 @@
                 </thead>
                 <tbody></tbody>
             </table>
+        </div>
+        <!-- Botón Regresar dentro del panel -->
+        <div class="d-flex justify-content-start mt-4">
+            <a href="/trsi/frontend/pages/services.php"
+               class="btn btn-uam d-flex align-items-center justify-content-center"
+               style="font-size: 1.4rem; font-weight: bold; border-radius: 15px; width: 150px; height: 50px; padding: 0;">
+                Regresar
+            </a>
         </div>
     </div>
 

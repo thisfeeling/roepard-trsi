@@ -6,6 +6,7 @@ $(document).ready(function () {
 
   $.getJSON(apiUrl, function (data) {
     const rows = data.map(commit => [
+      commit.sha.substring(0, 7), // ID corto del commit
       commit.commit.message,
       commit.commit.author.name,
       new Date(commit.commit.author.date).toLocaleString(),
@@ -15,6 +16,7 @@ $(document).ready(function () {
     $('#tablaCommits').DataTable({
       data: rows,
       columns: [
+        { title: "ID" },
         { title: "Mensaje" },
         { title: "Autor" },
         { title: "Fecha" },

@@ -1,28 +1,27 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Page Not Found - TRSI</title>
+    <title>Page Not Found</title>
 </head>
 
-<body>
-    <section><a id="Page_Not_Found"></a>
-        <h1>Page Not Found</h1>
-
-
-        <p>We're sorry, but the page you requested cannot be found. This may be because:</p>
-
-        <ul>
-
-            <li>The page has moved, was outdated, or has not been created yet</li>
-
-            <li>You typed the address incorrectly</li>
-
-            <li>You followed a link from another site that pointed to this page.</li>
+<body theme-404>
+    <!-- Navbar -->
+    <?php include './frontend/components/navbar.php'; ?>
+    <section class="d-flex flex-column justify-content-center align-items-center" style="min-height: 80vh;">
+        <h1 style="font-size: 3rem; font-weight: bold; color: var(--uam-blue);">404 - Página no encontrada</h1>
+        <p class="mt-3" style="font-size: 1.2rem; color: var(--uam-gray); max-width: 600px; text-align: center;">
+            Lo sentimos, pero la página que solicitaste no existe.<br>
+            Esto puede deberse a que:
+        </p>
+        <ul style="color: var(--uam-black); font-size: 1.1rem; max-width: 500px;">
+            <li>La página fue movida, está desactualizada o aún no ha sido creada.</li>
+            <li>Escribiste mal la dirección.</li>
+            <li>Seguiste un enlace que ya no es válido.</li>
         </ul>
-        
+        <a href="/trsi/index.php" class="btn btn-uam mt-4">Volver al inicio</a>
     </section>
 </body>
 

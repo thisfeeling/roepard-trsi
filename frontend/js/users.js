@@ -145,8 +145,8 @@ $(document).ready(function () {
             title: 'Actions',
             orderable: false,
             render: (data, type, row) => `
-              <button class="btn btn-info btn-sm" onclick="verDetallesUsuario(${row.user_id})">Detalles</button>
-              <button class="btn btn-danger btn-sm" onclick="eliminarUsuario(${row.user_id})">Eliminar</button>
+              <button class="btn btn-uam btn-sm me-2" onclick="verDetallesUsuario(${row.user_id})">Detalles</button>
+              <button class="btn btn-uam btn-sm" onclick="eliminarUsuario(${row.user_id})">Eliminar</button>
             `
           }
         ]
@@ -176,17 +176,22 @@ $(document).ready(function () {
   window.eliminarUsuario = function (user_id) {
     $('#confirmDeleteModal').modal('show');
     $('#confirmDeleteBtn').off('click').on('click', function () {
-      $.post('/trsi/backend/controllers/DelUserController.php', { user_id }, function (response) {
-        let result = JSON.parse(response);
-        if (result.success) {
-          showModal(result.success);
-          $('#confirmDeleteModal').modal('hide');
-          ListUsers();
-        } else {
-          showModal(result.error || "Error desconocido al eliminar el usuario.");
+      $.ajax({
+        url: '/trsi/backend/api/del_user.php',
+        method: 'POST',
+        data: { user_id: user_id },
+        success: function(response) {
+          if (response.success) {
+            showModal(response.message);
+            $('#confirmDeleteModal').modal('hide');
+            ListUsers();
+          } else {
+            showModal(response.message || "Error desconocido al eliminar el usuario.");
+          }
+        },
+        error: function(xhr, status, error) {
+          showModal("Error en la petición: " + error);
         }
-      }).fail(function () {
-        showModal("Error conectando con el servidor.");
       });
     });
   };

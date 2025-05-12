@@ -55,14 +55,13 @@ $(document).ready(function () {
         });
     });
 
-    let user_id = $("#UserUser_id").val();
-    // console.log("User ID:", user_id); // Verifica que el valor es correcto
-    if (!user_id) {
-        showModal("ID de usuario no válido.");
-        return; // Evita que el código continúe si no se tiene un `user_id`
-    }
-
     $("#btnDetailUser").on("click", function () {
+        // Intenta primero con la variable global, si no, busca el input
+        let user_id = window.USER_ID || $("#UserUser_id").val();
+        if (!user_id) {
+            showModal("ID de usuario no válido.");
+            return;
+        }
         $.ajax({
             url: '/trsi/backend/controllers/DetUserController.php',
             method: 'POST',

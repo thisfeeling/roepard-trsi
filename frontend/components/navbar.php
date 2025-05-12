@@ -40,7 +40,7 @@ if ($isServices) {
 } elseif ($isGraphs) {
     $pageName = 'Gráficas';
 } elseif ($isCommits) {
-    $pageName = 'Commits';
+    $pageName = 'Cambios';
 } elseif ($isUsers) {
     $pageName = 'Administrar Usuarios';
 } elseif ($isUserpanel) {
@@ -71,9 +71,11 @@ if ($isServices) {
     <header>
         <div class="navbar-uam d-flex align-items-center px-3 py-1">
             <div class="uam-logo">
-                <img src="/trsi/frontend/site/assets/logo.png" alt="Logo UAM" style="height:80px;">
+                <a href="/trsi/index.php">
+                    <img src="/trsi/frontend/site/assets/logo.png" alt="Logo UAM" style="height:80px;">
+                </a>
             </div>
-            <span class="uam-title">Monitoring Station</span>
+            <span class="uam-title">Estación de Monitoreo</span>
         </div>
 
         <div class="container-fluid">

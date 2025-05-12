@@ -122,6 +122,9 @@ footer {
     margin-bottom: 10px;
     transition: background 0.2s, color 0.2s;
     box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 .btn-uam:hover, .btn-uam:focus {
     background: #ffe066;
@@ -130,4 +133,32 @@ footer {
 }
 .panel-usuario {
     box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+}
+
+/* Centrado y tema claro para la página 404 */
+body[theme-404] {
+    background: var(--uam-white) !important;
+    color: var(--uam-blue) !important;
+}
+
+.uam-logo a {
+    display: inline-block;
+}
+.uam-logo img {
+    cursor: pointer;
+}
+
+.uam-bar-commits {
+    background: var(--uam-blue);
+    border-radius: 18px;
+    max-width: 1100px;
+    margin-top: 40px;
+    margin-bottom: 40px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+    padding: 30px 30px 30px 30px;
+}
+
+.user-card {
+    box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+    border-radius: 16px;
 }

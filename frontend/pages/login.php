@@ -103,8 +103,6 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
                             <!-- Submit -->
                             <div class="d-grid" >
                                 <button style="background-color: var(--uam-yellow); color: var(--uam-blue);" type="submit" class="btn btn-primary custom-button">Sign In</button>
-                                <small style="color: var(--uam-black);" class="text-body-secondary my-2">By clicking Sign In, you agree to the terms of
-                                    use.</small>
                             </div>
                         </form>
                     </div>
