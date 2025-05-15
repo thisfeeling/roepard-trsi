@@ -27,7 +27,7 @@ function LoginUser(username, password) {
     }
 
     $.ajax({
-        url: '/trsi/backend/api/auth.php',
+        url: '/trsi/backend/api/auth_user.php',
         method: 'POST',
         data: { username: username, password: password },
         dataType: 'json',

@@ -143,7 +143,7 @@ $(document).ready(function () {
         method: 'GET'
       });
       const json = await response.json();
-      // console.log(json);
+      // console.log(json); // Agrega esta línea para depurar
       $('#tablaUsuarios').DataTable({
         destroy: true,
         data: json.data,
@@ -173,7 +173,6 @@ $(document).ready(function () {
       console.error(err);
       showModal('Error al obtener los usuarios: ' + err.message);
     }
-
   }
 
   // Ver detalles del usuario
@@ -208,6 +207,7 @@ $(document).ready(function () {
         data: { user_id: user_id },
         dataType: 'json',
         success: function(response) {
+          // console.log(response); // Verifica la respuesta del servidor
           if (response.status === "success") {
             showModal(response.message);
             $('#confirmDeleteModal').modal('hide');
@@ -243,7 +243,7 @@ $(document).ready(function () {
     }
 
     $.ajax({
-        url: '/trsi/backend/api/cr_user.php', // Cambiado a la ruta correcta
+        url: '/trsi/backend/api/cr_user.php', // Cambiado a la ruta correcta con router
         method: 'POST',
         data: formData,
         processData: false,
@@ -418,5 +418,10 @@ $(document).ready(function () {
 
   // Inicializar
   ListUsers();
+
+  // Agregar evento al botón de recarga
+  $("#btnRecargarUsuarios").on("click", function () {
+    ListUsers(); // Llama a la función para recargar la lista de usuarios
+  });
 
 });

@@ -8,11 +8,14 @@ if (session_status() === PHP_SESSION_NONE) {
 $currentFile = basename($_SERVER['PHP_SELF']);
 $isLogin = ($currentFile === 'login.php');
 $isServices = ($currentFile === 'services.php');
-$isGraphs = ($currentFile === 'graphs.php');
 $isCommits = ($currentFile === 'commits.php');
 $isUsers = ($currentFile === 'users.php');
 $isUserpanel = ($currentFile === 'user-panel.php');
 $isVerify = ($currentFile === 'diagnostic.php');
+$isFirstArea = ($currentFile === 'first-area.php');
+$isSecondBar = ($currentFile === 'second-bar.php');
+$isThirdBar = ($currentFile === 'third-bar.php');
+$isFourthBarLine = ($currentFile === 'fourth-bar-line.php');
 
 // Variables globales
 $loggedIn = isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true;
@@ -37,8 +40,6 @@ if ($loggedIn && $currentFile === 'login.php') {
 $pageName = '';
 if ($isServices) {
     $pageName = 'Home';
-} elseif ($isGraphs) {
-    $pageName = 'Gráficas';
 } elseif ($isCommits) {
     $pageName = 'Cambios';
 } elseif ($isUsers) {
@@ -47,6 +48,14 @@ if ($isServices) {
     $pageName = 'Panel de Usuario';
 } elseif ($isVerify) {
     $pageName = 'Diagnóstico';
+} elseif ($isFirstArea) {
+    $pageName = 'Gráficas';
+} elseif ($isSecondBar) {
+    $pageName = 'Gráficas';
+} elseif ($isThirdBar) {
+    $pageName = 'Gráficas';    
+} elseif ($isFourthBarLine) {
+    $pageName = 'Gráficas';      
 } else {
     $pageName = '';
 }

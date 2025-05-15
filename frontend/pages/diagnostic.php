@@ -48,6 +48,7 @@ if (isset($_SESSION['user_id'])) {
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -65,6 +66,7 @@ if (isset($_SESSION['user_id'])) {
     <link rel="stylesheet" href="/trsi/frontend/css/variables.css" />
     <link rel="stylesheet" href="/trsi/frontend/css/style.css" />
 </head>
+
 <body class="bg-white text-light">
     <!-- Navbar -->
     <?php include __DIR__ . '/../../frontend/components/navbar.php'; ?>
@@ -72,22 +74,23 @@ if (isset($_SESSION['user_id'])) {
     <div class="container d-flex flex-column align-items-center justify-content-center" style="min-height: 90vh;">
         <div class="uam-bar-commits w-100" style="max-width: 700px;">
             <h2 class="text-center" style="color: var(--uam-yellow); font-weight: bold;">Verificar Conexiones</h2>
-            
+
             <div class="d-flex flex-column align-items-center gap-3 mt-4">
                 <button id="btn-db" class="btn btn-uam w-100" style="max-width: 350px;">Verificar Base de datos</button>
                 <div id="db-result" class="mt-2 mb-3" style="font-size: 1.3rem; font-weight: bold;"></div>
-                
-                <button id="btn-jetson" class="btn btn-uam w-100" style="max-width: 350px;">Verificar Dispositivo</button>
+
+                <button id="btn-jetson" class="btn btn-uam w-100" style="max-width: 350px;">Verificar
+                    Dispositivo</button>
                 <div id="jetson-result" class="mt-2 mb-3" style="font-size: 1.3rem; font-weight: bold;"></div>
             </div>
-            
+
             <div class="mt-4">
-                <a href="/trsi/frontend/pages/services.php" class="btn btn-uam" style="font-size: 1.2rem; border-radius: 15px; width: 150px;">Regresar</a>
+                <a href="/trsi/frontend/pages/services.php" class="btn btn-uam"
+                    style="font-size: 1.2rem; border-radius: 15px; width: 150px;">Regresar</a>
             </div>
         </div>
     </div>
 
-    <!-- Scripts igual que antes -->
     <script src="/trsi/frontend/dist/jquery/js/jquery.min.js"></script>
     <script src="/trsi/frontend/dist/bootstrap/js/bootstrap.bundle.js"></script>
     <script src="/trsi/frontend/dist/chart/js/chart.umd.min.js"></script>
@@ -99,4 +102,5 @@ if (isset($_SESSION['user_id'])) {
     <script src="/trsi/frontend/dist/sweetalert2/js/sweetalert2.all.min.js"></script>
     <script src="/trsi/frontend/js/diagnostic.js"></script>
 </body>
+
 </html>

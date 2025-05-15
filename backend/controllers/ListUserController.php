@@ -2,10 +2,10 @@
 require_once __DIR__ . '/../services/UserListService.php';
 
 class ListUserController {
-    private $userService;
+    private $UserListService;
 
     public function __construct() {
-        $this->userService = new UserService();
+        $this->UserListService = new UserListService();
     }
 
     public function handleRequest() {
@@ -13,7 +13,7 @@ class ListUserController {
         
         if ($_SERVER['REQUEST_METHOD'] === 'GET') {
             try {
-                $users = $this->userService->listUsers();
+                $users = $this->UserListService->listUsers();
                 echo json_encode(['success' => true, 'data' => $users]);
             } catch (Exception $e) {
                 echo json_encode([

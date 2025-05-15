@@ -26,9 +26,9 @@ class DelUserController {
 
                 // Devuelve la respuesta en JSON según el resultado
                 if ($success) {
-                    echo json_encode(['success' => true, 'message' => 'Usuario eliminado']);
+                    echo json_encode(['status' => 'success', 'message' => 'Usuario eliminado']);
                 } else {
-                    echo json_encode(['success' => false, 'message' => 'No se pudo eliminar el usuario']);
+                    echo json_encode(['status' => 'error', 'message' => 'No se pudo eliminar el usuario']);
                 }
             } else {
                 // Si no se proporcionó un ID de usuario

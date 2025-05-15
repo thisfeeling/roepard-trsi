@@ -24,7 +24,6 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
         $email = $user['email'];
         $role_id = $user['role_id'];
         $status_id = $user['status_id'];
-        $name = $first_name . ' ' . $last_name;
         // se queda en services.php
     } else {
         // Si no se encuentra el usuario en la base de datos
@@ -54,45 +53,50 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
     <link rel="stylesheet" href="/trsi/frontend/css/variables.css">
 </head>
 
-<body style="background-color: var(--olive-green) !important;">
+<body style="background-color: var(--uam-white) !important;">
 
     <!-- Navbar -->
     <?php include __DIR__ . '/../../frontend/components/navbar.php'; ?>
 
     <!-- Contenido principal de la página -->
-    <main class="container-fluid d-flex flex-column align-items-center justify-content-center" style="min-height: 80vh;">
-        <div class="panel-usuario p-5" style="background: var(--uam-blue); border-radius: 24px; width: 90%; max-width: 1100px; margin-top: 30px; margin-bottom: 30px; position: relative;">
+    <main class="container-fluid d-flex flex-column align-items-center justify-content-center"
+        style="min-height: 80vh;">
+        <div class="panel-usuario p-5"
+            style="background: var(--uam-blue); border-radius: 24px; width: 90%; max-width: 1100px; margin-top: 30px; margin-bottom: 30px; position: relative;">
             <h2 class="text-center mb-4" style="color: var(--uam-yellow); font-size: 2.0rem; font-weight: bold;">
                 <?php echo ucfirst($rol_text ?? 'User'); ?> Panel
             </h2>
             <div class="row">
                 <!-- Columna de gráficas -->
                 <div class="col-md-6 d-flex flex-column align-items-center">
-                    <h4 class="mb-3" style="color: #fff; font-weight: bold;">Graph Options</h4>
-                    <a href="/trsi/frontend/pages/" class="btn btn-uam mb-3 w-100">Datos en Tiempo Real</a>
-                    <a href="/trsi/frontend/pages/" class="btn btn-uam mb-3 w-100">Gráficas de Potencia</a>
-                    <a href="/trsi/frontend/pages/" class="btn btn-uam mb-3 w-100">Gráficas de Conteo</a>
-                    <a href="/trsi/frontend/pages/" class="btn btn-uam mb-3 w-100">Comparativa</a>
+                    <h4 class="mb-3" style="color: #fff; font-weight: bold;">Opciones de Gráficas</h4>
+                    <a href="/trsi/frontend/pages/first-area.php" class="btn btn-uam mb-3 w-100">Datos en Tiempo Real</a>
+                    <a href="/trsi/frontend/pages/second-bar.php" class="btn btn-uam mb-3 w-100">Gráficas de Potencia</a>
+                    <a href="/trsi/frontend/pages/third-bar.php" class="btn btn-uam mb-3 w-100">Gráficas de Conteo</a>
+                    <a href="/trsi/frontend/pages/fourth-bar-line.php" class="btn btn-uam mb-3 w-100">Comparativa</a>
                 </div>
                 <!-- Columna de servicios -->
                 <div class="col-md-6 d-flex flex-column align-items-center">
-                    <h4 class="mb-3" style="color: #fff; font-weight: bold;">Services Options</h4>
+                    <h4 class="mb-3" style="color: #fff; font-weight: bold;">Opciones de Servicios</h4>
                     <?php if ($role_id == 2): // Admin ?>
-                        <a href="/trsi/frontend/pages/users.php" class="btn btn-uam mb-3 w-100">Adminstrador de Usuarios</a>
-                        <a href="/trsi/frontend/pages/user-panel.php" class="btn btn-uam mb-3 w-100">Panel de usuario</a>
-                        <a href="/trsi/frontend/pages/diagnostic.php" class="btn btn-uam mb-3 w-100">Verificar Conexiones</a>
-                        <a href="/trsi/frontend/pages/commits.php" class="btn btn-uam mb-3 w-100">Registro de Cambios</a>
+                    <a href="/trsi/frontend/pages/users.php" class="btn btn-uam mb-3 w-100">Adminstrador de Usuarios</a>
+                    <a href="/trsi/frontend/pages/user-panel.php" class="btn btn-uam mb-3 w-100">Panel de usuario</a>
+                    <a href="/trsi/frontend/pages/diagnostic.php" class="btn btn-uam mb-3 w-100">Verificar
+                        Conexiones</a>
+                    <a href="/trsi/frontend/pages/commits.php" class="btn btn-uam mb-3 w-100">Registro de Cambios</a>
                     <?php elseif ($role_id == 3): // Supervisor ?>
-                        <a href="/trsi/frontend/pages/user-panel.php" class="btn btn-uam mb-3 w-100">Panel de usuario</a>
-                        <a href="/trsi/frontend/pages/diagnostic.php" class="btn btn-uam mb-3 w-100">Verificar Conexiones</a>
-                        <a href="/trsi/frontend/pages/commits.php" class="btn btn-uam mb-3 w-100">Registro de Cambios</a>
+                    <a href="/trsi/frontend/pages/user-panel.php" class="btn btn-uam mb-3 w-100">Panel de usuario</a>
+                    <a href="/trsi/frontend/pages/diagnostic.php" class="btn btn-uam mb-3 w-100">Verificar
+                        Conexiones</a>
+                    <a href="/trsi/frontend/pages/commits.php" class="btn btn-uam mb-3 w-100">Registro de Cambios</a>
                     <?php else: // Usuario ?>
-                        <a href="/trsi/frontend/pages/user-panel.php" class="btn btn-uam mb-3 w-100">Panel de usuario</a>
-                        <a href="/trsi/frontend/pages/commits.php" class="btn btn-uam mb-3 w-100">Registro de Cambios</a>
+                    <a href="/trsi/frontend/pages/user-panel.php" class="btn btn-uam mb-3 w-100">Panel de usuario</a>
+                    <a href="/trsi/frontend/pages/commits.php" class="btn btn-uam mb-3 w-100">Registro de Cambios</a>
                     <?php endif; ?>
                 </div>
             </div>
-            <span id="github-version" class="position-absolute" style="bottom: 20px; right: 30px; color: var(--uam-yellow); font-weight: bold;">
+            <span id="github-version" class="position-absolute"
+                style="bottom: 20px; right: 30px; color: var(--uam-yellow); font-weight: bold;">
                 Rev-cargando...
             </span>
         </div>

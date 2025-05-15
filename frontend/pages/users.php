@@ -68,7 +68,7 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
     <link rel="stylesheet" href="/trsi/frontend/css/variables.css" />
     <link rel="stylesheet" href="/trsi/frontend/css/style.css" />
     <!-- CSS de intl-tel-input -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/18.1.1/css/intlTelInput.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/18.1.1/css/intlTelInput.css" />
 </head>
 
 <body class="bg-white text-light">
@@ -76,8 +76,10 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
     <!-- Navbar -->
     <?php include __DIR__ . '/../../frontend/components/navbar.php'; ?>
 
-    <main class="container-fluid d-flex flex-column align-items-center justify-content-center" style="min-height: 80vh;">
-        <div class="uam-bar-commits my-5 mx-auto p-4 d-flex flex-column align-items-center" style="background: var(--uam-blue); border-radius: 18px; max-width: 1200px;">
+    <main class="container-fluid d-flex flex-column align-items-center justify-content-center"
+        style="min-height: 80vh;">
+        <div class="uam-bar-commits my-5 mx-auto p-4 d-flex flex-column align-items-center"
+            style="background: var(--uam-blue); border-radius: 18px; max-width: 1200px;">
             <h2 class="text-center mb-4" style="color: var(--uam-yellow); font-size: 2.5rem; font-weight: bold;">
                 Users Administration
             </h2>
@@ -105,16 +107,19 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
             </div>
             <div class="d-flex justify-content-between w-100" style="max-width: 1100px;">
                 <a href="/trsi/frontend/pages/services.php"
-                   class="btn btn-uam d-flex align-items-center justify-content-center"
-                   style="font-size: 1.4rem; font-weight: bold; border-radius: 15px; width: 180px; height: 50px; padding: 0;">
+                    class="btn btn-uam d-flex align-items-center justify-content-center"
+                    style="font-size: 1.4rem; font-weight: bold; border-radius: 15px; width: 180px; height: 50px; padding: 0;">
                     Regresar
                 </a>
-                <button type="button"
-                        class="btn btn-uam d-flex align-items-center justify-content-center"
-                        data-bs-toggle="modal"
-                        data-bs-target="#crearUsuarioModal"
-                        style="font-size: 1.4rem; font-weight: bold; border-radius: 15px; width: 220px; height: 50px; padding: 0;">
-                    Create New User
+                <button type="button" class="btn btn-uam d-flex align-items-center justify-content-center"
+                    style="font-size: 1.4rem; font-weight: bold; border-radius: 15px; width: 220px; height: 50px; padding: 0;"
+                    id="btnRecargarUsuarios">
+                    Recargar Lista
+                </button>
+                <button type="button" class="btn btn-uam d-flex align-items-center justify-content-center"
+                    data-bs-toggle="modal" data-bs-target="#crearUsuarioModal"
+                    style="font-size: 1.4rem; font-weight: bold; border-radius: 15px; width: 220px; height: 50px; padding: 0;">
+                    Crear nuevo usuario
                 </button>
             </div>
         </div>
@@ -169,10 +174,8 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
                         <input type="hidden" name="admin_edit" value="1">
                         <div class="form-group" id="currentPasswordGroup">
                             <label for="modalUserCurrentPassword">Contraseña actual</label>
-                            <input type="password" id="modalUserCurrentPassword" name="current_password" class="form-control">
-                            <script>
-                                var IS_ADMIN = <?php echo json_encode($isAdmin); ?>;
-                            </script>
+                            <input type="password" id="modalUserCurrentPassword" name="current_password"
+                                class="form-control">
                         </div>
                         <!-- Fila 1: 3 columnas -->
                         <div class="row">
@@ -205,7 +208,7 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
                                 <input type="email" class="form-control" id="modalUserEmail" name="email"
                                     placeholder="Enter an email" required autocomplete="off" />
                             </div>
-                            
+
                             <div class="col-md-4 mb-3">
                                 <div class="form-group">
                                     <label for="modalUserPhone">Teléfono</label>
@@ -267,7 +270,8 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
                             </div>
                             <div class="col-md-4 mb-3" id="ciudadOtroDiv" style="display:none;">
                                 <label for="modalUserCityOtro" class="form-label">Ciudad</label>
-                                <input type="text" class="form-control" id="modalUserCityOtro" name="city_otro" placeholder="Ingrese su ciudad" />
+                                <input type="text" class="form-control" id="modalUserCityOtro" name="city_otro"
+                                    placeholder="Ingrese su ciudad" />
                             </div>
                         </div>
 
@@ -297,8 +301,8 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary" id="btnUpdateUser">Save Changes</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                        <button type="button" class="btn btn-primary" id="btnUpdateUser">Guardar cambios</button>
                     </div>
                 </form>
             </div>
@@ -306,12 +310,12 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
     </div>
 
     <!-- Modal para crear usuario  -->
-    <div class="modal fade" id="crearUsuarioModal" tabindex="-1" aria-labelledby="crearUsuarioLabel"
-        aria-hidden="true" style="color: var(--uam-black);">
+    <div class="modal fade" id="crearUsuarioModal" tabindex="-1" aria-labelledby="crearUsuarioLabel" aria-hidden="true"
+        style="color: var(--uam-black);">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="crearUsuarioLabel">Create New User</h5>
+                    <h5 class="modal-title" id="crearUsuarioLabel">Crear nuevo usuario</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <form id="formCrearUsuario" enctype="multipart/form-data" method="post">
@@ -368,7 +372,7 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
                                 <label for="createUserCountry" class="form-label">País</label>
                                 <select class="form-select" id="createUserCountry" name="country" required>
                                     <option value="">Seleccione un país</option>
-                                    <option value="Colombia">Colombia</option>                                   
+                                    <option value="Colombia">Colombia</option>
                                 </select>
                             </div>
                             <div class="col-md-4 mb-3" id="CreateciudadColombiaDiv" style="display:none;">
@@ -410,10 +414,11 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
                             </div>
                             <div class="col-md-4 mb-3" id="CreateciudadOtroDiv" style="display:none;">
                                 <label for="CreateUserCityOtro" class="form-label">Ciudad</label>
-                                <input type="text" class="form-control" id="CreateUserCityOtro" name="city_otro" placeholder="Ingrese su ciudad" />
+                                <input type="text" class="form-control" id="CreateUserCityOtro" name="city_otro"
+                                    placeholder="Ingrese su ciudad" />
                             </div>
                         </div>
-                        
+
                         <!-- Fila 4: 3 columnas -->
                         <div class="row">
                             <div class="col-md-4 mb-3">
@@ -442,32 +447,32 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary" id="btnCrearUsuario">Create User</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                        <button type="button" class="btn btn-primary" id="btnCrearUsuario">Crear usuario</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
-</main>
+    </main>
 
-<!-- jQuery -->
-<script src="/trsi/frontend/dist/jquery/js/jquery.min.js"></script>
-<!-- Bootstrap JS Bundle -->
-<script src="/trsi/frontend/dist/bootstrap/js/bootstrap.bundle.js"></script>
-<!-- Chart.js -->
-<script src="/trsi/frontend/dist/chart/js/chart.umd.min.js"></script>
-<!-- FontAwesome -->
-<script src="/trsi/frontend/dist/fontawesome/js/all.min.js"></script>
-<!-- DataTables JS -->
-<script src="/trsi/frontend/dist/datatables/js/jquery.dataTables.min.js"></script>
-<script src="/trsi/frontend/dist/datatables/js/dataTables.bootstrap5.min.js"></script>
-<!-- JS personalizado -->
-<script src="/trsi/frontend/js/users.js"></script>
-<!-- JS de intl-tel-input -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/18.1.1/js/intlTelInput.min.js"></script>
-<!-- Utils para validación y formato -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/18.1.1/js/utils.js"></script>
+    <!-- jQuery -->
+    <script src="/trsi/frontend/dist/jquery/js/jquery.min.js"></script>
+    <!-- Bootstrap JS Bundle -->
+    <script src="/trsi/frontend/dist/bootstrap/js/bootstrap.bundle.js"></script>
+    <!-- Chart.js -->
+    <script src="/trsi/frontend/dist/chart/js/chart.umd.min.js"></script>
+    <!-- FontAwesome -->
+    <script src="/trsi/frontend/dist/fontawesome/js/all.min.js"></script>
+    <!-- DataTables JS -->
+    <script src="/trsi/frontend/dist/datatables/js/jquery.dataTables.min.js"></script>
+    <script src="/trsi/frontend/dist/datatables/js/dataTables.bootstrap5.min.js"></script>
+    <!-- JS personalizado -->
+    <script src="/trsi/frontend/js/users.js"></script>
+    <!-- JS de intl-tel-input -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/18.1.1/js/intlTelInput.min.js"></script>
+    <!-- Utils para validación y formato -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/18.1.1/js/utils.js"></script>
 </body>
 
 </html>
