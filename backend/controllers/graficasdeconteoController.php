@@ -19,8 +19,8 @@ try {
         $labels[] = date('H:i:s', strtotime($row['timestamp']));
         $fps[] = (float)$row['fps'];
         $people_count_5min[] = (int)$row['people_count_5min'];
-        $battery_percentage[] = (float)$row['battery_percentage']; // nombre corregido
-        $power_source[] = $row['power_source']; // string, no se castea
+        $battery_percentage[] = (float)$row['battery_percentage']; 
+        $power_source[] = $row['power_source']; // string
     }
 
     header('Content-Type: application/json');

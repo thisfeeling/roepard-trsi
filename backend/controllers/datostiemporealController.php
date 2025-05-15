@@ -33,8 +33,8 @@ try {
         $jetson_power[] = (float)$row['jetson_power'];
         $solar_radiation[] = (float)$row['solar_radiation'];
         $people_count_5min[] = (int)$row['people_count_5min'];
-        $battery_percentage[] = (float)$row['battery_percentage']; // nombre corregido
-        $power_source[] = $row['power_source']; // string, no se castea
+        $battery_percentage[] = (float)$row['battery_percentage']; 
+        $power_source[] = $row['power_source']; // string
     }
 
     header('Content-Type: application/json');

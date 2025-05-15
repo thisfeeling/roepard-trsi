@@ -24,7 +24,7 @@ try {
         $panel_current[] = (float)$row['panel_current'];
         $panel_power[] = (float)$row['panel_power'];
         $solar_radiation[] = (float)$row['solar_radiation'];
-        $battery_percentage[] = (float)$row['battery_percentage']; // nombre corregido
+        $battery_percentage[] = (float)$row['battery_percentage'];
     }
 
     header('Content-Type: application/json');

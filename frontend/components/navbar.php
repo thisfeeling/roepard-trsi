@@ -39,7 +39,7 @@ if ($loggedIn && $currentFile === 'login.php') {
 
 $pageName = '';
 if ($isServices) {
-    $pageName = 'Home';
+    $pageName = 'Inicio';
 } elseif ($isCommits) {
     $pageName = 'Cambios';
 } elseif ($isUsers) {

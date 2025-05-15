@@ -38,6 +38,5 @@ class DelUserController {
             // Si la petición no es POST, devuelve error
             echo json_encode(['success' => false, 'message' => 'Método no permitido']);
         }
-        // No pongas nada después para evitar romper el JSON
     }
 }

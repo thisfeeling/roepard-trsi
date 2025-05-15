@@ -1,7 +1,7 @@
 <?php
 require_once __DIR__ . '/../controllers/AuthController.php';
 
-// Verificar que sea una petición POST
+// POST
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     header('Content-Type: application/json');
     http_response_code(405);
@@ -12,7 +12,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     exit;
 }
 
-// Crear instancia del controlador y procesar la autenticación
+// Crear instancia del controlador 
 $authController = new AuthController();
 $authController->login();
 ?>

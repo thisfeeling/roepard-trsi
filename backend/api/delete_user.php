@@ -21,5 +21,4 @@ $controller = new DelUserController();
 // Llama al método que maneja la petición HTTP (POST) y responde en JSON
 $controller->handleRequest();
 
-// Nota: No pongas nada después de esto para evitar romper el formato JSON
 ?>
