@@ -65,6 +65,8 @@ if (isset($_SESSION['user_id'])) {
     <!-- Variables y estilos -->
     <link rel="stylesheet" href="/trsi/frontend/css/variables.css" />
     <link rel="stylesheet" href="/trsi/frontend/css/style.css" />
+     <!-- Icono -->
+    <link rel="icon" href="/trsi/favicon.ico" type="image/x-icon">
 </head>
 
 <body class="bg-white text-light">

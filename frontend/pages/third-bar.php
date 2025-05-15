@@ -51,6 +51,8 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
     <link rel="stylesheet" href="/trsi/frontend/dist/fontawesome/css/fontawesome.min.css">
     <!-- Styles -->
     <link rel="stylesheet" href="/trsi/frontend/css/style.css">
+    <!-- Icono -->
+    <link rel="icon" href="/trsi/favicon.ico" type="image/x-icon">
 </head>
 <body style="background-color: var(--uam-white) !important;">
 

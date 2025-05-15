@@ -59,6 +59,8 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
     <link rel="stylesheet" href="/trsi/frontend/css/style.css">
     <!-- CSS de intl-tel-input -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/18.1.1/css/intlTelInput.css" />
+    <!-- Icono -->
+    <link rel="icon" href="/trsi/favicon.ico" type="image/x-icon">
     <script>
     window.USER_ID = "<?php echo htmlspecialchars($user_id); ?>";
     </script>

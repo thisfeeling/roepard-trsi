@@ -81,10 +81,10 @@ if ($isServices) {
         <div class="navbar-uam d-flex align-items-center px-3 py-1">
             <div class="uam-logo">
                 <a href="/trsi/index.php">
-                    <img src="/trsi/frontend/site/assets/logo.png" alt="Logo UAM" style="height:80px;">
+                    <img src="/trsi/frontend/site/assets/logo.png" alt="Logo UAM" style="height: 80px; width: auto;">
                 </a>
             </div>
-            <span class="uam-title">Estación de Monitoreo</span>
+            <span class="uam-title" style="height: 40px; width: 600px;">Estación de Monitoreo</span>
         </div>
 
         <div class="container-fluid">

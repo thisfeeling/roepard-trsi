@@ -70,6 +70,13 @@ footer {
   color: var(--uam-yellow);
   margin-left: 20px;
 }
+
+@media (max-width: 600px) {
+  .uam-title{ 
+    font-size: 14px; 
+  }
+}
+
 .uam-bar {
   background-color: var(--uam-blue);
   color: var(--uam-yellow);
