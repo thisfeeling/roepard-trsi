@@ -1,9 +1,12 @@
 <?php
+// Requiere el servicio 
 require_once __DIR__ . '/../services/UserCrService.php';
 
+// Clase controlador
 class CrUserController {
     private $userService;
 
+    // Crea una instancia del servicio de usuario
     public function __construct() {
         $this->userService = new UserService();
     }

@@ -1,11 +1,11 @@
 <?php
-// Incluye el servicio que contiene la lógica de negocio para usuarios
+// Requiere el servicio 
 require_once __DIR__ . '/../services/UserDeleteService.php';
 
 class DelUserController {
     private $userService;
 
-    // Constructor: crea una instancia del servicio de usuario
+    // Crea una instancia del servicio de usuario
     public function __construct() {
         $this->userService = new UserService();
     }

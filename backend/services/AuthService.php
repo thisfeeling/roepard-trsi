@@ -1,6 +1,8 @@
 <?php
+// Requiere el modelo
 require_once __DIR__ . '/../models/UserAuth.php';
 
+// Clase AuthService
 class AuthService {
     private $userModel;
 
@@ -8,6 +10,7 @@ class AuthService {
         $this->userModel = new User();
     }
 
+    // Autentica un usuario
     public function authenticate($input, $password) {
         $user = $this->userModel->findByCredentials($input);
         

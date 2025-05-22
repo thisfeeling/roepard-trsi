@@ -1,9 +1,10 @@
 fetch("/trsi/backend/controllers/comparativaController.php")
 .then(response => response.json())
     .then(data => {
+        // Inicialización del gráfico de barras
         const ctx = document.getElementById('conteopersonasChart').getContext('2d');
-       new Chart(ctx, {
-            type: 'bar',
+        new Chart(ctx, {
+            type: 'bar', // Tipo de gráfico
             data: {
                 labels: data.labels,
                 datasets: [
@@ -44,9 +45,10 @@ fetch("/trsi/backend/controllers/comparativaController.php")
 fetch("/trsi/backend/controllers/comparativaController.php")
 .then(response => response.json())
     .then(data => {
+        // Inicialización del gráfico de barras
         const ctx = document.getElementById('potenciaconsumidaChart').getContext('2d');
         new Chart(ctx, {
-            type: 'line',
+            type: 'line', // Tipo de gráfico
             data: {
                 labels: data.labels,
                 datasets: [

@@ -1,14 +1,18 @@
 <?php
+// Requiere el conexion a la base de datos
 require_once __DIR__ . '/../core/DBConfig.php';
 
+// Clase UserList
 class User {
     private $db;
 
+    // Crea una nueva instancia
     public function __construct() {
         $auth = new DBConfig();
         $this->db = $auth->getConnection();
     }
 
+    // Obtiene todos los usuarios
     public function getAllUsers() {
         $stmt = $this->db->query("
             SELECT 

@@ -1,4 +1,5 @@
 <?php
+// Requiere el middleware de auth
 require_once __DIR__ . '/../middleware/auth.php';
 
 // Verifica que el usuario esté autenticado y tenga role_id = 1,2,3
@@ -13,11 +14,14 @@ if (!isset($_SESSION['user_id'])) {
     exit;
 }
 
+// Requiere el controllador para acceder a su clase
 require_once __DIR__ . '/../controllers/DetUserController.php';
 
+// Envía la respuesta en formato JSON
 header('Content-Type: application/json');
 
 try {
+    // Solo aceptar POST
     if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
         http_response_code(405);
         echo json_encode([
@@ -27,9 +31,12 @@ try {
         exit;
     }
 
+    // Crea una instancia del controlador
     $controller = new DetUserController();
+    // Llama al método que maneja la petición HTTP (POST) y responde en JSON
     $controller->getUserDetails();
 } catch (Throwable $e) {
+    // Envía la respuesta en formato JSON
     http_response_code(500);
     echo json_encode([
         'status' => 'error',

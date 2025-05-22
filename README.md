@@ -24,6 +24,15 @@ Está construido con las siguientes tecnologías:
 
 ---
 
+## 🛜 Creado y depurado en **Linux Ubuntu 22.04.5 LTS x86_64**
+
+- 👤 Kernel 5.15.0-140-generic
+- 🔐 Apache2 Apache/2.4.52 (Ubuntu)
+- 📊 MySQL 10.6.22-MariaDB-0ubuntu0.22.04.1
+- 📊 PHP 8.4.7 
+
+---
+
 ## 📁 Estructura del Proyecto
 
 ```

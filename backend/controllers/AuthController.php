@@ -1,11 +1,14 @@
 <?php
+// Requiere el servicio y el modelo
 require_once __DIR__ . '/../services/AuthService.php';
 require_once __DIR__ . '/../models/UserAuth.php';
 
+// Clase controlador
 class AuthController {
     private $authService;
     private $userModel;
-
+    
+    // Crea una instancia del servicio de usuario
     public function __construct() {
         $this->authService = new AuthService();
         $this->userModel = new User();

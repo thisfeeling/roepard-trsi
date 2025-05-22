@@ -18,6 +18,7 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
     $stmt->execute();
     // Si el usuario existe, obtenemos sus datos
     if ($stmt->rowCount() > 0) {
+        // Verifica el rol del usuario
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
         $first_name = $user['first_name'];
         $last_name = $user['last_name'];
@@ -25,7 +26,6 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
         $role_id = $user['role_id'];
         $status_id = $user['status_id'];
         $name = $first_name . ' ' . $last_name;
-        // Verifica el rol del usuario
         header('Location: /trsi/frontend/pages/services.php');
         exit();
     } else {
@@ -41,7 +41,7 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
 ?>
 
 <!doctype html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -52,11 +52,8 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
     <link rel="stylesheet" href="/trsi/frontend/dist/fontawesome/css/fontawesome.min.css">
     <!-- Styles -->
     <link rel="stylesheet" href="/trsi/frontend/css/style.css">
-    <!-- Icon of the page -->
     <!-- Manifest -->
     <link rel="manifest" href="/trsi/site.webmanifest">
-
-    <!-- Mobile & PWA support -->
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="application-name" content="trsi">
@@ -66,15 +63,12 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="msapplication-starturl" content="/index.php">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <!-- Íconos para PWA y dispositivos -->
     <link rel="icon" type="image/png" sizes="16x16" href="./favicon-16x16.png">
     <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png">
     <link rel="shortcut icon" href="./favicon.ico">
     <link rel="apple-touch-icon" sizes="32x32" href="./apple-touch-icon.png">
 </head>
 <body style="background-color: var(--olive-green) !important;">
-    
     <!-- Spinner de carga -->
     <main class="d-flex justify-content-center align-items-center vh-100">
         <div class="text-center">
@@ -88,7 +82,7 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
     <script>
         setTimeout(function () {
             window.location.href = "<?php echo htmlspecialchars($redirect_url); ?>";
-        }, 1000); // 1000 ms = 1 segundos
+        }, 1000);
     </script>
     <!-- jQuery -->
     <script src="/trsi/frontend/dist/jquery/js/jquery.min.js"></script>

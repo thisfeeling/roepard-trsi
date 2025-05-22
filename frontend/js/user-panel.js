@@ -1,16 +1,18 @@
 var iti;
 $(document).ready(function () {
+    // Inicialización del input para el teléfono con el plugin intlTelInput
     var input = document.querySelector("#modalUserPhone");
     iti = window.intlTelInput(input, {
-        initialCountry: "auto",
+        initialCountry: "auto", // País por defecto
         nationalMode: false, // Siempre incluye el prefijo
         utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/18.1.1/js/utils.js"
     });
 
+    // Manejo del clic en el botón de actualización de usuario
     $("#btnUpdateUser").on("click", function (e) {
-        e.preventDefault();
-        let form = $('#formUpdateUsuario')[0];
-        let formData = new FormData(form);
+        e.preventDefault(); // Prevenir el comportamiento por defecto del formulario
+        let form = $('#formUpdateUsuario')[0]; // Obtener el formulario
+        let formData = new FormData(form); // Crear un objeto FormData para enviar los datos
     
         // Validación extra en el frontend (opcional)
         if (!formData.get('current_password')) {
@@ -21,21 +23,22 @@ $(document).ready(function () {
         // Usa el valor internacional del plugin
         let fullPhone = iti.getNumber();
         formData.set('phone', fullPhone);
-    
+
+        // Enviar datos de actualización al servidor
         $.ajax({
-            url: '/trsi/backend/api/up_user.php',
-            method: 'POST',
-            data: formData,
-            processData: false,
-            contentType: false,
-            dataType: 'json',
+            url: '/trsi/backend/api/up_user.php',  // URL del API
+            method: 'POST', // Método HTTP para la petición
+            data: formData, // Datos a enviar en la petición
+            processData: false, // No procesar los datos como datos de formulario
+            contentType: false, // No establecer el tipo de contenido como formulario
+            dataType: 'json', // Tipo de dato esperado en la respuesta
             success: function (response) {
                 if (response.status === "success") {
-                    showModal(response.message);
-                    $('#detalleUsuarioModal').modal('hide');
-                    $('.modal-backdrop').remove();
-                    document.body.classList.remove('modal-open');
-                    document.body.style.removeProperty('padding-right');
+                    showModal(response.message); // Mostrar mensaje de éxito    
+                    $('#detalleUsuarioModal').modal('hide'); // Cerrar el modal de detalles
+                    $('.modal-backdrop').remove(); // Eliminar el fondo modal
+                    document.body.classList.remove('modal-open'); // Eliminar la clase modal-open
+                    document.body.style.removeProperty('padding-right'); // Eliminar el padding derecho
                     // Limpiar campos de contraseña
                     $('#modalUserCurrentPassword').val('');
                     $('#modalUserPassword').val('');
@@ -50,10 +53,10 @@ $(document).ready(function () {
                     $("#userBirthdateCard").text($("#modalUserBirthdate").val());
                     $("#userStatusCard").text($("#modalUserStatus").val());
                     $("#userRoleCard").text($("#modalUserRole").val());
-                    // Si quieres actualizar la imagen de perfil:
+                    // Actualizar la imagen de perfil
                     let newProfilePicture = $("#modalUserExistingPicture").val();
                     if (newProfilePicture) {
-                        // Si el usuario subió una nueva imagen, puedes forzar la recarga de la imagen
+                        // Si el usuario subió una nueva imagen, se puede forzar la recarga de la imagen
                         // (esto solo funciona si el input es tipo file y el backend devuelve el nombre del archivo)
                         $("#userProfilePictureCard").attr("src", "/trsi/uploads/" + newProfilePicture + "?" + new Date().getTime());
                     }
@@ -81,14 +84,16 @@ $(document).ready(function () {
             }
         });
     });
-
+    // Manejo del clic en el botón de detalles del usuario
     $("#btnDetailUser").on("click", function () {
-        // Intenta primero con la variable global, si no, busca el input
+
+        // Obtener el ID del usuario
         let user_id = window.USER_ID || $("#UserUser_id").val();
         if (!user_id) {
-            showModal("ID de usuario no válido.");
+            showModal("ID de usuario no válido."); // Mensaje de error
             return;
         }
+        // Enviar solicitud para obtener detalles del usuario
         $.ajax({
             url: '/trsi/backend/api/det_user.php',
             method: 'POST',
@@ -96,7 +101,7 @@ $(document).ready(function () {
             dataType: 'json',
             success: function (response) {
                 if (response.status === "success") {
-                    let user = response.data;
+                    let user = response.data; // Obtener datos del usuario
                     // Verifica la existencia de los elementos antes de manipularlos
                     if ($("#modalUserUser_id").length) {
                         $("#modalUserUser_id").val(user_id);

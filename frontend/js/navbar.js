@@ -1,4 +1,5 @@
 function mostrarHoraColombia() {
+    // Obtener la hora actual en Colombia
     const horaColombia = moment().tz("America/Bogota").format("HH:mm:ss YYYY-MM-DD Z");
     document.getElementById("uam-date").textContent = horaColombia;
   }
@@ -10,9 +11,11 @@ function mostrarHoraColombia() {
   setInterval(mostrarHoraColombia, 1000);
 
   $(document).ready(function() {
+    // Manejo del clic en el botón de logout
     $('#logout-button').on('click', function(e) {
         e.preventDefault(); // Previene el comportamiento por defecto del enlace o botón
 
+        // Enviar petición AJAX para cerrar sesión
         $.ajax({
             url: '/trsi/backend/api/logout.php',
             method: 'POST',

@@ -1,6 +1,7 @@
 fetch("/trsi/backend/controllers/datostiemporealController.php")
-    .then(response => response.json())
+    .then(response => response.json()) // Convertir la respuesta a JSON
     .then(data => {
+        // Mapeo de fuentes de energía a valores numéricos
         const powerSourceMap = {
             "solar": 1,
             "battery": 2,
@@ -8,24 +9,26 @@ fetch("/trsi/backend/controllers/datostiemporealController.php")
         };
 
         const power_source_numeric = data.power_source.map(
-            value => powerSourceMap[value] || 0
+            value => powerSourceMap[value] || 0 // Asignar valor numérico o 0 si no está definido
         );
 
+        // Inicialización del gráfico de líneas
         const ctx = document.getElementById('datosentiemporealChart').getContext('2d');
         new Chart(ctx, {
-            type: 'line',
+            type: 'line', // Tipo de gráfico
             data: {
-                labels: data.labels,
+                labels: data.labels, // Etiquetas del eje X
                 datasets: [
                     {
-                        label: 'FPS',
-                        data: data.fps,
-                        borderColor: 'rgba(54, 162, 235, 1)',
-                        backgroundColor: 'rgba(54, 162, 235, 0.2)',
-                        borderWidth: 2,
-                        fill: false,
-                        tension: 0.3
+                        label: 'FPS', // Etiqueta del conjunto de datos
+                        data: data.fps, // Datos para el gráfico
+                        borderColor: 'rgba(54, 162, 235, 1)', // Color de la línea
+                        backgroundColor: 'rgba(54, 162, 235, 0.2)', // Color de fondo
+                        borderWidth: 2, // Ancho de la línea
+                        fill: false, // No llenar el área bajo la línea
+                        tension: 0.3 // Curvatura de la línea
                     },
+                    // Otros conjuntos de datos para diferentes métricas
                     {
                         label: 'Personas contadas en 5 minutos',
                         data: data.people_count_5min,
@@ -92,29 +95,30 @@ fetch("/trsi/backend/controllers/datostiemporealController.php")
                 ]
             },
             options: {
-                responsive: true,
-                maintainAspectRatio: false,
+                responsive: true, // Hacer que el gráfico sea responsivo
+                maintainAspectRatio: false, // No mantener la relación de aspecto
                 scales: {
                     x: {
                         title: {
                             display: true,
-                            text: 'Hora'
+                            text: 'Hora' // Título del eje X
                         }
                     },
                     y: {
-                        beginAtZero: true,
+                        beginAtZero: true, // Comenzar el eje Y en cero
                         title: {
                             display: true,
-                            text: 'Valores'
+                            text: 'Valores' // Título del eje Y
                         },
                         ticks: {
                             callback: function (value) {
+                                // Personalizar etiquetas del eje Y
                                 const labels = {
                                     1: "Solar",
                                     2: "Batería",
                                     3: "Externa"
                                 };
-                                return labels[value] || value;
+                                return labels[value] || value; // Retornar etiqueta personalizada o valor
                             }
                         }
                     }
@@ -122,4 +126,4 @@ fetch("/trsi/backend/controllers/datostiemporealController.php")
             }
         });
     })
-    .catch(error => console.error("Error cargando los datos:", error));
+    .catch(error => console.error("Error cargando los datos:", error)); // Manejo de errores en la carga de datos

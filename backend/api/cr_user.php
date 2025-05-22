@@ -1,4 +1,5 @@
 <?php
+// Requiere el middleware de auth
 require_once __DIR__ . '/../middleware/auth.php';
 
 // Verifica que el usuario esté autenticado y tenga role_id = 2
@@ -13,6 +14,7 @@ if (!isset($_SESSION['user_id'])) {
     exit;
 }
 
+// Requiere el controllador para acceder a su clase
 require_once __DIR__ . '/../controllers/CrUserController.php';
 
 // Solo aceptar POST
@@ -26,6 +28,8 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     exit;
 }
 
+// Crear instancia del controlador 
 $controller = new CrUserController();
+// Llama al método que maneja la petición HTTP (POST) y responde en JSON
 $controller->createUser();
 ?>

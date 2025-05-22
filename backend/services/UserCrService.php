@@ -1,6 +1,8 @@
 <?php
+// Requiere el modelo
 require_once __DIR__ . '/../models/UserCr.php';
 
+// Clase UserService
 class UserService {
     private $userModel;
 
@@ -8,6 +10,7 @@ class UserService {
         $this->userModel = new User();
     }
 
+    // Crea un nuevo usuario
     public function createUser($userData) {
         // Validaciones básicas
         foreach (['first_name', 'last_name', 'username', 'email', 'phone', 'password', 'country', 'city', 'birthdate', 'status_id', 'role_id'] as $field) {

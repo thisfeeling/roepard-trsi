@@ -1,7 +1,8 @@
 <?php
+// Requiere el controllador para acceder a su clase
 require_once __DIR__ . '/../controllers/AuthController.php';
 
-// POST
+// Solo aceptar POST
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     header('Content-Type: application/json');
     http_response_code(405);
@@ -14,5 +15,6 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 
 // Crear instancia del controlador 
 $authController = new AuthController();
+// Llama al método que maneja la petición HTTP (POST) y responde en JSON
 $authController->login();
 ?>

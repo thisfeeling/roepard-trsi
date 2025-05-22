@@ -1,7 +1,5 @@
 <?php
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
+// Requiere el middleware de auth
 require_once __DIR__ . '/../middleware/auth.php';
 
 // Verifica que el usuario esté autenticado y tenga role_id = 1,2,3
@@ -15,6 +13,7 @@ if (!isset($_SESSION['user_id'])) {
     echo json_encode(['error' => 'No autorizado']);
     exit;
 }
+// Requiere el controllador para acceder a su clase
 require_once __DIR__ . '/../controllers/UpUserController.php';
 
 // Verificar que sea una petición POST
@@ -27,6 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     exit;
 }
 
+// Verificar si el usuario es admin
 $is_admin = isset($_POST['is_admin']) && $_POST['is_admin'] == '1';
 
 if (!$is_admin) {
@@ -38,7 +38,7 @@ if (!$is_admin) {
         ]);
         exit;
     }
-    // OBTÉN EL USUARIO ANTES DE VALIDAR LA CONTRASEÑA
+    // Obtener el usuario antes de validar la contraseña
     require_once __DIR__ . '/../models/UserDetails.php';
     $userDetails = new UserDetails();
     $user = $userDetails->findById($_POST['user_id']);
@@ -54,8 +54,9 @@ if (!$is_admin) {
 }
 // Si es admin, NO valida la contraseña actual y sigue con la actualización
 
-// Crear instancia del controlador y procesar la actualización
+// Crea una instancia del controlador
 $controller = new UpUserController();
+// Llama al método que maneja la petición HTTP (POST) y responde en JSON
 $controller->updateUser();
 exit;
 ?>

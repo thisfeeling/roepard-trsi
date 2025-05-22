@@ -1,14 +1,18 @@
 <?php
+// Requiere el conexion a la base de datos
 require_once __DIR__ . '/../core/DBConfig.php';
 
+// Clase UserUpdate
 class UserUpdate {
     private $db;
 
+    // Crea una nueva instancia
     public function __construct() {
         $dbConfig = new DBConfig();
         $this->db = $dbConfig->getConnection();
     }
 
+    // Actualiza un usuario
     public function update($userData) {
         try {
             $sql = "UPDATE users SET 
@@ -48,7 +52,7 @@ class UserUpdate {
         }
     }
 
-    public function verifyCurrentPassword($userId, $currentPassword) {
+        public function verifyCurrentPassword($userId, $currentPassword) {
         $sql = "SELECT password FROM users WHERE user_id = :user_id";
         $stmt = $this->db->prepare($sql);
         $stmt->execute([':user_id' => $userId]);
@@ -57,6 +61,7 @@ class UserUpdate {
         return $user && password_verify($currentPassword, $user['password']);
     }
 
+    // Obtiene la contraseña actual del usuario
     public function getCurrentPassword($userId) {
         $sql = "SELECT password FROM users WHERE user_id = :user_id";
         $stmt = $this->db->prepare($sql);
@@ -66,6 +71,7 @@ class UserUpdate {
         return $user['password'];
     }
 
+    // Obtiene la foto de perfil del usuario
     public function getProfilePicture($userId) {
         $sql = "SELECT profile_picture FROM users WHERE user_id = :user_id";
         $stmt = $this->db->prepare($sql);
@@ -75,6 +81,7 @@ class UserUpdate {
         return $user['profile_picture'] ?? 'default-profile.png';
     }
 
+    // Busca un usuario por su ID
     public function findById($user_id) {
         $stmt = $this->db->prepare("SELECT * FROM users WHERE user_id = :user_id");
         $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);

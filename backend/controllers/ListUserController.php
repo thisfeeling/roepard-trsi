@@ -1,13 +1,17 @@
 <?php
+// Requiere el servicio
 require_once __DIR__ . '/../services/UserListService.php';
 
+// Clase controlador
 class ListUserController {
     private $UserListService;
 
+    // Crea una instancia del servicio de usuario
     public function __construct() {
         $this->UserListService = new UserListService();
     }
 
+    // Este método maneja la petición HTTP
     public function handleRequest() {
         header('Content-Type: application/json');
         
@@ -27,3 +31,4 @@ class ListUserController {
         }
     }
 }
+?>

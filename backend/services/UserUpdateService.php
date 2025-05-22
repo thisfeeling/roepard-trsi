@@ -1,14 +1,18 @@
 <?php
+// Requiere los modelos
 require_once __DIR__ . '/../models/UserUpdate.php';
 require_once __DIR__ . '/../models/UserDetails.php';
 
+// Clase UserService
 class UserService {
     private $userModel;
 
+    // Crea una nueva instancia
     public function __construct() {
         $this->userModel = new UserUpdate();
     }
 
+    // Actualiza un usuario
     public function updateUser($userData) {
         // Validar contraseña actual si no es admin
         if (!$userData['is_admin']) {
@@ -41,10 +45,12 @@ class UserService {
         ];
     }
 
+    // Obtiene la foto de perfil del usuario
     public function getCurrentProfilePicture($userId) {
         return $this->userModel->getProfilePicture($userId);
     }
 
+    // Obtiene un usuario por su ID
     public function getUserById($user_id) {
         $userDetails = new UserDetails();
         return $userDetails->findById($user_id);

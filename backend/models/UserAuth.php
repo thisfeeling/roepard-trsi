@@ -1,14 +1,18 @@
 <?php
+// Requiere el conexion a la base de datos
 require_once __DIR__ . '/../core/DBConfig.php';
 
+// Clase UserAuth
 class User {
     private $db;
 
+    // Crea una nueva instancia
     public function __construct() {
         $dbConfig = new DBConfig();
         $this->db = $dbConfig->getConnection();
     }
 
+    // Busca un usuario por credenciales
     public function findByCredentials($input) {
         try {
             if (filter_var($input, FILTER_VALIDATE_EMAIL)) {

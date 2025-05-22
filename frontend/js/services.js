@@ -1,4 +1,5 @@
 async function mostrarVersionGitHub() {
+    // URL de la API de GitHub para obtener el último tag y el último commit
     const tagUrl = "https://api.github.com/repos/thisfeeling/roepard-trsi/tags";
     const commitUrl = "https://api.github.com/repos/thisfeeling/roepard-trsi/commits/main";
     let version = "";
@@ -15,9 +16,9 @@ async function mostrarVersionGitHub() {
             version += "main-" + commit.sha.substring(0, 7);
         }
     } catch (e) {
-        version += "desconocido";
+        version += "desconocido"; // Manejo de errores
     }
-    document.getElementById("github-version").textContent = version;
+    document.getElementById("github-version").textContent = version; // Mostrar la versión en el DOM
 }
 
-mostrarVersionGitHub();
+mostrarVersionGitHub(); // Mostrar la versión en el DOM

@@ -1,5 +1,6 @@
 <?php
 
+// NO se utilizo en el proyecto.
 // Definición de controladores
 $router = new Router(); // Asegúrate de tener una clase Router definida
 

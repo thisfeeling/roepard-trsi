@@ -1,7 +1,10 @@
 <?php
+
+// Clase Auth del middleware
 class Auth {
     private static $db;
 
+    // Método para obtener la conexión a la base de datos
     private static function getDB() {
         if (!self::$db) {
             require_once __DIR__ . '/../core/DBConfig.php';
@@ -11,6 +14,7 @@ class Auth {
         return self::$db;
     }
 
+    // Método para verificar si el usuario está autenticado
     public static function checkAuth() {
         session_start();
         if (!isset($_SESSION['user_id'])) {
@@ -21,6 +25,7 @@ class Auth {
         return $_SESSION['user_id'];
     }
 
+    // Método para verificar si el usuario tiene el rol requerido
     public static function checkRole($required_role_id) {
         $user_id = self::checkAuth();
         

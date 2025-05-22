@@ -1,4 +1,5 @@
 <?php
+// Requiere el conexion a la base de datos
 require_once __DIR__ . '/../../backend/core/DBConfig.php';
 
 $auth = new DBConfig();

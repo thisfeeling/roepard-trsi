@@ -1,6 +1,8 @@
 <?php
+// Requiere el conexion a la base de datos
 require_once __DIR__ . '/../../backend/core/DBConfig.php';
 
+// Crea una nueva instancia
 $auth = new DBConfig();
 $db = $auth->getConnection();
 

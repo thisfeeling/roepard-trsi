@@ -1,5 +1,7 @@
 <?php
 
+// Clase router
+// NO se utilizo en el proyecto.
 class Router {
     private $routes = [];
     private $notFoundHandler;

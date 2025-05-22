@@ -1,9 +1,10 @@
 fetch("/trsi/backend/controllers/graficaspotenciaController.php")
 .then(response => response.json())
     .then(data => {
+        // Inicialización del gráfico de barras
         const ctx = document.getElementById('graficaspotenciaChart').getContext('2d');
         new Chart(ctx, {
-            type: 'line',
+            type: 'line', // Tipo de gráfico
             data: {
                 labels: data.labels,
                 datasets: [

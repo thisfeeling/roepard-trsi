@@ -6,10 +6,11 @@ $(document).ready(function () {
         }
     });
 
+    // Manejo del clic en el botón de gestión de usuarios
     $("#btnGestionUsuarios").on("click", function () {
-        $(".modal").modal("hide");
+        $(".modal").modal("hide"); // Ocultar modales abiertos
         setTimeout(function () {
-            window.location.href = "/trsi/frontend/pages/users.php";
+            window.location.href = "/trsi/frontend/pages/users.php"; // Redirigir a la página de gestión de usuarios
         }, 300);
     });
 });

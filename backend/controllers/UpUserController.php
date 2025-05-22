@@ -1,14 +1,18 @@
 <?php
+// Requiere el servicio y el modelo
 require_once __DIR__ . '/../services/UserUpdateService.php';
 require_once __DIR__ . '/../models/UserDetails.php';
 
+// Clase controlador
 class UpUserController {
     private $userService;
 
+    // Crea una instancia del servicio de usuario
     public function __construct() {
         $this->userService = new UserService();
     }
 
+    // Este método maneja la petición HTTP
     public function updateUser() {
         try {
             // Validar datos de entrada
@@ -80,6 +84,7 @@ class UpUserController {
         }
     }
 
+    // Validar datos de entrada
     private function validateInput() {
         $requiredFields = [
             'user_id', 'first_name', 'last_name', 'username', 'email',
@@ -94,6 +99,7 @@ class UpUserController {
         }
     }
 
+    // Procesar la imagen si se subió una nueva
     private function handleProfilePicture() {
         $uploadDir = __DIR__ . '/../../uploads/';
         $allowedTypes = ['image/jpeg', 'image/png', 'image/heic'];
@@ -120,7 +126,7 @@ class UpUserController {
         $extension = pathinfo($file['name'], PATHINFO_EXTENSION);
         $newFilename = "user_" . $_POST['user_id'] . '.' . $extension;
         $destination = $uploadDir . $newFilename;
-
+        
         if (!move_uploaded_file($file['tmp_name'], $destination)) {
             throw new Exception('Error al subir la imagen.');
         }

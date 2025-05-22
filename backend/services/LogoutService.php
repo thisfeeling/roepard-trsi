@@ -1,5 +1,5 @@
 <?php
-
+// Clase LogoutService
 class LogoutService {
     public function logout() {
         if (session_status() === PHP_SESSION_NONE) {
