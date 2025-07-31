@@ -1,5 +1,27 @@
 [phases.setup]
-nixPkgs = []
+nixPkgs = [
+    "php84",
+    "php84Extensions.redis",
+    "php84Extensions.mbstring",
+    "php84Extensions.curl",
+    "php84Extensions.pdo",
+    "php84Extensions.pdo_mysql",  # ← Esta es la que falta!
+    "php84Extensions.bcmath",
+    "php84Extensions.tokenizer",
+    "php84Extensions.dom",
+    "php84Extensions.gd",
+    "php84Extensions.fileinfo",
+    "php84Extensions.xml",
+    "php84Extensions.zip",
+    "phpPackages.composer",
+    "nodejs_22",
+    "npm-9_x",
+    "python311Packages.supervisor",
+    "nginx",
+    "libmysqlclient",
+    "curl",
+    "wget"
+]
 
 [phases.build]
 cmds = [
