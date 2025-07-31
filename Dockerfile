@@ -1,16 +1,34 @@
-FROM php:8.3-cli
+FROM php:8.3-fpm
 
-# Crear directorio
-RUN mkdir -p /var/www/html
+# Instalar dependencias y Nginx
+RUN apt-get update && apt-get install -y \
+    nginx \
+    libpng-dev \
+    && docker-php-ext-install gd \
+    && rm -rf /var/lib/apt/lists/*
 
-# Copiar archivos
+# Copiar código fuente
 COPY . /var/www/html
 
-# Establecer working directory
-WORKDIR /var/www/html
+# Asignar permisos
+RUN chown -R www-data:www-data /var/www/html
 
-# Exponer puerto
+# Configurar Nginx
+COPY ./nginx.conf /etc/nginx/sites-available/default
+
+# Limpiar default site y activarlo
+RUN ln -sf /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default \
+    && rm -f /etc/nginx/sites-enabled/default.conf
+
+# Configurar PHP-FPM
+COPY ./php-fpm.conf /usr/local/etc/php-fpm.d/www.conf
+
+# Supervisord config
+COPY ./supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+
+# Instalar supervisor
+RUN apt-get update && apt-get install -y supervisor
+
 EXPOSE 80
 
-# Comando principal
-CMD ["php", "-S", "0.0.0.0:80", "-t", "/var/www/html"]
+CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]

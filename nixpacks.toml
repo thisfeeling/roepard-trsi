@@ -1,5 +1,5 @@
 [phases.setup]
-nixPkgs = ["php83"]
+nixPkgs = []
 
 [phases.build]
 cmds = [
@@ -8,4 +8,4 @@ cmds = [
 ]
 
 [start]
-cmd = 'php -S 0.0.0.0:80 -t /var/www/html'
+cmd = '/usr/bin/supervisord -c /var/www/html/supervisord.conf'
