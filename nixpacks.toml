@@ -1,11 +1,11 @@
 [phases.setup]
 nixPkgs = [
-    "php83",  # ← Cambiado de php84 a php83
+    "php83",
     "php83Extensions.redis",
     "php83Extensions.mbstring",
     "php83Extensions.curl",
     "php83Extensions.pdo",
-    "php83Extensions.pdo_mysql",  # ← Ahora coincide con PHP 8.3
+    "php83Extensions.pdo_mysql",
     "php83Extensions.bcmath",
     "php83Extensions.tokenizer",
     "php83Extensions.dom",
