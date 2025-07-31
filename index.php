@@ -26,16 +26,16 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
         $role_id = $user['role_id'];
         $status_id = $user['status_id'];
         $name = $first_name . ' ' . $last_name;
-        header('Location: /trsi/frontend/pages/services.php');
+        header('Location: frontend/pages/services.php');
         exit();
     } else {
         // Si no se encuentra el usuario en la base de datos
-        header("Location: /trsi/frontend/pages/login.php");
+        header("Location: frontend/pages/login.php");
         exit();
     }
 } else {
     // El usuario no está autenticado, redirige a la página de inicio de sesión
-    header("Location: /trsi/frontend/pages/login.php");
+    header("Location: frontend/pages/login.php");
     exit();
 }   
 ?>
@@ -47,13 +47,13 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>index</title>
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="/trsi/frontend/dist/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="./frontend/dist/bootstrap/css/bootstrap.css">
     <!-- FontAwesome CSS -->
-    <link rel="stylesheet" href="/trsi/frontend/dist/fontawesome/css/fontawesome.min.css">
+    <link rel="stylesheet" href="./frontend/dist/fontawesome/css/fontawesome.min.css">
     <!-- Styles -->
-    <link rel="stylesheet" href="/trsi/frontend/css/style.css">
+    <link rel="stylesheet" href="./frontend/css/style.css">
     <!-- Manifest -->
-    <link rel="manifest" href="/trsi/site.webmanifest">
+    <link rel="manifest" href="./site.webmanifest">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="application-name" content="trsi">
@@ -61,14 +61,14 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
     <meta name="theme-color" content="#3393FF">
     <meta name="msapplication-navbutton-color" content="#3393FF">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="msapplication-starturl" content="/index.php">
+    <meta name="msapplication-starturl" content="./index.php">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="icon" type="image/png" sizes="16x16" href="./favicon-16x16.png">
     <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png">
     <link rel="shortcut icon" href="./favicon.ico">
     <link rel="apple-touch-icon" sizes="32x32" href="./apple-touch-icon.png">
 </head>
-<body style="background-color: var(--olive-green) !important;">
+<body>
     <!-- Spinner de carga -->
     <main class="d-flex justify-content-center align-items-center vh-100">
         <div class="text-center">
@@ -85,12 +85,12 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
         }, 1000);
     </script>
     <!-- jQuery -->
-    <script src="/trsi/frontend/dist/jquery/js/jquery.min.js"></script>
+    <script src="./frontend/dist/jquery/js/jquery.min.js"></script>
     <!-- Bootstrap JS With Popper-->
-    <script src="/trsi/frontend/dist/bootstrap/js/bootstrap.bundle.js"></script>
+    <script src="./frontend/dist/bootstrap/js/bootstrap.bundle.js"></script>
     <!-- Chart JS -->
-    <script src="/trsi/frontend/dist/chart/js/chart.umd.min.js"></script>
+    <script src="./frontend/dist/chart/js/chart.umd.min.js"></script>
     <!-- FontAwesome JS -->
-    <script src="/trsi/frontend/dist/fontawesome/js/all.min.js"></script>
+    <script src="./frontend/dist/fontawesome/js/all.min.js"></script>
 </body>
 </html>

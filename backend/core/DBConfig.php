@@ -9,7 +9,7 @@ class DBConfig {
         }
         
         // Carga los credenciales de la base de datos
-        $config = require __DIR__ . '/db.php';
+        $config = require __DIR__ . '/../config/db.php';
         
         // Crea la cadena de conexión a la base de datos
         $dsn = "{$config['driver']}:host={$config['host']};port={$config['port']};dbname={$config['dbname']};charset={$config['charset']}";
