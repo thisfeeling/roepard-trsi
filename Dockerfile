@@ -1,31 +1,29 @@
 FROM php:8.3-fpm
 
-# Instalar dependencias del sistema
+# Instalar dependencias básicas
 RUN apt-get update && apt-get install -y \
-    curl \
-    libpng-dev \
-    libonig-dev \
-    libxml2-dev \
-    zip \
-    unzip \
     nginx \
-    supervisor \
-    && docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd \
+    libpng-dev \
+    && docker-php-ext-install gd \
     && rm -rf /var/lib/apt/lists/*
 
-# Configurar directorio de trabajo
-WORKDIR /var/www/html
+# Copiar código fuente
+COPY . /var/www/html
 
-# Copiar código
-COPY . .
+# Asignar permisos
+RUN chown -R www-data:www-data /var/www/html
 
-# Crear carpetas necesarias si existen
-RUN mkdir -p storage/logs bootstrap/cache \
-    && chown -R www-data:www-data /var/www/html
-
-# Copiar configuraciones de Nginx y PHP-FPM
+# Configurar Nginx
 COPY ./docker/nginx.conf /etc/nginx/sites-available/default
+
+# Limpiar default site y activarlo
+RUN ln -sf /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default \
+    && rm -f /etc/nginx/sites-enabled/default.conf
+
+# Configurar PHP-FPM
 COPY ./docker/php-fpm.conf /usr/local/etc/php-fpm.d/www.conf
+
+# Supervisord config
 COPY ./docker/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
 EXPOSE 80
