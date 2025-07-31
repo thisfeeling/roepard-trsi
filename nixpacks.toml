@@ -1,12 +1,11 @@
 [phases.setup]
-nixPkgs = ["nginx", "php83", "python3Packages.supervisor"]
+nixPkgs = ["php83"]
 
 [phases.build]
 cmds = [
-  "mkdir -p /var/www/html",
-  "cp -r . /var/www/html",
-  "mkdir -p /var/log"
+  "mkdir -p /app",
+  "cp -r . /app"
 ]
 
 [start]
-cmd = '/usr/bin/supervisord -c /var/www/html/docker/supervisord.conf'
+cmd = 'php -S 0.0.0.0:80 -t /app'
