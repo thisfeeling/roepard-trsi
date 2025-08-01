@@ -2,7 +2,8 @@
 // Verifica si session_start ya se inicializo
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
-};
+}
+;
 
 // Detectar si estamos en login.php
 $currentFile = basename($_SERVER['PHP_SELF']);
@@ -53,9 +54,9 @@ if ($isServices) {
 } elseif ($isSecondBar) {
     $pageName = 'Gráficas';
 } elseif ($isThirdBar) {
-    $pageName = 'Gráficas';    
+    $pageName = 'Gráficas';
 } elseif ($isFourthBarLine) {
-    $pageName = 'Gráficas';      
+    $pageName = 'Gráficas';
 } else {
     $pageName = '';
 }
@@ -74,6 +75,33 @@ if ($isServices) {
     <link rel="stylesheet" href="../dist/fontawesome/css/fontawesome.min.css">
     <!-- Styles -->
     <link rel="stylesheet" href="../css/style.css">
+    <style>
+    @media (max-width: 767px) and (orientation: landscape) {
+
+        .navbar-uam,
+        .uam-bar {
+            width: 100vw !important;
+            min-width: 100vw !important;
+            max-width: 100vw !important;
+            padding-left: 0 !important;
+            padding-right: 0 !important;
+            margin-left: 0 !important;
+            margin-right: 0 !important;
+        }
+
+        .uam-title {
+            width: 100vw !important;
+            max-width: 100vw !important;
+            text-align: center;
+            font-size: 1.1rem;
+        }
+
+        .uam-logo img {
+            max-width: 70px;
+            height: auto;
+        }
+    }
+    </style>
 </head>
 
 <body>
