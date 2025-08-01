@@ -101,7 +101,7 @@ class UpUserController {
 
     // Procesar la imagen si se subió una nueva
     private function handleProfilePicture() {
-        $uploadDir = __DIR__ . '/../../uploads/';
+        $uploadDir = __DIR__ . '/../uploads/';
         $allowedTypes = ['image/jpeg', 'image/png', 'image/heic'];
         
         // Obtener imagen actual
