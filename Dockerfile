@@ -8,7 +8,8 @@ RUN apt-get update && apt-get install -y \
     libonig-dev \
     libxml2-dev \
     libzip-dev \
-    libmysqlclient-dev \
+    libmariadb-dev-compat \
+    libmariadb-dev \
     zip \
     unzip \
     curl \
