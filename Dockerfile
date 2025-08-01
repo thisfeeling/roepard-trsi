@@ -30,7 +30,8 @@ RUN apt-get update && apt-get install -y \
 # Copiar código fuente y configurar permisos
 COPY . /var/www/html
 WORKDIR /var/www/html
-RUN chown -R www-data:www-data /var/www/html
+RUN chown -R www-data:www-data /var/www/html \
+    && chown -R www-data:www-data /var/www/html/uploads
 
 # Configurar Nginx
 COPY ./nginx.conf /etc/nginx/sites-available/default
