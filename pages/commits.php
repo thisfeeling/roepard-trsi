@@ -66,7 +66,56 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
     <link rel="stylesheet" href="../css/style.css" />
     <!-- Icono -->
     <link rel="icon" href="../favicon.ico" type="image/x-icon">
-</head>
+    <!-- Estilos personalizados para DataTables modo claro -->
+    <style>
+    /* DataTables modo claro solo para la tabla de commits */
+    #tablaCommits,
+    #tablaCommits thead th,
+    #tablaCommits tbody td {
+        background: #fff !important;
+        color: #111 !important;
+    }
+
+    #tablaCommits thead th {
+        border-bottom: 2px solid #dee2e6 !important;
+    }
+
+    #tablaCommits tbody tr {
+        border-bottom: 1px solid #dee2e6 !important;
+    }
+
+    #tablaCommits {
+        border: 1px solid #dee2e6 !important;
+        border-radius: 6px;
+    }
+
+    /* Paginación y controles */
+    .dataTables_wrapper .dataTables_paginate .paginate_button {
+        background: #f8f9fa !important;
+        color: #111 !important;
+        border: 1px solid #dee2e6 !important;
+    }
+
+    .dataTables_wrapper .dataTables_paginate .paginate_button.current {
+        background: #e9ecef !important;
+        color: #111 !important;
+    }
+
+    /* Filtros y otros controles */
+    .dataTables_wrapper .dataTables_filter input,
+    .dataTables_wrapper .dataTables_length select {
+        background: #fff !important;
+        color: #111 !important;
+        border: 1px solid #dee2e6 !important;
+    }
+
+    /* Responsive sólo para la tabla */
+    .table-responsive {
+        background: #fff !important;
+        border-radius: 18px;
+    }
+    </style>
+
 
 <body class="bg-white text-light">
 
@@ -76,8 +125,9 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
     <div class="uam-bar-commits my-5 mx-auto p-4">
         <h2 class="text-center mb-4" style="font-size: 2rem; font-weight: bold; color: var(--uam-yellow);">Registros de
             cambios</h2>
-        <div class="bg-dark table-responsive p-4 mb-4" style="border-radius: 18px; width: 100%; max-width: 1100px;">
-            <table id="tablaCommits" class="table table-striped table-bordered table-hover text-white">
+        <div class="bg-white text-dark table-responsive p-4 mb-4"
+            style="border-radius: 18px; width: 100%; max-width: 1100px;">
+            <table id="tablaCommits" class="table table-striped table-bordered table-hover text-dark">
                 <thead>
                     <tr>
                         <th>ID</th>

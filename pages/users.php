@@ -71,6 +71,54 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/18.1.1/css/intlTelInput.css" />
     <!-- Icono -->
     <link rel="icon" href="../favicon.ico" type="image/x-icon">
+    <style>
+    /* DataTables modo claro solo para la tabla de commits */
+    #tablaUsuarios,
+    #tablaUsuarios thead th,
+    #tablaUsuarios tbody td {
+        background: #fff !important;
+        color: #111 !important;
+    }
+
+    #tablaUsuarios thead th {
+        border-bottom: 2px solid #dee2e6 !important;
+    }
+
+    #tablaUsuarios tbody tr {
+        border-bottom: 1px solid #dee2e6 !important;
+    }
+
+    #tablaUsuarios {
+        border: 1px solid #dee2e6 !important;
+        border-radius: 6px;
+    }
+
+    /* Paginación y controles */
+    .dataTables_wrapper .dataTables_paginate .paginate_button {
+        background: #f8f9fa !important;
+        color: #111 !important;
+        border: 1px solid #dee2e6 !important;
+    }
+
+    .dataTables_wrapper .dataTables_paginate .paginate_button.current {
+        background: #e9ecef !important;
+        color: #111 !important;
+    }
+
+    /* Filtros y otros controles */
+    .dataTables_wrapper .dataTables_filter input,
+    .dataTables_wrapper .dataTables_length select {
+        background: #fff !important;
+        color: #111 !important;
+        border: 1px solid #dee2e6 !important;
+    }
+
+    /* Responsive sólo para la tabla */
+    .table-responsive {
+        background: #fff !important;
+        border-radius: 18px;
+    }
+    </style>
 </head>
 
 <body class="bg-white text-light">
@@ -85,7 +133,7 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
             <h2 class="text-center mb-4" style="color: var(--uam-yellow); font-size: 2.5rem; font-weight: bold;">
                 Administrador de Usuarios
             </h2>
-            <div class="bg-dark p-4 mb-4" style="border-radius: 18px; width: 100%; max-width: 1100px;">
+            <div class="bg-white text-dark p-4 mb-4" style="border-radius: 18px; width: 100%; max-width: 1100px;">
                 <div class="table-responsive">
                     <table id="tablaUsuarios" class="table table-bordered table-hover" style="width:100%">
                         <thead>

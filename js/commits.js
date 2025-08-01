@@ -12,7 +12,7 @@ $(document).ready(function () {
       commit.commit.message, // Mensaje del commit
       commit.commit.author.name, // Nombre del autor
       new Date(commit.commit.author.date).toLocaleString(), // Fecha del commit
-      `<a href="${commit.html_url}" target="_blank" class="btn btn-sm btn-outline-light">Ver</a>` // Enlace para ver el commit
+      `<a href="${commit.html_url}" target="_blank" class="btn btn-sm btn-outline-dark">Ver</a>` // Enlace para ver el commit
     ]);
 
     // Inicialización de la tabla con DataTables
