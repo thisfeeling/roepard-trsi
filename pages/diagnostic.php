@@ -71,7 +71,7 @@ if (isset($_SESSION['user_id'])) {
 
 <body class="bg-white text-light">
     <!-- Navbar -->
-    <div id="navbar-layout"></div>
+    <?php include __DIR__ . '/../components/navbar.php'; ?>
 
     <div class="container d-flex flex-column align-items-center justify-content-center" style="min-height: 90vh;">
         <div class="uam-bar-commits w-100" style="max-width: 700px;">

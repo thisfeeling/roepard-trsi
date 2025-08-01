@@ -27,12 +27,12 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
         // se queda en services.php
     } else {
         // Si no se encuentra el usuario en la base de datos
-        header("Location: ../pages/login.php");
+        header("Location: ../index.html");
         exit();
     }
 } else {
     // El usuario no está autenticado, redirige a la página de inicio de sesión
-    header("Location: ../pages/login.php");
+    header("Location: ../index.html");
     exit();
 }
 ?>
@@ -79,7 +79,7 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
             </div>
             <br>
             <div class="d-flex justify-content-between w-100" style="max-width: 1100px;">
-                <a href="../pages/services.php" class="btn btn-uam d-flex align-items-center justify-content-center"
+                <a href="./services.php" class="btn btn-uam d-flex align-items-center justify-content-center"
                     style="font-size: 1.4rem; font-weight: bold; border-radius: 15px; width: 180px; height: 50px; padding: 0;">
                     Regresar
                 </a>

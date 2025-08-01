@@ -34,12 +34,12 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
         // Si se encuentra autenticado , mantiene en la pagina
     } else {
         // Si no se encuentra el usuario en la base de datos
-        header("Location: /trsi/index.php");
+        header("Location: ../index.html");
         exit();
     }
 } else {
     // El usuario no está autenticado, redirige a la página de index.php
-    header("Location: /trsi/index.php");
+    header("Location: ../index.html");
     exit();
 }
 ?>
@@ -68,7 +68,7 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
 
 <body style="background-color: var(--uam-white); color: var(--uam-black);">
     <!-- Navbar -->
-    <div id="navbar-layout"></div>
+    <?php include __DIR__ . '/../components/navbar.php'; ?>
 
     <!-- Contenido principal -->
     <main class="container-fluid d-flex flex-column align-items-center justify-content-center"

@@ -34,17 +34,17 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
             // Se queda en manage-users.php
         } else {
             // Redirige a index.php si no es admin
-            header('Location: /trsi/index.php');
+            header('Location: ../index.html');
             exit();
         }
     } else {
         // Si no se encuentra el usuario en la base de datos
-        header("Location: /trsi/index.php");
+        header("Location: ../index.html");
         exit();
     }
 } else {
     // El usuario no está autenticado, redirige a la página de inicio de sesión
-    header("Location: /trsi/index.php");
+    header("Location: ../index.html");
     exit();
 }
 ?>

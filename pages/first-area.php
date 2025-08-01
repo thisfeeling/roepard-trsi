@@ -27,12 +27,12 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
         // se queda en services.php
     } else {
         // Si no se encuentra el usuario en la base de datos
-        header("Location: ../pages/login.php");
+        header("Location: ../index.html");
         exit();
     }
 } else {
     // El usuario no está autenticado, redirige a la página de inicio de sesión
-    header("Location: ../pages/login.php");
+    header("Location: ../index.html");
     exit();
 }
 ?>

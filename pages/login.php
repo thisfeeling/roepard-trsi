@@ -20,7 +20,7 @@
 
 <body style="background-color: var(--uam-white)">
     <!-- Navbar -->
-    <div id="navbar-layout"></div>
+    <?php include __DIR__ . '/../components/navbar.php'; ?>
 
     <main style="background-color: var(--uam-white)">
         <div class="d-flex justify-content-center align-items-center" style="min-height: 0vh">
