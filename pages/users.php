@@ -83,24 +83,24 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
         <div class="uam-bar-commits my-5 mx-auto p-4 d-flex flex-column align-items-center"
             style="background: var(--uam-blue); border-radius: 18px; max-width: 1200px;">
             <h2 class="text-center mb-4" style="color: var(--uam-yellow); font-size: 2.5rem; font-weight: bold;">
-                Users Administration
+                Administrador de Usuarios
             </h2>
             <div class="bg-dark p-4 mb-4" style="border-radius: 18px; width: 100%; max-width: 1100px;">
                 <div class="table-responsive">
                     <table id="tablaUsuarios" class="table table-bordered table-hover" style="width:100%">
                         <thead>
                             <tr>
-                                <th>Status</th>
-                                <th>Role</th>
-                                <th>First Name</th>
-                                <th>Last Name</th>
-                                <th>Username</th>
+                                <th>Estado</th>
+                                <th>Rol</th>
+                                <th>Nombre</th>
+                                <th>Apellido</th>
+                                <th>Usuario</th>
                                 <th>Email</th>
-                                <th>Phone</th>
-                                <th>Country</th>
-                                <th>City</th>
-                                <th>Birthdate</th>
-                                <th>Actions</th>
+                                <th>Telefono</th>
+                                <th>Pais</th>
+                                <th>Ciudad</th>
+                                <th>Fecha de Nacimiento</th>
+                                <th>Acciones</th>
                             </tr>
                         </thead>
                         <tbody></tbody>
@@ -166,7 +166,7 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="detalleUsuarioLabel">Details</h5>
+                    <h5 class="modal-title" id="detalleUsuarioLabel">Detalles</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <form id="formUpdateUsuario" enctype="multipart/form-data">

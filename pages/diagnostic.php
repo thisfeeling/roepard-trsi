@@ -103,7 +103,6 @@ if (isset($_SESSION['user_id'])) {
     <script src="../dist/moment/js/moment-timezone-with-data.js"></script>
     <script src="../dist/sweetalert2/js/sweetalert2.all.min.js"></script>
     <script src="../js/diagnostic.js"></script>
-    <script src="../js/app.js"></script>
 </body>
 
 </html>

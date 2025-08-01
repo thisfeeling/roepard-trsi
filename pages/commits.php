@@ -76,7 +76,7 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
     <div class="uam-bar-commits my-5 mx-auto p-4">
         <h2 class="text-center mb-4" style="font-size: 2rem; font-weight: bold; color: var(--uam-yellow);">Registros de
             cambios</h2>
-        <div class="table-responsive">
+        <div class="bg-dark table-responsive p-4 mb-4" style="border-radius: 18px; width: 100%; max-width: 1100px;">
             <table id="tablaCommits" class="table table-striped table-bordered table-hover text-white">
                 <thead>
                     <tr>

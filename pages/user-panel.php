@@ -96,20 +96,20 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
                         </div>
                         <div>
                             <div><strong>ID:</strong> <?php echo htmlspecialchars($user_id); ?></div>
-                            <div><strong>First Name:</strong> <?php echo htmlspecialchars($first_name); ?></div>
-                            <div><strong>Last Name:</strong> <?php echo htmlspecialchars($last_name); ?></div>
-                            <div><strong>Username:</strong> <?php echo htmlspecialchars($username); ?></div>
+                            <div><strong>Nombre:</strong> <?php echo htmlspecialchars($first_name); ?></div>
+                            <div><strong>Apellido:</strong> <?php echo htmlspecialchars($last_name); ?></div>
+                            <div><strong>Usuario:</strong> <?php echo htmlspecialchars($username); ?></div>
                             <div><strong>Email:</strong> <a
                                     href="mailto:<?php echo htmlspecialchars($email); ?>"><?php echo htmlspecialchars($email); ?></a>
                             </div>
-                            <div><strong>Phone:</strong> <?php echo htmlspecialchars($phone); ?></div>
-                            <div><strong>Birthdate:</strong> <?php echo htmlspecialchars($birthdate); ?></div>
-                            <div><strong>Country:</strong> <?php echo htmlspecialchars($country); ?></div>
-                            <div><strong>City:</strong> <?php echo htmlspecialchars($city); ?></div>
-                            <div><strong>Role:</strong> <span
+                            <div><strong>Telefono:</strong> <?php echo htmlspecialchars($phone); ?></div>
+                            <div><strong>Fecha de nacimiento:</strong> <?php echo htmlspecialchars($birthdate); ?></div>
+                            <div><strong>Pais:</strong> <?php echo htmlspecialchars($country); ?></div>
+                            <div><strong>Ciudad:</strong> <?php echo htmlspecialchars($city); ?></div>
+                            <div><strong>Rol:</strong> <span
                                     style="color: var(--uam-blue);"><?php echo htmlspecialchars($role_id == 1 ? 'user' : ($role_id == 2 ? 'admin' : 'supervisor')); ?></span>
                             </div>
-                            <div><strong>Status:</strong> <span
+                            <div><strong>Estado:</strong> <span
                                     style="color: var(--uam-blue);"><?php echo htmlspecialchars($status_id == 1 ? 'active' : 'inactive'); ?></span>
                             </div>
                         </div>
@@ -294,8 +294,6 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
     <script src="../dist/fontawesome/js/all.min.js"></script>
     <!-- user-panel JS -->
     <script src="../js/user-panel.js"></script>
-
-    <script src="../js/app.js"></script>
     <!-- JS de intl-tel-input -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/18.1.1/js/intlTelInput.min.js"></script>
     <!-- Utils para validación y formato -->

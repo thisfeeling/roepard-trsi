@@ -142,18 +142,18 @@ $(document).ready(function () {
         data: json.data, // Datos a mostrar en la tabla
         columns: [
           { data: 'user_id', title: 'ID' },
-          { data: 'first_name', title: 'First Name' },
-          { data: 'last_name', title: 'Last Name' },
-          { data: 'username', title: 'Username' },
+          { data: 'first_name', title: 'Nombre' },
+          { data: 'last_name', title: 'Apellido' },
+          { data: 'username', title: 'Usuario' },
           { data: 'email', title: 'Email' },
-          { data: 'phone', title: 'Phone' },
-          { data: 'country', title: 'Country' },
-          { data: 'city', title: 'City' },
-          { data: 'status_id', title: 'Status' },
+          { data: 'phone', title: 'Telefono' },
+          { data: 'country', title: 'Pais' },
+          { data: 'city', title: 'Ciudad' },
+          { data: 'status_id', title: 'Estado' },
           { data: 'role_id', title: 'Role' },
           {
             data: null,
-            title: 'Actions',
+            title: 'Acciones',
             orderable: false,
             render: (data, type, row) => `
               <button class="btn btn-uam btn-sm me-2" onclick="verDetallesUsuario(${row.user_id})">Detalles</button>
