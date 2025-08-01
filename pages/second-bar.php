@@ -38,7 +38,7 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">

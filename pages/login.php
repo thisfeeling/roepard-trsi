@@ -1,5 +1,51 @@
+<?php
+// Incluir el archivo de conexión a la base de datos
+require_once __DIR__ . '/../core/DBConfig.php';
+// Crear una instancia de la clase de conexión
+$auth = new DBConfig();
+$db = $auth->getConnection();
+// Verifica si la sesión está iniciada
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+// Verifica si el usuario está autenticado
+if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
+    // Recupera el ID del usuario desde la sesión
+    $user_id = $_SESSION['user_id']; // Asumiendo que 'user_id' está guardado en la sesión
+    // Consulta para obtener los datos del usuario
+    $stmt = $db->prepare("SELECT profile_picture, first_name, last_name, email, phone, username, country, city, birthdate, role_id, status_id FROM users WHERE user_id = :user_id");
+    $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+    $stmt->execute();
+    // Si el usuario existe, obtenemos sus datos
+    if ($stmt->rowCount() > 0) {
+        $user = $stmt->fetch(PDO::FETCH_ASSOC);
+        $profile_picture = $user['profile_picture'];
+        $first_name = $user['first_name'];
+        $last_name = $user['last_name'];
+        $email = $user['email'];
+        $phone = $user['phone'];
+        $username = $user['username'];
+        $country = $user['country'];
+        $city = $user['city'];
+        $birthdate = $user['birthdate'];
+        $role_id = $user['role_id'];
+        $status_id = $user['status_id'];
+        $name = $first_name . ' ' . $last_name;
+        // Si se encuentra autenticado , mantiene en la pagina
+    } else {
+        // Si no se encuentra el usuario en la base de datos
+        header("Location: ../index.html");
+        exit();
+    }
+} else {
+    // El usuario no está autenticado, redirige a la página de index.php
+    header("Location: ../index.html");
+    exit();
+}
+?>
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="utf-8" />
