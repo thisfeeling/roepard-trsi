@@ -82,7 +82,7 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
                 </div>
             </div>
             <br>
-            <div class="d-flex justify-content-between w-100" style="max-width: 1100px;">
+            <div class="d-flex justify-content-between w-100" style="max-width: 1100px; margin-top: 30px;">
                 <a href="../pages/services.php" class="btn btn-uam d-flex align-items-center justify-content-center"
                     style="font-size: 1.4rem; font-weight: bold; border-radius: 15px; width: 180px; height: 50px; padding: 0;">
                     Regresar
