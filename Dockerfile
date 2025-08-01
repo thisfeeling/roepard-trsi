@@ -1,6 +1,6 @@
 FROM php:8.3-fpm
 
-# Instalar todas las dependencias del sistema
+# Instalar todas las dependencias del sistema y extensiones PHP en un solo RUN
 RUN apt-get update && apt-get install -y \
     nginx \
     supervisor \
@@ -13,10 +13,7 @@ RUN apt-get update && apt-get install -y \
     zip \
     unzip \
     curl \
-    && rm -rf /var/lib/apt/lists/*
-
-# Instalar extensiones PHP necesarias
-RUN docker-php-ext-install \
+    && docker-php-ext-install \
     pdo \
     pdo_mysql \
     mysqli \
@@ -27,29 +24,23 @@ RUN docker-php-ext-install \
     exif \
     pcntl \
     bcmath \
-    sockets
+    sockets \
+    && rm -rf /var/lib/apt/lists/*
 
-# Copiar código fuente
+# Copiar código fuente y configurar permisos
 COPY . /var/www/html
-
-# Asignar permisos
+WORKDIR /var/www/html
 RUN chown -R www-data:www-data /var/www/html
 
 # Configurar Nginx
 COPY ./nginx.conf /etc/nginx/sites-available/default
-
-# Limpiar default site y activarlo
 RUN ln -sf /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default \
     && rm -f /etc/nginx/sites-enabled/default.conf
 
-# Configurar PHP-FPM
+# Configurar PHP-FPM y Supervisord
 COPY ./php-fpm.conf /usr/local/etc/php-fpm.d/www.conf
-
-# Supervisord config
 COPY ./supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
-# Exponer puerto
+# Exponer puerto y comando de inicio
 EXPOSE 80
-
-# Comando de inicio
 CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]

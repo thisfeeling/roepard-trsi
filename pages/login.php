@@ -31,16 +31,14 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
         $role_id = $user['role_id'];
         $status_id = $user['status_id'];
         $name = $first_name . ' ' . $last_name;
-        // Si se encuentra autenticado , mantiene en la pagina
-    } else {
-        // Si no se encuentra el usuario en la base de datos
-        header("Location: ../index.html");
+        // Si se encuentra autenticado , se redirige a services.php
+        header("Location: ./services.php");
         exit();
+    } else {
+        // Si no se encuentra el usuario en la base de datos se mantiene en login
     }
 } else {
-    // El usuario no está autenticado, redirige a la página de index.php
-    header("Location: ../index.html");
-    exit();
+    // El usuario no está autenticado, mantiene en la pagina
 }
 ?>
 

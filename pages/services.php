@@ -24,7 +24,7 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
         $email = $user['email'];
         $role_id = $user['role_id'];
         $status_id = $user['status_id'];
-        // se queda en services.php
+        // se queda en services.php si esta autenticado
     } else {
         // Si no se encuentra el usuario en la base de datos
         header("Location: ../index.html");
