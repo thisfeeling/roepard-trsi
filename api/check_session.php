@@ -1,4 +1,16 @@
 <?php
+// Envía la respuesta en formato JSON
+header('Content-Type: application/json');
+// Solo aceptar POST
+if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
+    http_response_code(401);
+    echo json_encode([
+        'status' => 'error',
+        'message' => 'Método no permitido',
+    ]);
+    exit;
+}
+
 // Incluir el archivo de conexión a la base de datos
 require_once __DIR__ . '/../core/DBConfig.php';
 // Crear una instancia de la clase de conexión
@@ -26,16 +38,25 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
         $role_id = $user['role_id'];
         $status_id = $user['status_id'];
         $name = $first_name . ' ' . $last_name;
-        echo json_encode(['logged' => true]);
+        echo json_encode([
+            'logged' => true,
+            'message' => 'Authorized',
+        ]);
         exit();
     } else {
         // Si no se encuentra el usuario en la base de datos
-        echo json_encode(['logged' => false]);
+        echo json_encode([
+            'logged' => false,
+            'message' => 'No authorized',
+        ]);
         exit();
     }
 } else {
     // El usuario no está autenticado, redirige a la página de inicio de sesión
-    echo json_encode(['logged' => false]);
+    echo json_encode([
+        'logged' => false,
+        'message' => 'No authorized',
+    ]);
     exit();
 }
 ?>

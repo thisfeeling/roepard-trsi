@@ -225,8 +225,8 @@ $(document).ready(function () {
                     showModal(response.message || "Error al obtener los detalles del usuario.");
                 }
             },
-            error: function () {
-                showModal("Error obteniendo detalles del usuario.");
+            error: function (xhr, status, error) {
+                showModal("Error obteniendo detalles del usuario: " + error);
             }
         });
     });

@@ -1,9 +1,13 @@
 <?php
+// Envía la respuesta en formato JSON
+header('Content-Type: application/json');
 // Requiere el middleware de auth
 require_once __DIR__ . '/../middleware/auth.php';
+require_once __DIR__ . '/../middleware/status.php';
 
 // Verifica que el usuario esté autenticado y tenga role_id = 1,2,3
 Auth::checkAnyRole([1, 2, 3]);
+Status::checkStatus(1);
 
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
@@ -16,9 +20,6 @@ if (!isset($_SESSION['user_id'])) {
 
 // Requiere el controllador para acceder a su clase
 require_once __DIR__ . '/../controllers/DetUserController.php';
-
-// Envía la respuesta en formato JSON
-header('Content-Type: application/json');
 
 try {
     // Solo aceptar POST

@@ -73,6 +73,19 @@ if (isset($_SESSION['user_id'])) {
     <!-- Navbar -->
     <?php include __DIR__ . '/../components/navbar.php'; ?>
 
+    <!-- Modal para mensajes -->
+    <div class="modal fade" id="modalMessage" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Mensaje</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body" id="modalMessageContent"></div>
+            </div>
+        </div>
+    </div>
+
     <div class="container d-flex flex-column align-items-center justify-content-center" style="min-height: 90vh;">
         <div class="uam-bar-commits w-100" style="max-width: 700px;">
             <h2 class="text-center" style="color: var(--uam-yellow); font-weight: bold;">Verificar Conexiones</h2>

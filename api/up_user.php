@@ -1,4 +1,6 @@
 <?php
+// Envía la respuesta en formato JSON
+header('Content-Type: application/json');
 // Requiere el middleware de auth
 require_once __DIR__ . '/../middleware/auth.php';
 
@@ -18,7 +20,7 @@ require_once __DIR__ . '/../controllers/UpUserController.php';
 
 // Verificar que sea una petición POST
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    http_response_code(405);
+    http_response_code(401);
     echo json_encode([
         'status' => 'error',
         'message' => 'Método no permitido'

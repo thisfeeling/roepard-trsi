@@ -1,11 +1,13 @@
 <?php
 
-// Clase Auth del middleware
-class Auth {
+// Clase status del middleware
+class Status
+{
     private static $db;
 
     // Método para obtener la conexión a la base de datos
-    private static function getDB() {
+    private static function getDB()
+    {
         // Iniciar sesión solo si no está iniciada
         if (session_status() === PHP_SESSION_NONE) {
             session_start();
@@ -20,7 +22,8 @@ class Auth {
     }
 
     // Método para verificar si el usuario está autenticado
-    public static function checkAuth() {
+    public static function checkAuth()
+    {
         if (session_status() === PHP_SESSION_NONE) {
             session_start();
         }
@@ -33,32 +36,36 @@ class Auth {
     }
 
     // Método para verificar si el usuario tiene el rol requerido
-    public static function checkRole($required_role_id) {
+    public static function checkStatus($required_status_id)
+    {
         $user_id = self::checkAuth();
+
         $db = self::getDB();
-        $stmt = $db->prepare("SELECT role_id FROM users WHERE user_id = ?");
+        $stmt = $db->prepare("SELECT status_id FROM users WHERE user_id = ?");
         $stmt->execute([$user_id]);
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        if (!$user || $user['role_id'] != $required_role_id) {
+        if (!$user || $user['status_id'] != $required_status_id) {
             http_response_code(401);
-            echo json_encode(['error' => 'No tienes permisos']);
-            exit;
+            echo json_encode(['error' => 'No tienes permisos, usuario deshabilitado']);
+            exit();
         }
     }
 
     // Método para verificar si el usuario tiene al menos uno de los roles permitidos
-    public static function checkAnyRole($allowed_roles) {
+    public static function checkAnyStatus($allowed_statuses)
+    {
         $user_id = self::checkAuth();
+
         $db = self::getDB();
-        $stmt = $db->prepare("SELECT role_id FROM users WHERE user_id = ?");
+        $stmt = $db->prepare("SELECT status_id FROM users WHERE user_id = ?");
         $stmt->execute([$user_id]);
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        if (!$user || !in_array($user['role_id'], $allowed_roles)) {
+        if (!$user || !in_array($user['status_id'], $allowed_statuses)) {
             http_response_code(401);
-            echo json_encode(['error' => 'No tienes permisos para acceder a esta función']);
-            exit;
+            echo json_encode(['error' => 'No tienes permisos, usuario deshabilitado']);
+            exit();
         }
     }
 }

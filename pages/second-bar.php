@@ -61,6 +61,19 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
     <!-- Navbar -->
     <?php include __DIR__ . '/../components/navbar.php'; ?>
 
+    <!-- Modal para mensajes -->
+    <div class="modal fade" id="modalMessage" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Mensaje</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body" id="modalMessageContent"></div>
+            </div>
+        </div>
+    </div>
+
     <main class="container-fluid d-flex flex-column align-items-center justify-content-center"
         style="min-height: 80vh;">
         <div class="container-todo p-5"

@@ -1,4 +1,6 @@
 <?php
+// Envía la respuesta en formato JSON
+header('Content-Type: application/json');
 // Requiere el middleware de auth
 require_once __DIR__ . '/../middleware/auth.php';
 
@@ -21,4 +23,3 @@ $controller = new LogoutController();
 // Llama al método que maneja la petición HTTP (POST) y responde en JSON
 $controller->handleRequest();
 ?>
-

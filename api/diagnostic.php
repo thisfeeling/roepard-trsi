@@ -1,9 +1,12 @@
 <?php
+// Envía la respuesta en formato JSON
+header('Content-Type: application/json');
 // Requiere el middleware de auth
 require_once __DIR__ . '/../middleware/auth.php';
-
+require_once __DIR__ . '/../middleware/status.php';
 // Verifica que el usuario esté autenticado y tenga role_id = 2
 Auth::checkRole(2);
+Status::checkStatus(1);
 
 if (session_status() === PHP_SESSION_NONE) {
     session_start();

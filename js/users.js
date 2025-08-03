@@ -136,7 +136,31 @@ $(document).ready(function () {
       const response = await fetch('../api/list_users.php', {
         method: 'GET' // Método de la solicitud
       });
-      const json = await response.json(); // Convertir respuesta a JSON
+      const text = await response.text(); // Convertir respuesta a JSON
+      
+      let json;
+
+      try {
+        json = JSON.parse(text);
+      } catch (parseErr) {
+        // Si no es JSON válido, muestra el texto crudo para depuración
+        console.error('Respuesta no es JSON:', text);
+        showModal('Error inesperado del servidor. Respuesta no válida.');
+        return;
+      }
+
+      // Si la respuesta contiene error, muéstralo y no sigas
+      if (json.error) {
+        showModal('Error: ' + json.error);
+        return;
+      }
+
+      // Si no hay datos, muestra mensaje
+      if (!json.data || !Array.isArray(json.data)) {
+        showModal('No se encontraron usuarios o la respuesta es incorrecta.');
+        return;
+      }
+      
       $('#tablaUsuarios').DataTable({
         destroy: true, // Permitir destruir la tabla anterior
         data: json.data, // Datos a mostrar en la tabla
@@ -195,7 +219,7 @@ $(document).ready(function () {
     $('#confirmDeleteModal').modal('show'); // Mostrar modal de confirmación
     $('#confirmDeleteBtn').off('click').on('click', function () {
       $.ajax({
-        url: '../api/delete_user.php',
+        url: '../api/del_user.php',
         method: 'POST',
         data: { user_id: user_id }, // Enviar ID del usuario a eliminar
         dataType: 'json',

@@ -56,8 +56,6 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
     <!-- Styles -->
     <link rel="stylesheet" href="../css/style.css" />
     <link rel="stylesheet" href="../css/variables.css" />
-    <!-- Custom JS -->
-    <script src="../js/app.js"></script>
     <!-- Icono -->
     <link rel="icon" href="../favicon.ico" type="image/x-icon" />
 </head>

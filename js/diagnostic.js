@@ -1,4 +1,17 @@
-$(document).ready(function() {
+$(document).ready(function () {
+    // Función para mostrar un modal con un mensaje
+    function showModal(message) {
+        $('#modalMessageContent').text(message); // Establecer el contenido del modal
+        $('#modalMessage').modal('show'); // Mostrar el modal
+        // Remover la clase de fondo modal si queda atascada
+        document.addEventListener('hidden.bs.modal', function () {
+            document.body.classList.remove('modal-open'); // Remover clase de modal abierto
+            document.querySelectorAll('.modal-backdrop').forEach(function (el) {
+                el.remove(); // Remover el fondo modal
+            });
+        });
+    }
+
     // Manejo del clic en el botón para verificar el estado de la base de datos
     $('#btn-db').on('click', function() {
         $.ajax({
@@ -24,9 +37,12 @@ $(document).ready(function() {
             },
             error: function(xhr, status, error) {
                 // Manejo de errores en la petición
-                console.error('Error en la petición:', error); // Para debug
+                // console.error('Error en la petición:', error); // Para debug
                 $('#db-result').html('<span style="color: #dc3545;">Error al verificar</span>');
+                showModal('Error: ' + error);
+                return;
             }
+            
         });
     });
 
@@ -42,9 +58,11 @@ $(document).ready(function() {
                     '<span style="color: #28a745;">🤖 Disponible</span>' : 
                     '<span style="color: #dc3545;">🤖 Sin respuesta</span>');
             },
-            error: function() {
+            error: function(xhr, status, error) {
                 // Manejo de errores en la petición
                 $('#jetson-result').html('<span style="color: #dc3545;">Error al verificar</span>');
+                showModal('Error: ' + error);
+                return;
             }
         });
     });
