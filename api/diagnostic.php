@@ -5,7 +5,7 @@ header('Content-Type: application/json');
 require_once __DIR__ . '/../middleware/auth.php';
 require_once __DIR__ . '/../middleware/status.php';
 // Verifica que el usuario esté autenticado y tenga role_id = 2
-Auth::checkRole(2);
+Auth::checkAnyRole([1, 2, 3]);
 Status::checkStatus(1);
 
 if (session_status() === PHP_SESSION_NONE) {

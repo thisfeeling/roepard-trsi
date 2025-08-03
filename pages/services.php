@@ -61,6 +61,80 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
     <!-- Navbar -->
     <?php include __DIR__ . '/../components/navbar.php'; ?>
 
+    <!-- Modal de Sistema -->
+    <div class="modal fade" id="sistemaModal" tabindex="-1" aria-labelledby="sistemaModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header bg-uam" style="color: var(--uam-blue);">
+                    <h5 class="modal-title" id="sistemaModalLabel">Información del Sistema</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                        aria-label="Cerrar"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h6 class="fw-bold text-uam mb-3" style="color: var(--uam-blue);">Estado del Sistema
+                                </h6>
+                                <div class="list-group">
+                                    <div class="list-group-item d-flex justify-content-between align-items-center">
+                                        <span class="fw-bold" style="color: var(--uam-blue);">Versión del
+                                            Sistema</span>
+                                        <span id="github-version"
+                                            class="d-flex align-items-center justify-content-center"
+                                            style="color: var(--uam-yellow); font-size: 1.2rem; font-weight: bold; border-radius: 15px; width: 220px; height: 50px; padding: 0;">
+                                            Cargando...
+                                        </span>
+                                    </div>
+                                    <div class="list-group-item d-flex justify-content-between align-items-center">
+                                        <span class="fw-bold" style="color: var(--uam-blue);">Estado de la Base de
+                                            Datos</span>
+                                        <div id="db-status-container" class="d-flex align-items-center">
+                                            <span id="db-status-text" class="me-2">Verificando...</span>
+                                            <div id="db-status-indicator"
+                                                class="spinner-border spinner-border-sm text-warning" role="status">
+                                                <span class="visually-hidden">Cargando...</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="list-group-item">
+                                        <h6 class="fw-bold text-uam" style="color: var(--uam-blue);">Información del
+                                            Usuario Conectado</h6>
+                                        <div class="small">
+                                            <div class="fw-bold" style="color: var(--uam-yellow);">Nombre:
+                                                <span
+                                                    style="color: var(--uam-blue);"><?php echo htmlspecialchars($first_name . ' ' . $last_name); ?></span>
+                                            </div>
+                                            <div class="fw-bold" style="color: var(--uam-yellow);">Correo:
+                                                <span
+                                                    style="color: var(--uam-blue);"><?php echo htmlspecialchars($email); ?></span>
+                                            </div>
+                                            <div class="fw-bold" style="color: var(--uam-yellow);">Rol:
+                                                <span style="color: var(--uam-blue);"><?php
+                                                $rol_text = '';
+                                                if ($role_id == 2)
+                                                    $rol_text = 'Admin';
+                                                elseif ($role_id == 3)
+                                                    $rol_text = 'Supervisor';
+                                                else
+                                                    $rol_text = 'User';
+                                                echo htmlspecialchars($rol_text);
+                                                ?>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Contenido principal de la página -->
     <main class="container-fluid d-flex flex-column align-items-center justify-content-center"
         style="min-height: 80vh;">
@@ -96,17 +170,22 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
                     <a href="../pages/commits.php" class="btn btn-uam mb-3 w-100">Registro de Cambios</a>
                     <?php else: // Usuario ?>
                     <a href="../pages/user-panel.php" class="btn btn-uam mb-3 w-100">Panel de usuario</a>
+                    <a href="../pages/diagnostic.php" class="btn btn-uam mb-3 w-100">Verificar
+                        Conexiones</a>
                     <a href="../pages/commits.php" class="btn btn-uam mb-3 w-100">Registro de Cambios</a>
                     <?php endif; ?>
                 </div>
             </div>
-            <span id="github-version" class="position-absolute"
-                style="bottom: 20px; right: 30px; color: var(--uam-yellow); font-weight: bold;">
-                Rev-cargando...
-            </span>
-        </div>
-    </main>
 
+            <div class="d-flex justify-content-between w-100" style="max-width: 1100px;">
+                <button type="button" class="btn btn-uam d-flex align-items-center justify-content-center"
+                    style="font-size: 1.4rem; font-weight: bold; border-radius: 15px; width: 220px; height: 50px; padding: 0;"
+                    id="btnSistema">
+                    Sistema
+                </button>
+            </div>
+
+        </div>
     </main>
 
     <!-- jQuery -->
