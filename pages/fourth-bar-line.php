@@ -83,23 +83,20 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
                     Comparativa
                 </h2>
             </div>
-            <div style="background-color: var(--uam-white) !important; border-radius: 24px;">
-                <div class="row g-4 justify-content-center">
-                    <div class="col-12 col-lg-10">
-                        <div class="chart-container bg-white rounded-3 shadow-sm p-3" style="height: 400px; max-width: 1200px; margin: 0 auto;">
-                            <h5 class="text-center mb-3 fw-bold text-primary">Conteo de Personas</h5>
-                            <div class="chart-wrapper" style="position: relative; height: calc(100% - 40px);">
-                                <canvas id="conteopersonasChart"></canvas>
-                            </div>
-                        </div>
+            <div class="chart-grid" style="display: flex; flex-direction: column; gap: 1.25rem; padding: 1.25rem; width: 100%;">
+                <!-- Gráfico de Conteo de Personas -->
+                <div class="chart-container" style="background: white; border-radius: 12px; padding: 1rem; box-shadow: 0 2px 8px rgba(0,0,0,0.1); width: 100%;">
+                    <h5 class="text-center mb-3 fw-bold" style="color: var(--uam-blue); font-size: 1.1rem;">Conteo de Personas</h5>
+                    <div style="position: relative; width: 100%; height: 0; padding-bottom: 56.25%;">
+                        <canvas id="conteopersonasChart" style="position: absolute; width: 100%; height: 100%; left: 0; top: 0;"></canvas>
                     </div>
-                    <div class="col-12 col-lg-10">
-                        <div class="chart-container bg-white rounded-3 shadow-sm p-3" style="height: 400px; max-width: 1200px; margin: 0 auto;">
-                            <h5 class="text-center mb-3 fw-bold text-primary">Potencia Consumida</h5>
-                            <div class="chart-wrapper" style="position: relative; height: calc(100% - 40px);">
-                                <canvas id="potenciaconsumidaChart"></canvas>
-                            </div>
-                        </div>
+                </div>
+                
+                <!-- Gráfico de Potencia Consumida -->
+                <div class="chart-container" style="background: white; border-radius: 12px; padding: 1rem; box-shadow: 0 2px 8px rgba(0,0,0,0.1); width: 100%;">
+                    <h5 class="text-center mb-3 fw-bold" style="color: var(--uam-blue); font-size: 1.1rem;">Potencia Consumida</h5>
+                    <div style="position: relative; width: 100%; height: 0; padding-bottom: 56.25%;">
+                        <canvas id="potenciaconsumidaChart" style="position: absolute; width: 100%; height: 100%; left: 0; top: 0;"></canvas>
                     </div>
                 </div>
             </div>

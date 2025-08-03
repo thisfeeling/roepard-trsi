@@ -30,7 +30,7 @@ $(document).ready(function () {
                 const commonOptions = {
                     responsive: true,
                     maintainAspectRatio: false,
-                    devicePixelRatio: 2, // Mejor calidad en pantallas de alta densidad
+                    devicePixelRatio: Math.min(window.devicePixelRatio, 2), // Limitar a 2x para mejor rendimiento
                     animation: {
                         duration: 1000,
                         easing: 'easeOutQuart'
@@ -56,22 +56,39 @@ $(document).ready(function () {
                     },
                     layout: {
                         padding: {
-                            left: 5,
-                            right: 5,
+                            left: 8,
+                            right: 8,
                             top: 10,
-                            bottom: 5
+                            bottom: 10
                         }
                     },
                     plugins: {
                         legend: {
                             position: 'top',
+                            align: 'center',
                             labels: {
                                 boxWidth: 12,
-                                padding: 10,
+                                padding: 12,
                                 font: {
-                                    size: window.innerWidth < 768 ? 10 : 12
-                                }
+                                    size: () => window.innerWidth < 768 ? 11 : 13
+                                },
+                                usePointStyle: true
                             }
+                        },
+                        tooltip: {
+                            backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                            titleFont: {
+                                size: 12,
+                                weight: 'bold'
+                            },
+                            bodyFont: {
+                                size: 12
+                            },
+                            padding: 10,
+                            cornerRadius: 4,
+                            displayColors: true,
+                            mode: 'index',
+                            intersect: false
                         }
                     },
                     interaction: {
@@ -81,36 +98,57 @@ $(document).ready(function () {
                     },
                     scales: {
                         x: {
+                            grid: {
+                                display: true,
+                                color: 'rgba(0, 0, 0, 0.05)',
+                                drawBorder: true,
+                                borderColor: 'rgba(0, 0, 0, 0.1)'
+                            },
                             title: {
                                 display: true,
                                 text: 'Hora',
                                 font: {
-                                    size: window.innerWidth < 768 ? 10 : 12
-                                }
+                                    size: () => window.innerWidth < 768 ? 11 : 13,
+                                    weight: 'bold'
+                                },
+                                padding: { top: 10, bottom: 10 }
                             },
                             ticks: {
                                 maxRotation: 45,
                                 minRotation: 45,
                                 font: {
-                                    size: window.innerWidth < 768 ? 8 : 10
+                                    size: () => window.innerWidth < 768 ? 9 : 11
                                 },
-                                maxTicksLimit: window.innerWidth < 768 ? 10 : 15
+                                maxTicksLimit: () => window.innerWidth < 768 ? 8 : 12,
+                                padding: 5
                             }
                         },
                         y: {
                             beginAtZero: true,
+                            grid: {
+                                display: true,
+                                color: 'rgba(0, 0, 0, 0.05)',
+                                drawBorder: true,
+                                borderColor: 'rgba(0, 0, 0, 0.1)'
+                            },
                             title: {
                                 display: true,
                                 text: 'Valores',
                                 font: {
-                                    size: window.innerWidth < 768 ? 10 : 12
-                                }
+                                    size: () => window.innerWidth < 768 ? 11 : 13,
+                                    weight: 'bold'
+                                },
+                                padding: { bottom: 10 }
                             },
                             ticks: {
                                 font: {
-                                    size: window.innerWidth < 768 ? 8 : 10
+                                    size: () => window.innerWidth < 768 ? 9 : 11
                                 },
-                                maxTicksLimit: 8
+                                maxTicksLimit: 8,
+                                padding: 5,
+                                callback: function(value) {
+                                    return Number.isInteger(value) ? value : value.toFixed(2);
+                                }
                             }
                         }
                     }
@@ -122,20 +160,43 @@ $(document).ready(function () {
 
                 // Gráfico de Conteo de Personas (Barras)
                 const ctx1 = document.getElementById('conteopersonasChart').getContext('2d');
+                
+                // Función para manejar el redimensionamiento
+                const handleChartResize = (chart) => {
+                    if (!chart || !chart.canvas) return;
+                    
+                    const container = chart.canvas.parentElement?.parentElement;
+                    if (!container) return;
+                    
+                    const containerWidth = container.offsetWidth;
+                    const aspectRatio = 16/9;
+                    
+                    // Ajustar el padding del contenedor para mantener la relación de aspecto
+                    chart.canvas.parentElement.style.paddingBottom = `${100/aspectRatio}%`;
+                    
+                    // Usar requestAnimationFrame para mejor rendimiento
+                    requestAnimationFrame(() => {
+                        if (chart && typeof chart.resize === 'function') {
+                            chart.resize();
+                        }
+                    });
+                };
+
+                // Configuración común de datasets para el gráfico de barras
+                const barDataset = {
+                    label: 'Personas/5min',
+                    data: data.people_count_5min,
+                    borderColor: 'rgba(55, 60, 191, 0.8)',
+                    backgroundColor: 'rgba(69, 49, 170, 0.7)',
+                    hoverBackgroundColor: 'rgba(55, 60, 191, 0.9)',
+                    hoverBorderColor: 'rgba(55, 60, 191, 1)',
+                };
+
                 const chart1 = new Chart(ctx1, {
                     type: 'bar',
                     data: {
                         labels: data.labels,
-                        datasets: [
-                            {
-                                label: 'Personas/5min',
-                                data: data.people_count_5min,
-                                borderColor: 'rgba(55, 60, 191, 0.8)',
-                                backgroundColor: 'rgba(69, 49, 170, 0.7)',
-                                hoverBackgroundColor: 'rgba(55, 60, 191, 0.9)',
-                                hoverBorderColor: 'rgba(55, 60, 191, 1)',
-                            }
-                        ]
+                        datasets: [barDataset]
                     },
                     options: {
                         ...commonOptions,
@@ -372,31 +433,47 @@ $(document).ready(function () {
                     }
                 });
 
-                // Función para actualizar el tamaño de los gráficos de manera segura
-                function updateChartSizes() {
+                // Configurar el observador de redimensionamiento
+                let resizeTimer;
+                const resizeObserver = new ResizeObserver(entries => {
+                    clearTimeout(resizeTimer);
+                    resizeTimer = setTimeout(() => {
+                        if (chart1) handleChartResize(chart1);
+                        if (chart2) handleChartResize(chart2);
+                    }, 100);
+                });
+
+                // Función para actualizar los tamaños de los gráficos
+                const updateChartSizes = () => {
                     try {
                         if (chart1 && typeof chart1.resize === 'function') {
-                            chart1.resize();
+                            handleChartResize(chart1);
                         }
                         if (chart2 && typeof chart2.resize === 'function') {
-                            chart2.resize();
+                            handleChartResize(chart2);
                         }
                     } catch (e) {
-                        console.error('Error al redimensionar los gráficos:', e);
+                        console.error('Error al actualizar los tamaños de los gráficos:', e);
                     }
+                };
+
+                // Observar cambios en el contenedor principal
+                const chartContainer = document.querySelector('.chart-grid');
+                if (chartContainer) {
+                    resizeObserver.observe(chartContainer);
                 }
 
-                // Manejar el redimensionamiento de la ventana con debounce
-                let resizeTimer;
-                const handleResize = function() {
-                    clearTimeout(resizeTimer);
-                    resizeTimer = setTimeout(updateChartSizes, 250);
-                };
+                // Inicializar tamaños
+                if (chart1) handleChartResize(chart1);
+                if (chart2) handleChartResize(chart2);
+
+                // Limpiar al desmontar
+                window.addEventListener('beforeunload', () => {
+                    resizeObserver.disconnect();
+                });
 
                 // Asegurarse de que los gráficos estén definidos antes de agregar event listeners
                 if (chart1 && chart2) {
-                    window.addEventListener('resize', handleResize);
-                    
                     // Actualizar tamaños después de que se cargue todo el contenido
                     if (document.readyState === 'complete') {
                         setTimeout(updateChartSizes, 100);
