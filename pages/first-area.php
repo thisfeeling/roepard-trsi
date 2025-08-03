@@ -83,12 +83,10 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
                     Datos en tiempo real
                 </h2>
             </div>
-            <div style="background-color: var(--uam-white) !important; border-radius: 24px;">
-
-                <div class="chart-container" style="width: 1000px; height: 500px;">
-                    <canvas id="datosentiemporealChart" class="datosentiemporealChart"></canvas>
+            <div style="background-color: var(--uam-white) !important; border-radius: 24px; padding: 15px; overflow: hidden;">
+                <div class="chart-container" style="position: relative; width: 100%; min-height: 300px; height: 60vh;">
+                    <canvas id="datosentiemporealChart" style="width: 100% !important; height: 100% !important;"></canvas>
                 </div>
-
             </div>
             <br>
             <div class="d-flex justify-content-between w-100" style="max-width: 1100px; margin-top: 30px;">

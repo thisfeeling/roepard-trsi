@@ -270,7 +270,7 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
                         <div class="row">
                             <div class="col-md-4 mb-3">
                                 <label for="modalUserPassword" class="form-label">Password</label>
-                                <input type="text" class="form-control" id="modalUserPassword" name="password"
+                                <input type="password" class="form-control" id="modalUserPassword" name="password"
                                     placeholder="Enter a password" required autocomplete="off" />
                             </div>
                             <div class="col-md-4 mb-3">
@@ -282,7 +282,7 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
                             </div>
                             <div class="col-md-4 mb-3" id="ciudadColombiaDiv" style="display:none;">
                                 <label for="modalUserCity" class="form-label">Ciudad</label>
-                                <select class="form-select" id="modalUserCity" name="city">
+                                <select class="form-select" id="modalUserCity" name="city" required>
                                     <option value="">Seleccione una ciudad</option>
                                     <option value="Arauca">Arauca</option>
                                     <option value="Armenia">Armenia</option>
@@ -414,8 +414,8 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
                         <div class="row">
                             <div class="col-md-4 mb-3">
                                 <label for="createUserPassword" class="form-label">Password</label>
-                                <input type="text" class="form-control" id="createUserPassword" name="password"
-                                    placeholder="Enter a password" required autocomplete="on" />
+                                <input type="password" class="form-control" id="createUserPassword" name="password"
+                                    placeholder="Enter a password" required autocomplete="off" />
                             </div>
                             <div class="col-md-4 mb-3">
                                 <label for="createUserCountry" class="form-label">País</label>

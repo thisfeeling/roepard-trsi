@@ -84,13 +84,22 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
                 </h2>
             </div>
             <div style="background-color: var(--uam-white) !important; border-radius: 24px;">
-                <div class="d-flex justify-content-center gap-4 flex-wrap">
-                    <div class="chart-container" style="width: 500px; height: 250px;">
-                        <canvas id="conteopersonasChart" class="conteopersonasChart"></canvas>
+                <div class="row g-4 justify-content-center">
+                    <div class="col-12 col-lg-10">
+                        <div class="chart-container bg-white rounded-3 shadow-sm p-3" style="height: 400px; max-width: 1200px; margin: 0 auto;">
+                            <h5 class="text-center mb-3 fw-bold text-primary">Conteo de Personas</h5>
+                            <div class="chart-wrapper" style="position: relative; height: calc(100% - 40px);">
+                                <canvas id="conteopersonasChart"></canvas>
+                            </div>
+                        </div>
                     </div>
-
-                    <div class="chart-container" style="width: 500px; height: 250px;">
-                        <canvas id="potenciaconsumidaChart" class="potenciaconsumidaChart"></canvas>
+                    <div class="col-12 col-lg-10">
+                        <div class="chart-container bg-white rounded-3 shadow-sm p-3" style="height: 400px; max-width: 1200px; margin: 0 auto;">
+                            <h5 class="text-center mb-3 fw-bold text-primary">Potencia Consumida</h5>
+                            <div class="chart-wrapper" style="position: relative; height: calc(100% - 40px);">
+                                <canvas id="potenciaconsumidaChart"></canvas>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

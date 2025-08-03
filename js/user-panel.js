@@ -34,32 +34,48 @@ $(document).ready(function () {
             dataType: 'json', // Tipo de dato esperado en la respuesta
             success: function (response) {
                 if (response.status === "success") {
-                    showModal(response.message); // Mostrar mensaje de éxito    
-                    $('#detalleUsuarioModal').modal('hide'); // Cerrar el modal de detalles
-                    $('.modal-backdrop').remove(); // Eliminar el fondo modal
-                    document.body.classList.remove('modal-open'); // Eliminar la clase modal-open
-                    document.body.style.removeProperty('padding-right'); // Eliminar el padding derecho
+                    // Cerrar el modal de detalles
+                    $('#detalleUsuarioModal').modal('hide');
+                    $('.modal-backdrop').remove();
+                    document.body.classList.remove('modal-open');
+                    document.body.style.removeProperty('padding-right');
+                    
                     // Limpiar campos de contraseña
                     $('#modalUserCurrentPassword').val('');
                     $('#modalUserPassword').val('');
+                    
+                    // Obtener los valores actuales de los campos del formulario
+                    const firstName = $("#modalUserFirstName").val();
+                    const lastName = $("#modalUserLastName").val();
+                    const username = $("#modalUserUsername").val();
+                    const email = $("#modalUserEmail").val();
+                    const phone = iti.getNumber(); // Obtener el número de teléfono formateado
+                    const city = $("#modalUserCity").val();
+                    const country = $("#modalUserCountry").val();
+                    const birthdate = $("#modalUserBirthdate").val();
+                    
                     // Actualizar datos en la tarjeta principal
-                    $("#userFirstNameCard").text($("#modalUserFirstName").val());
-                    $("#userLastNameCard").text($("#modalUserLastName").val());
-                    $("#userUsernameCard").text($("#modalUserUsername").val());
-                    $("#userEmailCard").text($("#modalUserEmail").val());
-                    $("#userPhoneCard").text($("#modalUserPhone").val());
-                    $("#userCityCard").text($("#modalUserCity").val());
-                    $("#userCountryCard").text($("#modalUserCountry").val());
-                    $("#userBirthdateCard").text($("#modalUserBirthdate").val());
-                    $("#userStatusCard").text($("#modalUserStatus").val());
-                    $("#userRoleCard").text($("#modalUserRole").val());
-                    // Actualizar la imagen de perfil
-                    let newProfilePicture = $("#modalUserExistingPicture").val();
-                    if (newProfilePicture) {
-                        // Si el usuario subió una nueva imagen, se puede forzar la recarga de la imagen
-                        // (esto solo funciona si el input es tipo file y el backend devuelve el nombre del archivo)
-                        $("#userProfilePictureCard").attr("src", "../uploads/" + newProfilePicture + "?" + new Date().getTime());
+                    $("#userFirstNameCard").text(firstName);
+                    $("#userLastNameCard").text(lastName);
+                    $("#userUsernameCard").text(username);
+                    $("#userEmailCard").text(email);
+                    $("#userPhoneCard").text(phone);
+                    $("#userCityCard").text(city);
+                    $("#userCountryCard").text(country);
+                    $("#userBirthdateCard").text(birthdate);
+                    
+                    // Actualizar la imagen de perfil si hay una nueva
+                    const fileInput = $("#modalUserExistingPicture")[0];
+                    if (fileInput.files && fileInput.files[0]) {
+                        const reader = new FileReader();
+                        reader.onload = function(e) {
+                            $("#userProfilePictureCard").attr("src", e.target.result);
+                        };
+                        reader.readAsDataURL(fileInput.files[0]);
                     }
+                    
+                    // Mostrar mensaje de éxito después de actualizar la UI
+                    showModal('¡Actualización exitosa! Para ver los cambios reflejados, por favor cierre la sesión y vuelva a iniciar sesión.');
                 } else {
                     showModal(response.message || "Error desconocido");
                 }
@@ -220,6 +236,10 @@ $(document).ready(function () {
                     // Abre el modal
                     $("#detalleUsuarioModal").modal('show');
 
+                    // Mostrar el campo de ciudad si el país está seleccionado
+                    if (user.country) {
+                        $('#ciudadColombiaDiv').show();
+                    }
                     iti.setNumber(user.phone);
                 } else {
                     showModal(response.message || "Error al obtener los detalles del usuario.");

@@ -36,24 +36,25 @@ $(document).ready(function () {
                 const power_source_numeric = data.power_source.map(
                     value => powerSourceMap[value] || 0 // Asignar valor numérico o 0 si no está definido
                 );
-                // Inicialización del gráfico de barras
+                // Configuración del gráfico
                 const ctx = document.getElementById('graficasdeconteoChart').getContext('2d');
-                new Chart(ctx, {
-                    type: 'bar', // Tipo de gráfico
+                
+                const config = {
+                    type: 'bar',
                     data: {
                         labels: data.labels,
                         datasets: [
                             {
-                                label: 'FPS',  // Etiqueta del conjunto de datos
-                                data: data.fps, // Datos para el gráfico
-                                borderColor: 'rgba(54, 162, 235, 1)', // Color de la línea
-                                backgroundColor: 'rgba(54, 162, 235, 0.2)', // Color de fondo
-                                borderWidth: 2, // Ancho de la línea
-                                fill: true, // No llenar el área bajo la línea
-                                tension: 0.3 // Curvatura de la línea
+                                label: 'FPS',
+                                data: data.fps,
+                                borderColor: 'rgba(54, 162, 235, 1)',
+                                backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                                borderWidth: 2,
+                                fill: false,
+                                tension: 0.3
                             },
                             {
-                                label: 'Personas contadas en 5 minutos',
+                                label: 'Personas/5min',
                                 data: data.people_count_5min,
                                 borderColor: 'rgb(55, 60, 191)',
                                 backgroundColor: 'rgba(69, 49, 170, 0.2)',
@@ -67,7 +68,7 @@ $(document).ready(function () {
                                 borderColor: 'rgba(153, 102, 255, 1)',
                                 backgroundColor: 'rgba(153, 102, 255, 0.2)',
                                 borderWidth: 2,
-                                fill: true,
+                                fill: false,
                                 tension: 0.3
                             },
                             {
@@ -82,36 +83,95 @@ $(document).ready(function () {
                         ]
                     },
                     options: {
-                        responsive: true,  // Hacer que el gráfico sea responsivo
-                        maintainAspectRatio: false, // Mantener la proporción del gráfico
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        layout: {
+                            padding: {
+                                left: 5,
+                                right: 5,
+                                top: 10,
+                                bottom: 5
+                            }
+                        },
+                        plugins: {
+                            legend: {
+                                position: 'top',
+                                labels: {
+                                    boxWidth: 12,
+                                    padding: 10,
+                                    font: {
+                                        size: window.innerWidth < 768 ? 10 : 12
+                                    }
+                                }
+                            }
+                        },
+                        interaction: {
+                            mode: 'nearest',
+                            axis: 'x',
+                            intersect: false
+                        },
                         scales: {
                             x: {
                                 title: {
                                     display: true,
-                                    text: 'Hora' // Título del eje X
+                                    text: 'Hora',
+                                    font: {
+                                        size: window.innerWidth < 768 ? 10 : 12
+                                    }
+                                },
+                                ticks: {
+                                    maxRotation: 45,
+                                    minRotation: 45,
+                                    font: {
+                                        size: window.innerWidth < 768 ? 8 : 10
+                                    },
+                                    maxTicksLimit: window.innerWidth < 768 ? 10 : 15
                                 }
                             },
                             y: {
                                 beginAtZero: true,
                                 title: {
                                     display: true,
-                                    text: 'Valores' // Título del eje Y
+                                    text: 'Valores',
+                                    font: {
+                                        size: window.innerWidth < 768 ? 10 : 12
+                                    }
                                 },
                                 ticks: {
-                                    callback: function (value) {
-                                        // Personalizar etiquetas del eje Y
-                                        const labels = {
-                                            1: "Solar",
-                                            2: "Batería",
-                                            3: "Externa"
-                                        };
-                                        return labels[value] || value; // Devolver la etiqueta o el valor si no está en el mapa
+                                    font: {
+                                        size: window.innerWidth < 768 ? 8 : 10
+                                    },
+                                    maxTicksLimit: 8,
+                                    callback: function(value, index, values) {
+                                        // Solo mostrar etiquetas personalizadas para la fuente de energía
+                                        if (this.scale && this.scale.id === 'y' && this.chart && this.chart.scales.y === this.scale) {
+                                            const labels = {
+                                                1: "Solar",
+                                                2: "Batería",
+                                                3: "Externa"
+                                            };
+                                            return labels[value] !== undefined ? labels[value] : value;
+                                        }
+                                        return value;
                                     }
                                 }
                             }
                         }
                     }
-                });
+                };
+
+                // Crear instancia del gráfico
+                const myChart = new Chart(ctx, config);
+
+                // Manejar el redimensionamiento de la ventana
+                let resizeTimeout;
+                const handleResize = function() {
+                    clearTimeout(resizeTimeout);
+                    resizeTimeout = setTimeout(function() {
+                        myChart.update();
+                    }, 200);
+                };
+                window.addEventListener('resize', handleResize);
             },
             error: function (xhr, status, error) {
                 // console.error("Error cargando los datos:", error);

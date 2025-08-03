@@ -128,6 +128,11 @@ $(document).ready(function () {
     if (itiDetalle) {
         itiDetalle.setNumber(user.phone || "");
     }
+
+    // Mostrar el campo de ciudad si el país está seleccionado
+    if (user.country) {
+        $('#ciudadColombiaDiv').show();
+    }
   }
 
   // Función para listar usuarios en DataTable

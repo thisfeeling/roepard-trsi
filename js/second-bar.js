@@ -27,8 +27,10 @@ $(document).ready(function () {
             dataType: "json",
             success: function (data) {
                 const ctx = document.getElementById('graficaspotenciaChart').getContext('2d');
-                new Chart(ctx, {
-                    type: 'line', // Tipo de gráfico
+                
+                // Configuración del gráfico
+                const config = {
+                    type: 'line',
                     data: {
                         labels: data.labels,
                         datasets: [
@@ -38,7 +40,7 @@ $(document).ready(function () {
                                 borderColor: 'rgba(54, 162, 235, 1)',
                                 backgroundColor: 'rgba(54, 162, 235, 0.2)',
                                 borderWidth: 2,
-                                fill: true,
+                                fill: false,
                                 tension: 0.3
                             },
                             {
@@ -47,7 +49,7 @@ $(document).ready(function () {
                                 borderColor: 'rgba(255, 99, 132, 1)',
                                 backgroundColor: 'rgba(255, 99, 132, 0.2)',
                                 borderWidth: 2,
-                                fill: true,
+                                fill: false,
                                 tension: 0.3
                             },
                             {
@@ -56,7 +58,7 @@ $(document).ready(function () {
                                 borderColor: 'rgba(255, 159, 64, 1)',
                                 backgroundColor: 'rgba(255, 159, 64, 0.2)',
                                 borderWidth: 2,
-                                fill: true,
+                                fill: false,
                                 tension: 0.3
                             },
                             {
@@ -65,7 +67,7 @@ $(document).ready(function () {
                                 borderColor: 'rgba(255, 205, 86, 1)',
                                 backgroundColor: 'rgba(255, 205, 86, 0.2)',
                                 borderWidth: 2,
-                                fill: true,
+                                fill: false,
                                 tension: 0.3
                             },
                             {
@@ -74,7 +76,7 @@ $(document).ready(function () {
                                 borderColor: 'rgba(75, 192, 192, 1)',
                                 backgroundColor: 'rgba(75, 192, 192, 0.2)',
                                 borderWidth: 2,
-                                fill: true,
+                                fill: false,
                                 tension: 0.3
                             },
                             {
@@ -83,7 +85,7 @@ $(document).ready(function () {
                                 borderColor: 'rgba(153, 102, 255, 1)',
                                 backgroundColor: 'rgba(153, 102, 255, 0.2)',
                                 borderWidth: 2,
-                                fill: true,
+                                fill: false,
                                 tension: 0.3
                             }
                         ]
@@ -91,23 +93,81 @@ $(document).ready(function () {
                     options: {
                         responsive: true,
                         maintainAspectRatio: false,
+                        layout: {
+                            padding: {
+                                left: 5,
+                                right: 5,
+                                top: 10,
+                                bottom: 5
+                            }
+                        },
+                        plugins: {
+                            legend: {
+                                position: 'top',
+                                labels: {
+                                    boxWidth: 12,
+                                    padding: 10,
+                                    font: {
+                                        size: window.innerWidth < 768 ? 10 : 12
+                                    }
+                                }
+                            }
+                        },
+                        interaction: {
+                            mode: 'nearest',
+                            axis: 'x',
+                            intersect: false
+                        },
                         scales: {
                             x: {
                                 title: {
                                     display: true,
-                                    text: 'Hora'
+                                    text: 'Hora',
+                                    font: {
+                                        size: window.innerWidth < 768 ? 10 : 12
+                                    }
+                                },
+                                ticks: {
+                                    maxRotation: 45,
+                                    minRotation: 45,
+                                    font: {
+                                        size: window.innerWidth < 768 ? 8 : 10
+                                    },
+                                    maxTicksLimit: window.innerWidth < 768 ? 10 : 15
                                 }
                             },
                             y: {
                                 beginAtZero: true,
                                 title: {
                                     display: true,
-                                    text: 'Valores'
+                                    text: 'Valores',
+                                    font: {
+                                        size: window.innerWidth < 768 ? 10 : 12
+                                    }
+                                },
+                                ticks: {
+                                    font: {
+                                        size: window.innerWidth < 768 ? 8 : 10
+                                    },
+                                    maxTicksLimit: 8
                                 }
                             }
                         }
                     }
-                });
+                };
+
+                // Crear instancia del gráfico
+                const myChart = new Chart(ctx, config);
+
+                // Manejar el redimensionamiento de la ventana
+                let resizeTimeout;
+                const handleResize = function() {
+                    clearTimeout(resizeTimeout);
+                    resizeTimeout = setTimeout(function() {
+                        myChart.update();
+                    }, 200);
+                };
+                window.addEventListener('resize', handleResize);
             },
             error: function (xhr, status, error) {
                 // console.error("Error cargando los datos:", error);

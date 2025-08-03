@@ -39,7 +39,9 @@ $(document).ready(function () {
 
                 // Inicialización del gráfico de líneas
                 const ctx = document.getElementById('datosentiemporealChart').getContext('2d');
-                new Chart(ctx, {
+                
+                // Configuración del gráfico
+                const config = {
                     type: 'line',
                     data: {
                         labels: data.labels,
@@ -54,7 +56,7 @@ $(document).ready(function () {
                                 tension: 0.3
                             },
                             {
-                                label: 'Personas contadas en 5 minutos',
+                                label: 'Personas/5min',
                                 data: data.people_count_5min,
                                 borderColor: 'rgb(55, 60, 191)',
                                 backgroundColor: 'rgba(69, 49, 170, 0.2)',
@@ -62,7 +64,6 @@ $(document).ready(function () {
                                 fill: false,
                                 tension: 0.3
                             },
-                            // ... resto de los datasets ...
                             {
                                 label: 'Batería (%)',
                                 data: data.battery_percentage,
@@ -86,33 +87,90 @@ $(document).ready(function () {
                     options: {
                         responsive: true,
                         maintainAspectRatio: false,
+                        layout: {
+                            padding: {
+                                left: 5,
+                                right: 5,
+                                top: 10,
+                                bottom: 5
+                            }
+                        },
+                        plugins: {
+                            legend: {
+                                position: 'top',
+                                labels: {
+                                    boxWidth: 12,
+                                    padding: 10,
+                                    font: {
+                                        size: window.innerWidth < 768 ? 10 : 12
+                                    }
+                                }
+                            }
+                        },
+                        interaction: {
+                            mode: 'nearest',
+                            axis: 'x',
+                            intersect: false
+                        },
                         scales: {
                             x: {
                                 title: {
                                     display: true,
-                                    text: 'Hora'
+                                    text: 'Hora',
+                                    font: {
+                                        size: window.innerWidth < 768 ? 10 : 12
+                                    }
+                                },
+                                ticks: {
+                                    maxRotation: 45,
+                                    minRotation: 45,
+                                    font: {
+                                        size: window.innerWidth < 768 ? 8 : 10
+                                    },
+                                    maxTicksLimit: window.innerWidth < 768 ? 10 : 15
                                 }
                             },
                             y: {
                                 beginAtZero: true,
                                 title: {
                                     display: true,
-                                    text: 'Valores'
+                                    text: 'Valores',
+                                    font: {
+                                        size: window.innerWidth < 768 ? 10 : 12
+                                    }
                                 },
                                 ticks: {
-                                    callback: function (value) {
+                                    font: {
+                                        size: window.innerWidth < 768 ? 8 : 10
+                                    },
+                                    maxTicksLimit: 8,
+                                    callback: function(value, index, values) {
+                                        // Solo mostrar etiquetas personalizadas para la fuente de energía
                                         const labels = {
                                             1: "Solar",
                                             2: "Batería",
                                             3: "Externa"
                                         };
-                                        return labels[value] || value;
+                                        return labels[value] !== undefined ? labels[value] : value;
                                     }
                                 }
                             }
                         }
                     }
-                });
+                };
+
+                // Crear instancia del gráfico
+                const myChart = new Chart(ctx, config);
+
+                // Manejar el redimensionamiento de la ventana
+                let resizeTimeout;
+                const handleResize = function() {
+                    clearTimeout(resizeTimeout);
+                    resizeTimeout = setTimeout(function() {
+                        myChart.update();
+                    }, 200);
+                };
+                window.addEventListener('resize', handleResize);
             },
             error: function (xhr, status, error) {
                 // console.error("Error cargando los datos:", error);

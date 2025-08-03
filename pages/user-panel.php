@@ -82,7 +82,8 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
                 <div class="user-card bg-white p-4 mb-5"
                     style="border-radius: 16px; max-width: 500px; min-width: 320px; box-shadow: 0 4px 24px rgba(0,0,0,0.08);">
                     <div class="d-flex flex-row align-items-center mb-3">
-                        <div class="me-4">
+                        <div class="me-4"
+                            style="border-radius: 50%; overflow: hidden; background-color: var(--uam-blue); width: 100px; height: 100px; padding: 4rem; display: flex; align-items: center; justify-content: center;">
                             <?php if (!empty($profile_picture)): ?>
                             <img id="userProfilePictureCard"
                                 src="../uploads/<?php echo htmlspecialchars($profile_picture); ?>" alt="Profile"
@@ -94,23 +95,52 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
                             </div>
                             <?php endif; ?>
                         </div>
-                        <div>
-                            <div><strong>ID:</strong> <?php echo htmlspecialchars($user_id); ?></div>
-                            <div><strong>Nombre:</strong> <?php echo htmlspecialchars($first_name); ?></div>
-                            <div><strong>Apellido:</strong> <?php echo htmlspecialchars($last_name); ?></div>
-                            <div><strong>Usuario:</strong> <?php echo htmlspecialchars($username); ?></div>
-                            <div><strong>Email:</strong> <a
+                        <div class="d-flex flex-column"
+                            style="background-color: var(--uam-yellow); color: var(--uam-blue); padding: 1rem; border-radius: 16px;">
+                            <h2 class="text-center mb-4"
+                                style="color: var(--uam-blue); font-size: 1.5rem; font-weight: bold;">Información del
+                                usuario</h2>
+                            <div class="mb-2" style="border-bottom: 1px solid var(--uam-blue);">
+                                <strong>ID:</strong>
+                                <span style="color: var(--uam-white);">
+                                    <?php echo htmlspecialchars($user_id); ?></span>
+                            </div>
+                            <div class="mb-2" style="border-bottom: 1px solid var(--uam-blue);"><strong>Nombre:</strong>
+                                <span style="color: var(--uam-white);">
+                                    <?php echo htmlspecialchars($first_name); ?></span>
+                            </div>
+                            <div class="mb-2" style="border-bottom: 1px solid var(--uam-blue);"><strong>Apellido:</strong>
+                                <span style="color: var(--uam-white);">
+                                    <?php echo htmlspecialchars($last_name); ?></span>
+                            </div>
+                            <div class="mb-2" style="border-bottom: 1px solid var(--uam-blue);"><strong>Usuario:</strong>
+                                <span style="color: var(--uam-white);">
+                                    <?php echo htmlspecialchars($username); ?></span>
+                            </div>
+                            <div class="mb-2" style="border-bottom: 1px solid var(--uam-blue);"><strong>Email:</strong> <a
                                     href="mailto:<?php echo htmlspecialchars($email); ?>"><?php echo htmlspecialchars($email); ?></a>
                             </div>
-                            <div><strong>Telefono:</strong> <?php echo htmlspecialchars($phone); ?></div>
-                            <div><strong>Fecha de nacimiento:</strong> <?php echo htmlspecialchars($birthdate); ?></div>
-                            <div><strong>Pais:</strong> <?php echo htmlspecialchars($country); ?></div>
-                            <div><strong>Ciudad:</strong> <?php echo htmlspecialchars($city); ?></div>
-                            <div><strong>Rol:</strong> <span
-                                    style="color: var(--uam-blue);"><?php echo htmlspecialchars($role_id == 1 ? 'user' : ($role_id == 2 ? 'admin' : 'supervisor')); ?></span>
+                            <div class="mb-2" style="border-bottom: 1px solid var(--uam-blue);"><strong>Telefono:</strong> <a
+                                    href="tel:<?php echo htmlspecialchars($phone); ?>"><?php echo htmlspecialchars($phone); ?></a>
                             </div>
-                            <div><strong>Estado:</strong> <span
-                                    style="color: var(--uam-blue);"><?php echo htmlspecialchars($status_id == 1 ? 'active' : 'inactive'); ?></span>
+                            <div class="mb-2" style="border-bottom: 1px solid var(--uam-blue);"><strong>Fecha de nacimiento:</strong>
+                                <span style="color: var(--uam-white);">
+                                    <?php echo htmlspecialchars($birthdate); ?></span>
+                            </div>
+                            <div class="mb-2" style="border-bottom: 1px solid var(--uam-blue);"><strong>Pais:</strong>
+                                <span style="color: var(--uam-white);">
+                                    <?php echo htmlspecialchars($country); ?></span>
+                            </div>
+                            <div class="mb-2" style="border-bottom: 1px solid var(--uam-blue);"><strong>Ciudad:</strong>
+                                <span style="color: var(--uam-white);">
+                                    <?php echo htmlspecialchars($city); ?></span>
+                            </div>
+                            <div class="mb-2" style="border-bottom: 1px solid var(--uam-blue);"><strong>Rol:</strong> <span style="color: var(--uam-blue);">
+                                    <?php echo htmlspecialchars($role_id == 1 ? 'user' : ($role_id == 2 ? 'admin' : 'supervisor')); ?></span>
+                            </div>
+                            <div class="mb-2" style="border-bottom: 1px solid var(--uam-blue);"><strong>Estado:</strong> <span
+                                    style="color: var(--uam-blue);">
+                                    <?php echo htmlspecialchars($status_id == 1 ? 'active' : 'inactive'); ?></span>
                             </div>
                         </div>
                     </div>
@@ -215,7 +245,7 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
                             </div>
                             <div class="col-md-4 mb-3">
                                 <label for="modalUserPassword" class="form-label">Nueva contraseña</label>
-                                <input type="text" class="form-control" id="modalUserPassword" name="password"
+                                <input type="password" class="form-control" id="modalUserPassword" name="password"
                                     placeholder="Introduce la nueva contraseña" required autocomplete="off" />
                             </div>
                         </div>

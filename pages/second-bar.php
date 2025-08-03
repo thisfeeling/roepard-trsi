@@ -85,8 +85,8 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
             </div>
             <div style="background-color: var(--uam-white) !important; border-radius: 24px;">
 
-                <div class="chart-container" style="width: 1000px; height: 500px;">
-                    <canvas id="graficaspotenciaChart" class="graficaspotenciaChart"></canvas>
+                <div class="chart-container" style="width: 100%; height: 60vh; min-height: 300px; padding: 10px;">
+                    <canvas id="graficaspotenciaChart" class="graficaspotenciaChart" style="width: 100%; height: 100%;"></canvas>
                 </div>
 
             </div>
