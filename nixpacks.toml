@@ -14,7 +14,7 @@ nixPkgs = [
     "php83Extensions.xml",
     "php83Extensions.zip",
     "phpPackages.composer",
-    "nodejs_22",
+    "nodejs_20",
     "npm-9_x",
     "python311Packages.supervisor",
     "nginx",
