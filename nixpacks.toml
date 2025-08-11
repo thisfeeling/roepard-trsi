@@ -15,7 +15,6 @@ nixPkgs = [
     "php83Extensions.zip",
     "phpPackages.composer",
     "nodejs_20",
-    "npm-9_x",
     "python311Packages.supervisor",
     "nginx",
     "libmysqlclient",
